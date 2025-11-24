@@ -545,17 +545,17 @@
     }
 
     .chapter-dropdown {
-      position: absolute;
-      top: 100%;
-      left: 56px;
-      right: 0;
-      margin-top: 4px;
-      z-index: 20;
-      opacity: 0;
-      transform: translateY(-4px) scale(0.98);
-      pointer-events: none;
-      transition: opacity 0.16s ease, transform 0.16s ease;
-    }
+  position: absolute;
+  top: 100%;
+  left: 0;              /* align with the trigger */
+  /* remove right: 0; */
+  margin-top: 4px;
+  z-index: 20;
+  opacity: 0;
+  transform: translateY(-4px) scale(0.98);
+  pointer-events: none;
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
     .chapter-dropdown-inner {
       background: var(--bg-card);
       border-radius: 12px;
