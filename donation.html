@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Testy | Donate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Poppins Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ========== THEME VARIABLES (LIGHT BY DEFAULT) ========== */
+    :root {
+      --bg-main: #f3f4f6;
+      --bg-header: #f3f4f6;
+      --bg-card: #ffffff;
+      --bg-qr: #f1f5f9;
+      --border-soft: rgba(148, 163, 184, 0.4);
+      --border-card: rgba(148, 163, 184, 0.35);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --pill-bg: #e5e7eb;
+      --pill-border: rgba(148, 163, 184, 0.6);
+      --shadow-card: 0 12px 28px rgba(15, 23, 42, 0.12);
+    }
+
+    /* DARK THEME OVERRIDES WHEN body.dark-mode IS SET (SYNCED WITH index.html) */
+    body.dark-mode {
+      --bg-main: #0f172a;
+      --bg-header: #0f172a;
+      --bg-card: #1e293b;
+      --bg-qr: #020617;
+      --border-soft: rgba(148, 163, 184, 0.35);
+      --border-card: rgba(148, 163, 184, 0.2);
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --pill-bg: rgba(30, 41, 59, 0.7);
+      --pill-border: rgba(148, 163, 184, 0.3);
+      --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 680px;
+      padding: 16px 16px 32px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      position: sticky;
+      top: 0;
+      background: var(--bg-header);
+      padding-bottom: 8px;
+      z-index: 10;
+    }
+
+    .brand-text {
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: 0.02em;
+    }
+
+    .back-link {
+      font-size: 13px;
+      color: var(--text-main);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-soft);
+    }
+
+    .back-link:hover {
+      background: rgba(148, 163, 184, 0.18);
+    }
+
+    .content {
+      margin-top: 8px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 18px;
+      border: 1px solid var(--border-card);
+      padding: 22px 20px 26px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .card h1 {
+      font-size: 20px;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .qr-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .qr-box {
+      padding: 10px;
+      background: var(--bg-qr);
+      border-radius: 14px;
+      border: 1px solid var(--border-soft);
+    }
+
+    .qr-box img {
+      display: block;
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 12px;
+    }
+
+    .upi-block {
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .upi-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .upi-id {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .copy-btn {
+      margin-top: 8px;
+      padding: 7px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      background: transparent;
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      background: rgba(148, 163, 184, 0.18);
+    }
+
+    .pill-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      background: var(--pill-bg);
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid var(--pill-border);
+    }
+
+    .note {
+      margin-top: 14px;
+      font-size: 11px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    @media (min-width: 768px) {
+      .page {
+        padding-top: 24px;
+      }
+      .card {
+        padding: 24px 24px 28px;
+      }
+      .qr-box img {
+        width: 240px;
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="top-bar">
+      <span class="brand-text">Testy</span>
+      <a href="index.html" class="back-link">← Back</a>
+    </header>
+
+    <main class="content">
+      <section class="card">
+        <h1>Support the Project</h1>
+        <p class="sub">
+          If Testy has helped in your CA prep, you can support it through a small UPI contribution.
+        </p>
+
+        <div class="qr-wrap">
+          <div class="qr-box">
+            <!-- Replace this with your actual QR file -->
+            <img src="qr-donation.png" alt="UPI QR Code">
+          </div>
+        </div>
+
+        <div class="upi-block">
+          <div class="upi-label">UPI ID</div>
+
+          <!-- Updated UPI ID -->
+          <div class="upi-id" id="upiIdText">professorshivam@fam</div>
+
+          <button class="copy-btn" id="copyUpiBtn">Copy UPI ID</button>
+        </div>
+
+        <div class="pill-row">
+          <div class="pill">No login required</div>
+          <div class="pill">UPI supported</div>
+          <div class="pill">Independent project</div>
+        </div>
+
+        <p class="note">
+          This is a voluntary contribution to support development & hosting.
+          It is not a charitable donation for tax purposes.
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // THEME SYNC WITH index.html (reads the same localStorage key)
+    const THEME_KEY = "quizTheme_v1";
+
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        document.body.classList.add("dark-mode");
+      } else {
+        document.body.classList.remove("dark-mode");
+      }
+    }
+
+    function initTheme() {
+      let saved = "light";
+      try {
+        const t = localStorage.getItem(THEME_KEY);
+        if (t === "dark" || t === "light") {
+          saved = t;
+        }
+      } catch (e) {
+        // if localStorage explodes, we just stay in light mode
+      }
+      applyTheme(saved);
+    }
+
+    initTheme();
+
+    // COPY UPI ID
+    const copyBtn = document.getElementById("copyUpiBtn");
+    const upiText = document.getElementById("upiIdText");
+
+    copyBtn.addEventListener("click", async () => {
+      const id = upiText.textContent.trim();
+      try {
+        await navigator.clipboard.writeText(id);
+        copyBtn.textContent = "Copied!";
+        setTimeout(() => (copyBtn.textContent = "Copy UPI ID"), 1500);
+      } catch {
+        alert("UPI ID: " + id);
+      }
+    });
+  </script>
+
+</body>
+</html>

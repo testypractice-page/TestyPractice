@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Testy – Login / Sign up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Shared storage helpers (createAccount, loginUser, importUserData, etc.) -->
+  <script src="storage.js"></script>
+
+  <style>
+    /* ===========================
+       LOCAL POPPINS FONT IMPORT
+       =========================== */
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Light.ttf") format("truetype");
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-SemiBold.ttf") format("truetype");
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    :root {
+      --bg-body: #f3f7fc;
+      --bg-card: #ffffff;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border-soft: #d1d5db;
+      --blue-accent: #3b82f6;
+      --blue-deep: #1d4ed8;
+      --danger: #dc2626;
+      --success: #16a34a;
+    }
+
+    body.dark-mode {
+      --bg-body: #020617;
+      --bg-card: #020617;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-soft: #1f2937;
+      --blue-accent: #60a5fa;
+      --blue-deep: #3b82f6;
+      --danger: #f97373;
+      --success: #22c55e;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      font-family: "Poppins", system-ui, sans-serif;
+      background: radial-gradient(circle at top, #dbeafe 0, var(--bg-body) 55%);
+      color: var(--text-main);
+      transition:
+        background-color 0.25s ease,
+        color 0.25s ease;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 430px;
+      background: var(--bg-card);
+      border-radius: 18px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.25);
+      padding: 18px 18px 16px;
+      overflow: hidden;
+    }
+
+    .auth-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .brand-title {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .icon-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition:
+        background-color 0.18s ease,
+        color 0.18s ease,
+        box-shadow 0.18s ease,
+        transform 0.08s ease;
+    }
+
+    .icon-btn:active {
+      transform: scale(0.94);
+    }
+
+    .mode-switch {
+      display: flex;
+      margin-bottom: 12px;
+      background: rgba(148, 163, 184, 0.12);
+      border-radius: 999px;
+      padding: 3px;
+    }
+
+    .mode-btn {
+      flex: 1;
+      font-size: 13px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      padding: 6px 8px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition:
+        background-color 0.18s ease,
+        color 0.18s ease,
+        box-shadow 0.18s ease,
+        transform 0.08s ease;
+    }
+
+    .mode-btn:hover {
+      background: rgba(148, 163, 184, 0.18);
+    }
+
+    .mode-btn:active {
+      transform: scale(0.97);
+    }
+
+    .mode-btn.active {
+      background: var(--blue-accent);
+      color: #ffffff;
+      font-weight: 500;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+    }
+
+    .hint-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    @keyframes slideInFromRight {
+      from {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInFromLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .form-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hidden-panel {
+      display: none;
+    }
+
+    .form-slide-right {
+      animation: slideInFromRight 0.28s ease;
+    }
+
+    .form-slide-left {
+      animation: slideInFromLeft 0.28s ease;
+    }
+
+    label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input {
+      font-family: inherit;
+      font-size: 13px;
+      padding: 7px 8px;
+      border-radius: 8px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      color: var(--text-main);
+      transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background-color 0.18s ease,
+        color 0.18s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--blue-accent);
+      box-shadow: 0 0 0 1px var(--blue-accent);
+    }
+
+    .help-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .main-btn {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: var(--blue-deep);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.25);
+      transition:
+        background-color 0.18s ease,
+        box-shadow 0.18s ease,
+        transform 0.08s ease;
+    }
+
+    .main-btn:hover {
+      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.32);
+    }
+
+    .main-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
+    }
+
+    .error-msg {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--danger);
+      min-height: 14px;
+    }
+
+    .success-msg {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--success);
+      min-height: 14px;
+    }
+
+    .logged-state {
+      margin-top: 10px;
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      background: rgba(148, 163, 184, 0.08);
+      font-size: 12px;
+    }
+
+    .logged-state strong {
+      font-weight: 600;
+    }
+
+    .link-btn {
+      border: none;
+      background: none;
+      padding: 0;
+      margin: 0;
+      font-size: 12px;
+      color: var(--blue-accent);
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* Import area */
+    .import-area {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border-soft);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .import-actions {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .secondary-btn {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: rgba(148, 163, 184, 0.08);
+      font-size: 12px;
+      cursor: pointer;
+      color: var(--text-main);
+      transition:
+        background-color 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.08s ease;
+    }
+
+    .secondary-btn:hover {
+      background: rgba(148, 163, 184, 0.16);
+      border-color: var(--blue-accent);
+    }
+
+    .secondary-btn:active {
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-card">
+    <div class="auth-header">
+      <div>
+        <div class="brand-title">Testy</div>
+        <div class="brand-sub">Login / Sign up (local only)</div>
+      </div>
+      <button id="themeToggle" type="button" class="icon-btn">🌙</button>
+    </div>
+
+    <div class="mode-switch">
+      <button id="loginModeBtn" class="mode-btn active" type="button">Login</button>
+      <button id="signupModeBtn" class="mode-btn" type="button">Sign up</button>
+    </div>
+
+    <div id="hint" class="hint-text">
+      Login to continue your practice & stats on this device.
+    </div>
+
+    <!-- LOGIN FORM -->
+    <form id="loginForm" class="form-panel" autocomplete="on" novalidate>
+      <div class="field">
+        <label for="loginId">Email</label>
+        <input
+          id="loginId"
+          name="loginId"
+          type="email"
+          autocomplete="username"
+          placeholder="Enter your email"
+          required
+        />
+      </div>
+      <div class="field">
+        <label for="loginPassword">Password</label>
+        <input
+          id="loginPassword"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Enter your password"
+          required
+        />
+      </div>
+
+      <div class="help-row">
+        <label class="checkbox-row">
+          <input type="checkbox" id="rememberMe" />
+          <span>Keep me logged in on this device</span>
+        </label>
+      </div>
+
+      <button type="submit" class="main-btn">Login</button>
+      <div id="loginError" class="error-msg"></div>
+      <div id="loginSuccess" class="success-msg"></div>
+    </form>
+
+    <!-- SIGNUP FORM -->
+    <form id="signupForm" class="form-panel hidden-panel" autocomplete="on" novalidate>
+      <div class="field">
+        <label for="signupName">Name</label>
+        <input
+          id="signupName"
+          name="name"
+          type="text"
+          autocomplete="name"
+          placeholder="Enter your name"
+          required
+        />
+      </div>
+      <div class="field">
+        <label for="signupEmail">Email</label>
+        <input
+          id="signupEmail"
+          name="email"
+          type="email"
+          autocomplete="email"
+          placeholder="Enter your email"
+          required
+        />
+      </div>
+      <div class="field">
+        <label for="signupPassword">Password</label>
+        <input
+          id="signupPassword"
+          name="new-password"
+          type="password"
+          autocomplete="new-password"
+          placeholder="Minimum 6 characters"
+          required
+        />
+      </div>
+      <div class="field">
+        <label for="signupPassword2">Confirm password</label>
+        <input
+          id="signupPassword2"
+          type="password"
+          placeholder="Re-type your password"
+          required
+        />
+      </div>
+
+      <button type="submit" class="main-btn">Create account</button>
+      <div id="signupError" class="error-msg"></div>
+      <div id="signupSuccess" class="success-msg"></div>
+    </form>
+
+    <!-- LOGGED-IN STATE -->
+    <div id="loggedState" class="logged-state" style="display:none;">
+      Logged in as <strong id="currentUserLabel"></strong>
+      <br />
+      <button id="gotoApp" type="button" class="link-btn">Go to Testy</button>
+      &nbsp;|&nbsp;
+      <button id="gotoProfile" type="button" class="link-btn">Profile</button>
+      &nbsp;|&nbsp;
+      <button id="logoutBtn" type="button" class="link-btn">Log out</button>
+    </div>
+
+    <!-- IMPORT DATA AREA -->
+    <div class="import-area">
+      <div>Restore a saved backup from another device.</div>
+      <div class="import-actions">
+        <button id="importDataBtn" type="button" class="secondary-btn">
+          Import data from file
+        </button>
+        <input
+          id="importFileInput"
+          type="file"
+          accept="application/json"
+          style="display:none"
+        />
+        <div id="importStatus" class="success-msg" style="min-height:0;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ================= THEME TOGGLE (same key as other pages) =================
+    const THEME_KEY = "quizTheme_v1";
+    const themeToggle = document.getElementById("themeToggle");
+
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        document.body.classList.add("dark-mode");
+        if (themeToggle) themeToggle.textContent = "☀️";
+      } else {
+        document.body.classList.remove("dark-mode");
+        if (themeToggle) themeToggle.textContent = "🌙";
+      }
+      try { localStorage.setItem(THEME_KEY, theme); } catch (_) {}
+    }
+
+    function initTheme() {
+      let saved = "light";
+      try {
+        const t = localStorage.getItem(THEME_KEY);
+        if (t === "dark" || t === "light") saved = t;
+      } catch (_) {}
+      applyTheme(saved);
+    }
+
+    if (themeToggle) {
+      themeToggle.addEventListener("click", () => {
+        const isDark = document.body.classList.contains("dark-mode");
+        applyTheme(isDark ? "light" : "dark");
+      });
+    }
+
+    initTheme();
+
+    // ================= UI ELEMENTS =================
+    const loginModeBtn = document.getElementById("loginModeBtn");
+    const signupModeBtn = document.getElementById("signupModeBtn");
+    const hint = document.getElementById("hint");
+
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
+
+    const loginError = document.getElementById("loginError");
+    const loginSuccess = document.getElementById("loginSuccess");
+    const signupError = document.getElementById("signupError");
+    const signupSuccess = document.getElementById("signupSuccess");
+
+    const loggedState = document.getElementById("loggedState");
+    const currentUserLabel = document.getElementById("currentUserLabel");
+    const gotoAppBtn = document.getElementById("gotoApp");
+    const gotoProfileBtn = document.getElementById("gotoProfile");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    // ================ SLIDE SWITCH HELPERS ================
+    function showLoginMode() {
+      loginModeBtn.classList.add("active");
+      signupModeBtn.classList.remove("active");
+
+      loginForm.classList.remove("form-slide-right", "form-slide-left", "hidden-panel");
+      signupForm.classList.remove("form-slide-right", "form-slide-left");
+      signupForm.classList.add("hidden-panel");
+
+      void loginForm.offsetWidth;
+      loginForm.classList.add("form-slide-left");
+
+      hint.textContent = "Login to continue your practice & stats on this device.";
+      loginError.textContent = "";
+      loginSuccess.textContent = "";
+      signupError.textContent = "";
+      signupSuccess.textContent = "";
+    }
+
+    function showSignupMode() {
+      signupModeBtn.classList.add("active");
+      loginModeBtn.classList.remove("active");
+
+      signupForm.classList.remove("form-slide-right", "form-slide-left", "hidden-panel");
+      loginForm.classList.remove("form-slide-right", "form-slide-left");
+      loginForm.classList.add("hidden-panel");
+
+      void signupForm.offsetWidth;
+      signupForm.classList.add("form-slide-right");
+
+      hint.textContent = "Create an account stored on this device only (no server).";
+      loginError.textContent = "";
+      loginSuccess.textContent = "";
+      signupError.textContent = "";
+      signupSuccess.textContent = "";
+    }
+
+    loginModeBtn.addEventListener("click", showLoginMode);
+    signupModeBtn.addEventListener("click", showSignupMode);
+
+    // ================= SIGNUP HANDLER (uses storage.js) =================
+    signupForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      if (!signupForm.checkValidity()) {
+        signupForm.reportValidity();
+        return;
+      }
+
+      signupError.textContent = "";
+      signupSuccess.textContent = "";
+
+      const name = document.getElementById("signupName").value.trim();
+      const email = document.getElementById("signupEmail").value.trim().toLowerCase();
+      const pass = document.getElementById("signupPassword").value;
+      const pass2 = document.getElementById("signupPassword2").value;
+
+      if (pass.length < 6) {
+        signupError.textContent = "Password should be at least 6 characters.";
+        return;
+      }
+      if (pass !== pass2) {
+        signupError.textContent = "Passwords do not match.";
+        return;
+      }
+
+      const result = createAccount(email, pass);
+      if (!result.success) {
+        signupError.textContent = result.message || "Could not create account.";
+        return;
+      }
+
+      // Save profile name right away
+      saveUserProfile({ name });
+
+      signupSuccess.textContent = "Account created. Redirecting to profile...";
+      setTimeout(() => {
+        window.location.href = "profile.html";
+      }, 500);
+    });
+
+    // ================= LOGIN HANDLER (uses storage.js) =================
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      if (!loginForm.checkValidity()) {
+        loginForm.reportValidity();
+        return;
+      }
+
+      loginError.textContent = "";
+      loginSuccess.textContent = "";
+
+      const email = document.getElementById("loginId").value.trim().toLowerCase();
+      const pass = document.getElementById("loginPassword").value;
+
+      const result = loginUser(email, pass);
+      if (!result.success) {
+        loginError.textContent = result.message || "Invalid email or password.";
+        return;
+      }
+
+      loginSuccess.textContent = "Logged in successfully. Redirecting...";
+      updateLoggedState();
+
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 500);
+    });
+
+    // ================= LOGGED STATE (uses getActiveUser) =================
+    function updateLoggedState() {
+      const user = getActiveUser();
+      if (user) {
+        loggedState.style.display = "block";
+        const labelName = user.name && user.name.trim() ? user.name : "(no name)";
+        currentUserLabel.textContent = `${labelName} – ${user.email}`;
+      } else {
+        loggedState.style.display = "none";
+      }
+    }
+
+    logoutBtn.addEventListener("click", () => {
+      logoutUser();
+      updateLoggedState();
+      loginForm.reset();
+      signupForm.reset();
+      loginError.textContent = "";
+      loginSuccess.textContent = "";
+      signupError.textContent = "";
+      signupSuccess.textContent = "";
+    });
+
+    gotoAppBtn.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+
+    gotoProfileBtn.addEventListener("click", () => {
+      window.location.href = "profile.html";
+    });
+
+    // ================= IMPORT DATA (uses importUserData from storage.js) =================
+    const importBtn = document.getElementById("importDataBtn");
+    const importInput = document.getElementById("importFileInput");
+    const importStatus = document.getElementById("importStatus");
+
+    if (importBtn && importInput) {
+      importBtn.addEventListener("click", () => {
+        if (importStatus) importStatus.textContent = "";
+        importInput.click();
+      });
+
+      importInput.addEventListener("change", () => {
+        const file = importInput.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            const text = e.target.result;
+
+            if (typeof importUserData !== "function") {
+              if (importStatus) {
+                importStatus.textContent =
+                  "Import helper missing. Make sure storage.js is updated.";
+                importStatus.className = "error-msg";
+              }
+              return;
+            }
+
+            const result = importUserData(text);
+            if (!result || !result.success) {
+              if (importStatus) {
+                importStatus.textContent =
+                  (result && result.message) ||
+                  "Could not import data. Is this a valid Testy backup?";
+                importStatus.className = "error-msg";
+              }
+            } else {
+              if (importStatus) {
+                importStatus.textContent = "Data imported successfully.";
+                importStatus.className = "success-msg";
+              }
+              updateLoggedState();
+            }
+          } catch (err) {
+            if (importStatus) {
+              importStatus.textContent =
+                "Import failed. Make sure you selected the correct JSON backup.";
+              importStatus.className = "error-msg";
+            }
+          } finally {
+            importInput.value = "";
+          }
+        };
+
+        reader.readAsText(file);
+      });
+    }
+
+    // ================= CUSTOM VALIDATION MESSAGES =================
+    function attachCustomMessages() {
+      const signupEmail   = document.getElementById("signupEmail");
+      const signupPass    = document.getElementById("signupPassword");
+      const signupPass2   = document.getElementById("signupPassword2");
+      const loginEmail    = document.getElementById("loginId");
+      const loginPassword = document.getElementById("loginPassword");
+
+      function wire(input, messages) {
+        if (!input) return;
+
+        input.addEventListener("invalid", function () {
+          this.setCustomValidity("");
+          if (this.validity.valueMissing && messages.required) {
+            this.setCustomValidity(messages.required);
+          } else if (this.validity.typeMismatch && messages.typeMismatch) {
+            this.setCustomValidity(messages.typeMismatch);
+          }
+        });
+
+        input.addEventListener("input", function () {
+          this.setCustomValidity("");
+        });
+      }
+
+      wire(signupEmail, {
+        required: "Please enter your email",
+        typeMismatch: "Enter a valid email address"
+      });
+
+      wire(signupPass, {
+        required: "Please enter a password"
+      });
+
+      wire(signupPass2, {
+        required: "Please confirm your password"
+      });
+
+      wire(loginEmail, {
+        required: "Email is required to login",
+        typeMismatch: "Enter a valid email"
+      });
+
+      wire(loginPassword, {
+        required: "Password is required to login"
+      });
+    }
+
+    // INIT
+    updateLoggedState();
+    attachCustomMessages();
+  </script>
+</body>
+</html>

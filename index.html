@@ -1,0 +1,2459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Testy – MCQ Practice</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    /* ===========================
+       POPPINS LOCAL FONT IMPORT
+       =========================== */
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Thin.ttf") format("truetype");
+      font-weight: 100;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-ExtraLight.ttf") format("truetype");
+      font-weight: 200;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Light.ttf") format("truetype");
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-SemiBold.ttf") format("truetype");
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Bold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-ExtraBold.ttf") format("truetype");
+      font-weight: 800;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Black.ttf") format("truetype");
+      font-weight: 900;
+      font-style: normal;
+    }
+    .cover-datetime {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  color: #111;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+#pdfCoverPage {
+  padding: 30px;
+}
+
+@media print {
+
+  /* Hide everything by default */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Show only cover page + review section */
+  #pdfCoverPage, #pdfCoverPage * {
+    visibility: visible;
+  }
+  #reviewSection, #reviewSection * {
+    visibility: visible;
+  }
+
+  /* Arrange them in top-to-bottom order */
+  #pdfCoverPage {
+    position: relative;
+    display: block;
+    page-break-after: always;
+  }
+
+  #reviewSection {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .review-section {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  
+
+  .review-card {
+    page-break-inside: avoid;
+  }
+  /* Force cover page to actually render even though it has .hidden on screen */
+  #pdfCoverPage,
+  .pdf-cover {
+    display: block !important;
+  }
+}
+
+    :root {
+      --bg-body: #f3f7fc;
+      --bg-card: #ffffff;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border-soft: #d1d5db;
+      --blue-accent: #3b82f6;
+      --blue-faint: #dbeafe;
+      --btn-bg: #3b82f6;
+      --btn-text: #ffffff;
+      --timer-text: #b91c1c;
+      --option-correct-bg: #dcfce7;
+      --option-correct-border: #16a34a;
+      --option-wrong-bg: #fee2e2;
+      --option-wrong-border: #dc2626;
+    }
+
+    body.dark-mode {
+      --bg-body: #020617;
+      --bg-card: #020617;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-soft: #1f2937;
+      --blue-accent: #60a5fa;
+      --blue-faint: #0b1120;
+      --btn-bg: #1d4ed8;
+      --btn-text: #e5e7eb;
+      --timer-text: #fb7185;
+      --option-correct-bg: #022c22;
+      --option-correct-border: #22c55e;
+      --option-wrong-bg: #3f1d1d;
+      --option-wrong-border: #f97373;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: radial-gradient(
+        circle at top,
+        var(--blue-faint) 0,
+        var(--bg-body) 50%
+      );
+      margin: 0;
+      padding: 0;
+      color: var(--text-main);
+    }
+
+    /* smooth theme transition */
+    body,
+    body * {
+      transition: background-color 0.35s ease, color 0.35s ease,
+        border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .quiz-container {
+      background: var(--bg-card);
+      width: 100%;
+      min-height: 100vh;
+      box-sizing: border-box;
+      padding: 16px 16px 24px;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+      font-family: inherit;
+    }
+    button:focus,
+    a:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      gap: 8px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0.02em;
+      font-weight: 600;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .icon-btn {
+      padding: 6px;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: transparent;
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, border-color 0.2s ease,
+        transform 0.08s ease;
+    }
+    .icon-btn:hover {
+      background: var(--blue-faint);
+      border-color: var(--blue-accent);
+    }
+    .icon-btn:active {
+      transform: scale(0.94);
+    }
+    .icon-btn.active-tap {
+      background: var(--blue-faint);
+      border-color: var(--blue-accent);
+    }
+
+    .main-btn {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: var(--btn-bg);
+      color: var(--btn-text);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.2s ease, transform 0.08s ease,
+        box-shadow 0.08s ease;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.25);
+    }
+    .main-btn:hover:not(:disabled) {
+      background: #2563eb;
+      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.35);
+    }
+    .main-btn:active:not(:disabled) {
+      transform: translateY(1px);
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.2);
+    }
+    .main-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* ================= MOBILE MENU (overlay) ================= */
+
+    .nav-panel {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 24px 12px;
+      z-index: 50;
+      opacity: 0;
+      transform: translateY(-10px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .nav-panel.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .nav-panel-inner {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--border-soft);
+  padding: 12px 14px 10px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.7);
+
+  /* circular reveal from menu button */
+  clip-path: circle(0 at var(--nav-cx, 100%) var(--nav-cy, 0));
+  opacity: 0;
+  transform: scale(0.9);
+  transition:
+    clip-path 0.45s ease-out,
+    opacity 0.25s ease-out,
+    transform 0.25s ease-out;
+}
+
+/* when overlay is visible, expand the circle */
+.nav-panel.show .nav-panel-inner {
+  clip-path: circle(140% at var(--nav-cx, 100%) var(--nav-cy, 0));
+  opacity: 1;
+  transform: scale(1);
+}
+
+    .nav-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .nav-panel-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-panel-section {
+      margin-top: 10px;
+    }
+
+    .nav-panel-section-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .nav-groups {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-group {
+      position: relative;
+    }
+
+    .nav-group-toggle {
+      width: 100%;
+      text-align: left;
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid var(--border-soft);
+      background: transparent;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.15s ease, border-color 0.15s ease,
+        transform 0.08s ease;
+      color: var(--text-main);
+    }
+    .nav-group-toggle div {
+      color: inherit;
+    }
+    .nav-group-toggle .subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+    }
+    .nav-group-toggle .chevron {
+      font-size: 12px;
+      margin-left: 6px;
+      color: var(--text-main);
+    }
+    .nav-group-toggle:hover {
+      background: var(--blue-faint);
+      border-color: var(--blue-accent);
+    }
+    .nav-group-toggle:active {
+      transform: scale(0.98);
+    }
+
+    .nav-submenu {
+  margin-top: 2px;
+  border-radius: 8px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-card);
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-4px);
+  overflow: hidden;
+  transition: max-height 0.2s ease, opacity 0.2s ease,
+    transform 0.2s ease;
+
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+    .nav-submenu[data-open="true"] {
+  max-height: calc(4 * 32px); /* about 4 rows visible */
+  opacity: 1;
+  transform: translateY(0);
+  overflow-y: auto;
+}
+
+    
+
+    .nav-subitem {
+  display: block;
+  padding: 6px 8px;
+  font-size: 13px;
+  text-decoration: none;
+  color: var(--text-main);
+  background: var(--bg-card);
+  transition: background 0.15s ease;
+}
+   .nav-subitem + .nav-subitem {
+  border-top: 1px solid var(--border-soft);
+}
+.nav-subitem:hover {
+  background: var(--blue-faint);
+}
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .nav-item {
+      text-decoration: none;
+      color: var(--text-main);
+      padding: 6px 8px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid transparent;
+      font-size: 13px;
+      transition: background 0.15s ease, border-color 0.15s ease,
+        transform 0.08s ease;
+    }
+    .nav-item span {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .nav-item:hover {
+      background: var(--blue-faint);
+      border-color: var(--blue-accent);
+    }
+    .nav-item:active {
+      transform: scale(0.98);
+    }
+
+    /* ============= DESKTOP NAV ============= */
+
+    .desktop-nav {
+      display: none;
+      margin: 8px 0 4px;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .desktop-nav a {
+      text-decoration: none;
+      font-size: 12px;
+      color: var(--text-muted);
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .desktop-nav a:hover {
+      background: var(--blue-faint);
+      border-color: var(--blue-accent);
+      color: var(--text-main);
+    }
+
+    .desktop-group {
+  position: relative;
+}
+    .desktop-group .nav-group-toggle {
+      padding: 4px 10px;
+    }
+    .desktop-group .nav-submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 220px;
+  margin-top: 4px;
+  z-index: 30;
+}
+
+    /* ============= CHAPTER DISPLAY ============= */
+
+    .chapter-display {
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 4px;
+      align-items: baseline;
+      position: relative;
+    }
+    .chapter-label {
+      flex-shrink: 0;
+      font-weight: 400;
+    }
+    .chapter-trigger {
+      margin: 0;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+    }
+    .chapter-trigger:hover {
+      background: var(--blue-faint);
+      border-color: var(--blue-accent);
+    }
+    .chapter-name {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .chapter-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 56px;
+      right: 0;
+      margin-top: 4px;
+      z-index: 20;
+      opacity: 0;
+      transform: translateY(-4px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 0.16s ease, transform 0.16s ease;
+    }
+    .chapter-dropdown-inner {
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
+      padding: 6px 8px 6px;
+      max-height: 148px;
+      overflow-y: auto;
+    }
+    .chapter-dropdown-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .chapter-dropdown[data-open="true"] {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .chapter-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .chapter-item-btn {
+      width: 100%;
+      text-align: left;
+      padding: 4px 6px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-main);
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease,
+        transform 0.08s ease;
+      margin-bottom: 0;
+    }
+    .chapter-item-btn:hover {
+      background: var(--blue-faint);
+      border-color: var(--blue-accent);
+    }
+
+    .native-select-hidden {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      height: 0;
+      width: 0;
+    }
+
+    /* ============= SETUP ROW ============= */
+
+    .setup {
+      margin-top: 4px;
+      margin-bottom: 12px;
+      border-top: 1px solid var(--border-soft);
+      padding-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .setup-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .setup label {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .setup-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    #questionCount {
+      width: 70px;
+      padding: 4px 6px;
+      border-radius: 8px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 13px;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    #questionCount:focus {
+      outline: none;
+      border-color: var(--blue-accent);
+      box-shadow: 0 0 0 1px var(--blue-accent);
+    }
+
+    .timer-toggle-label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    #maxInfo {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin: 10px 0 0;
+      font-weight: 300;
+      text-align: center;
+    }
+
+    /* ============= QUIZ AREA ============= */
+
+    .hidden {
+      display: none;
+    }
+
+    #status {
+      font-size: 13px;
+      margin-bottom: 4px;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+    #timer {
+      font-size: 13px;
+      margin-bottom: 4px;
+      font-weight: 600;
+      color: var(--timer-text);
+    }
+    #streakInfo {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      font-weight: 300;
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--blue-faint);
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      width: 0%;
+      background: var(--blue-accent);
+      transition: width 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    #questionText {
+      font-size: 16px;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .option {
+      padding: 6px 8px;
+      border-radius: 10px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      border: 1px solid transparent;
+      background: transparent;
+      transition: background 0.15s ease, border-color 0.15s ease;
+      font-weight: 400;
+    }
+    .option input[type="radio"] {
+      margin-right: 8px;
+    }
+    .option:hover {
+      background: var(--blue-faint);
+    }
+    .option.correct {
+      border-color: var(--option-correct-border);
+      background: var(--option-correct-bg);
+    }
+    .option.incorrect {
+      border-color: var(--option-wrong-border);
+      background: var(--option-wrong-bg);
+    }
+
+    .explanation {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-radius: 8px;
+      border: 1px dashed var(--border-soft);
+      padding: 6px 8px;
+      background: rgba(148, 163, 184, 0.08);
+    }
+
+    .controls {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 6px;
+    }
+    .controls button {
+      flex-shrink: 0;
+    }
+
+    #phaseInfo {
+      font-size: 11px;
+      color: var(--blue-accent);
+      white-space: nowrap;
+    }
+
+    #summary {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--text-main);
+    }
+
+    /* REVIEW SECTION */
+
+    .review-section {
+      margin-top: 10px;
+      border-top: 1px solid var(--border-soft);
+      padding-top: 8px;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+
+    .review-card {
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      padding: 6px 8px;
+      margin-bottom: 6px;
+      font-size: 12px;
+      background: rgba(148, 163, 184, 0.03);
+      overflow-x: auto;
+      white-space: normal;
+    }
+    .review-card.correct {
+      border-color: var(--option-correct-border);
+      background: var(--option-correct-bg);
+    }
+    .review-card.incorrect {
+      border-color: var(--option-wrong-border);
+      background: var(--option-wrong-bg);
+    }
+
+    .review-inner {
+      min-width: 100%;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .review-q-header {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .review-q-text {
+      margin-bottom: 4px;
+    }
+    .review-options {
+      margin-left: 4px;
+    }
+    .review-option {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 2px;
+    }
+    .review-tag {
+      font-size: 10px;
+      padding: 1px 4px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: rgba(15, 23, 42, 0.04);
+    }
+    .review-tag.correct-tag {
+      border-color: var(--option-correct-border);
+    }
+    .review-tag.selected-tag {
+      border-color: var(--blue-accent);
+    }
+
+    /* ============= WELCOME MODAL ============= */
+
+    .welcome-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.82);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      z-index: 80;
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .welcome-modal.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    .welcome-modal-inner {
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-card);
+      border-radius: 20px;
+      border: 1px solid var(--border-soft);
+      padding: 18px 18px 14px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.6);
+    }
+    .welcome-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--blue-faint);
+      color: var(--blue-accent);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .welcome-modal-inner h2 {
+      margin: 0 0 4px;
+      font-size: 18px;
+    }
+    .welcome-sub {
+      margin: 0 0 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .welcome-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 12px;
+      font-size: 12px;
+      color: var(--text-main);
+    }
+    .welcome-features li {
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+      margin-bottom: 4px;
+    }
+    .welcome-features li::before {
+      content: "•";
+      font-size: 14px;
+      line-height: 1;
+      margin-top: 1px;
+      color: var(--blue-accent);
+    }
+    .welcome-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .welcome-footer button {
+      margin-left: auto;
+    }
+
+    /* Desktop tweaks */
+    @media (min-width: 768px) {
+      .desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  overflow-x: auto float;
+  white-space: nowrap;
+}
+      #navToggle {
+        display: none;
+      }
+      .nav-panel {
+        display: none;
+      }
+      .quiz-container {
+        padding: 20px 40px 32px;
+      }
+      .setup {
+        flex-wrap: nowrap;
+      }
+      .setup-left {
+        flex: 1;
+      }
+      .setup-right {
+        justify-content: flex-end;
+      }
+    }
+
+    /* blur behind welcome */
+    .blur-bg {
+      filter: blur(6px);
+      transition: filter 0.25s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- WELCOME MODAL -->
+  <div id="welcomeModal" class="welcome-modal">
+    <div class="welcome-modal-inner">
+      <div class="welcome-badge">Welcome to Testy</div>
+      <h2>Hands-on MCQ practice</h2>
+      <p class="welcome-sub">
+        Fast questions, clean UI, explanations after every attempt.
+      </p>
+      <ul class="welcome-features">
+        <li>Select any chapter & choose question count</li>
+        <li>Timer with streak-based time bonus</li>
+        <li>Instant answer highlight with explanation</li>
+        <li>Review all questions with your choices</li>
+      </ul>
+      <div class="welcome-footer">
+        <span>Tip: Start with 10 questions per round.</span>
+        <button id="welcomeClose" type="button" class="main-btn">Start</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="quiz-container">
+    <!-- MOBILE MENU OVERLAY -->
+    <div id="navPanel" class="nav-panel">
+      <div class="nav-panel-inner">
+        <div class="nav-panel-header">
+          <div class="nav-panel-title">Quick menu</div>
+          <button id="navClose" type="button" class="icon-btn">✕</button>
+        </div>
+
+        <div class="nav-panel-section">
+          <div class="nav-panel-section-label">PRACTICE SETS</div>
+          <div class="nav-groups">
+            <div class="nav-group">
+              <button
+                type="button"
+                class="nav-group-toggle"
+                data-group="rtp-mobile"
+              >
+                <div>
+                  RTPs
+                  <span class="subtitle">Revision Test Papers</span>
+                </div>
+                <span class="chevron">▾</span>
+              </button>
+              <div
+                class="nav-submenu"
+                data-group="rtp-mobile"
+                data-open="false"
+              >
+                <a
+                  href="rtp-mtp.html?type=rtp&paper=sept-2025"
+                  class="nav-subitem"
+                  >RTP Sept 2025</a
+                >
+                <a
+                  href="rtp-mtp.html?type=rtp&paper=may-2025"
+                  class="nav-subitem"
+                  >RTP May 2025</a
+                >
+                <a
+                  href="rtp-mtp.html?type=rtp&paper=jan-2025"
+                  class="nav-subitem"
+                  >RTP Jan 2025</a
+                >
+                <a
+                  href="rtp-mtp.html?type=rtp&paper=sept-2024"
+                  class="nav-subitem"
+                  >RTP Sept 2024</a
+                >
+              </div>
+            </div>
+
+            <div class="nav-group">
+              <button
+                type="button"
+                class="nav-group-toggle"
+                data-group="mtp-mobile"
+              >
+                <div>
+                  MTPs
+                  <span class="subtitle">Mock Test Papers</span>
+                </div>
+                <span class="chevron">▾</span>
+              </button>
+              <div
+                class="nav-submenu"
+                data-group="mtp-mobile"
+                data-open="false"
+              >
+                <a
+                  href="rtp-mtp.html?type=mtp&paper=sept-2025-1"
+                  class="nav-subitem"
+                  >MTP I Sept 2025</a
+                >
+                <a
+                  href="rtp-mtp.html?type=mtp&paper=sept-2025-2"
+                  class="nav-subitem"
+                  >MTP II Sept 2025</a
+                >
+                <a
+                  href="rtp-mtp.html?type=mtp&paper=may-2025-1"
+                  class="nav-subitem"
+                  >MTP I May 2025</a
+                >
+                <a
+                  href="rtp-mtp.html?type=mtp&paper=may-2025-2"
+                  class="nav-subitem"
+                  >MTP II May 2025</a
+                >
+                <a
+                  href="rtp-mtp.html?type=mtp&paper=jan-2025-1"
+                  class="nav-subitem"
+                  >MTP I Jan 2025</a
+                >
+                <a
+                  href="rtp-mtp.html?type=mtp&paper=jan-2025-2"
+                  class="nav-subitem"
+                  >MTP II Jan 2025</a
+                >
+                <a
+                  href="rtp-mtp.html?type=mtp&paper=sept-2024-1"
+                  class="nav-subitem"
+                  >MTP I Sept 2024</a
+                >
+                <a
+                  href="rtp-mtp.html?type=mtp&paper=sept-2024-2"
+                  class="nav-subitem"
+                  >MTP II Sept 2024</a
+                >
+                <a
+                  href="rtp-mtp.html?type=mtp&paper=may-2024-1"
+                  class="nav-subitem"
+                  >MTP I May 2024</a
+                >
+                <a
+                  href="rtp-mtp.html?type=mtp&paper=may-2024-2"
+                  class="nav-subitem"
+                  >MTP II May 2024</a
+                >
+                <a
+                  href="rtp-mtp.html?type=mtp&paper=jan-2024-1"
+                  class="nav-subitem"
+                  >MTP I Jan 2024</a
+                >
+                <a
+                  href="rtp-mtp.html?type=mtp&paper=jan-2024-2"
+                  class="nav-subitem"
+                  >MTP II Jan 2024</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-panel-section">
+          <div class="nav-panel-section-label">LINKS</div>
+            <div class="nav-links">
+    <!-- shown when NOT logged in -->
+    <a
+      id="loginNavItem"
+      class="nav-item"
+      href="auth.html"
+    >
+      Login / Sign up
+      <span>Save progress on this device</span>
+    </a>
+
+    <!-- shown ONLY when logged in -->
+    <a
+      id="profileNavItem"
+      class="nav-item"
+      href="profile-view.html"
+      style="display:none"
+    >
+      My profile
+      <span>Progress & stats</span>
+    </a>
+
+    <a class="nav-item" href="donation.html" target="_blank" rel="noopener">
+      Donate ₹1 <span>Support this project</span>
+    </a>
+
+    <a
+      class="nav-item"
+      href="mailto: contact.globalratings@gmail.com"
+      target="_blank"
+      rel="noopener"
+    >
+      Suggest improvement <span>Share feedback</span>
+    </a>
+
+    <a
+      class="nav-item"
+      href="about.html"
+      rel="noopener"
+    >
+      About Me <span>Know Admin</span>
+    </a>
+
+    <a
+      class="nav-item"
+      href="https://instagram.com/__be1oved_once"
+      target="_blank"
+      rel="noopener"
+    >
+      Instagram <span>Follow updates</span>
+    </a>
+
+    <a
+      class="nav-item"
+      href="https://t.me/your_channel"
+      target="_blank"
+      rel="noopener"
+    >
+      Telegram <span>Join community</span>
+    </a>
+  </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      <h1>Testy</h1>
+      <div class="top-actions">
+        <button id="themeToggle" type="button" class="icon-btn">🌙</button>
+        <button id="navToggle" type="button" class="icon-btn">☰</button>
+      </div>
+    </div>
+
+    <!-- DESKTOP NAV -->
+    <div class="desktop-nav">
+  <div class="desktop-group nav-group" data-ope>
+    <button
+      type="button"
+      class="nav-group-toggle"
+      data-group="rtp-desktop"
+    >
+      <div>
+        RTPs
+        <span class="subtitle">Revision Test Papers</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div
+      class="nav-submenu"
+      data-group="rtp-desktop"
+      data-open="false"
+    >
+      <a href="rtp-mtp.html?type=rtp&paper=sept-2025" class="nav-subitem">RTP Sept 2025</a>
+      <a href="rtp-mtp.html?type=rtp&paper=may-2025"  class="nav-subitem">RTP May 2025</a>
+      <a href="rtp-mtp.html?type=rtp&paper=jan-2025"  class="nav-subitem">RTP Jan 2025</a>
+      <a href="rtp-mtp.html?type=rtp&paper=sept-2024" class="nav-subitem">RTP Sept 2024</a>
+    </div>
+  </div>
+
+  <div class="desktop-group">
+    <button
+      type="button"
+      class="nav-group-toggle"
+      data-group="mtp-desktop"
+    >
+      <div>
+        MTPs
+        <span class="subtitle">Mock Test Papers</span>
+      </div>
+      <span class="chevron">▾</span>
+    </button>
+    <div
+      class="nav-submenu"
+      data-group="mtp-desktop"
+      data-open="false"
+    >
+      <a href="rtp-mtp.html?type=mtp&paper=sept-2025-1" class="nav-subitem">MTP I Sept 2025</a>
+      <a href="rtp-mtp.html?type=mtp&paper=sept-2025-2" class="nav-subitem">MTP II Sept 2025</a>
+
+      <a href="rtp-mtp.html?type=mtp&paper=may-2025-1"  class="nav-subitem">MTP I May 2025</a>
+      <a href="rtp-mtp.html?type=mtp&paper=may-2025-2"  class="nav-subitem">MTP II May 2025</a>
+
+      <a href="rtp-mtp.html?type=mtp&paper=jan-2025-1"  class="nav-subitem">MTP I Jan 2025</a>
+      <a href="rtp-mtp.html?type=mtp&paper=jan-2025-2"  class="nav-subitem">MTP II Jan 2025</a>
+
+      <a href="rtp-mtp.html?type=mtp&paper=sept-2024-1" class="nav-subitem">MTP I Sept 2024</a>
+      <a href="rtp-mtp.html?type=mtp&paper=sept-2024-2" class="nav-subitem">MTP II Sept 2024</a>
+
+      <a href="rtp-mtp.html?type=mtp&paper=may-2024-1"  class="nav-subitem">MTP I May 2024</a>
+      <a href="rtp-mtp.html?type=mtp&paper=may-2024-2"  class="nav-subitem">MTP II May 2024</a>
+
+      <a href="rtp-mtp.html?type=mtp&paper=jan-2024-1"  class="nav-subitem">MTP I Jan 2024</a>
+      <a href="rtp-mtp.html?type=mtp&paper=jan-2024-2"  class="nav-subitem">MTP II Jan 2024</a>
+    </div>
+  </div>
+
+  <!-- same pages as mobile menu -->
+  <!-- shown when NOT logged in -->
+  <a
+    id="loginNavItemDesktop"
+    href="auth.html"
+  >
+    Login / Sign up
+  </a>
+
+  <!-- shown ONLY when logged in -->
+  <a
+    id="profileNavItemDesktop"
+    href="profile-view.html"
+    style="display:none"
+  >
+    My profile
+  </a>
+
+  <a href="donation.html" target="_blank" rel="noopener">Donate ₹1</a>
+  <a href="mailto: contact.globalratings@gmail.com" target="_blank" rel="noopener">Suggest improvement</a>
+  <a href="about.html" rel="noopener">About Me</a>
+  <a href="https://instagram.com/__be1oved_once" target="_blank" rel="noopener">Instagram</a>
+  <a href="https://t.me/your_channel" target="_blank" rel="noopener">Telegram</a>
+</div>
+
+    <!-- CHAPTER SELECT -->
+    <div class="chapter-display">
+      <span class="chapter-label">Chapter:</span>
+      <button id="chapterTrigger" type="button" class="chapter-trigger">
+        <span id="currentChapterLabel" class="chapter-name">None selected</span>
+      </button>
+
+      <div id="chapterDropdown" class="chapter-dropdown" data-open="false">
+        <div class="chapter-dropdown-inner">
+          <div class="chapter-dropdown-title">Choose chapter</div>
+          <div id="chapterDropdownList" class="chapter-list"></div>
+        </div>
+      </div>
+    </div>
+    <select id="chapterSelect" class="native-select-hidden">
+      <option value="">-- Select chapter --</option>
+    </select>
+
+    <!-- SETUP -->
+    <div class="setup">
+      <div class="setup-left">
+        <label>
+          Questions:
+          <input id="questionCount" type="number" min="1" />
+        </label>
+      </div>
+
+      <div class="setup-right">
+        <label class="timer-toggle-label">
+          <input id="timerToggle" type="checkbox" checked />
+          Timer ON
+        </label>
+        <button id="startBtn" type="button" class="main-btn">Start</button>
+        <button id="resetBtn" type="button" class="main-btn" disabled>
+          Reset
+        </button>
+      </div>
+    </div>
+
+    <!-- QUIZ AREA -->
+    <div id="quizArea" class="hidden">
+      <div id="status"></div>
+      <div id="timer"></div>
+      <div id="streakInfo"></div>
+
+      <div id="progressBarWrap" class="progress-bar-wrap hidden">
+        <div id="progressBarInner" class="progress-bar-inner"></div>
+      </div>
+
+      <div id="questionText"></div>
+
+      <form id="optionsForm">
+        <label class="option">
+          <input type="radio" name="option" value="0" />
+          <span class="option-text"></span>
+        </label>
+        <label class="option">
+          <input type="radio" name="option" value="1" />
+          <span class="option-text"></span>
+        </label>
+        <label class="option">
+          <input type="radio" name="option" value="2" />
+          <span class="option-text"></span>
+        </label>
+        <label class="option">
+          <input type="radio" name="option" value="3" />
+          <span class="option-text"></span>
+        </label>
+      </form>
+
+      <div id="explanation" class="explanation hidden"></div>
+
+      <div class="controls">
+        <button id="prevBtn" type="button" class="main-btn">← Prev</button>
+        <button id="nextBtn" type="button" class="main-btn">Next →</button>
+        <span id="phaseInfo"></span>
+      </div>
+
+      <div id="summary"></div>
+
+      <button
+        id="reviewToggleBtn"
+        type="button"
+        class="main-btn hidden"
+        style="margin-top: 8px"
+      >
+        Review questions
+      </button>
+
+      <button
+  id="savePdfBtn"
+  type="button"
+  class="main-btn hidden"
+  style="margin-top: 8px; margin-left: 6px"
+>
+  Save as PDF
+</button>
+
+<div id="pdfCoverPage" class="pdf-cover hidden">
+  <div id="pdfDateTime" class="cover-datetime">
+  <div id="pdfTime"></div>
+  <div id="pdfDate"></div>
+</div>
+  <h1>Testy – Your Practice Report 📘</h1>
+
+  <p class="cover-msg">
+    You’re working hard, and that already puts you far ahead.  
+    Stay consistent, stay disciplined, stay hungry.  
+    You are going to crack this. I believe you will, seriously. <br>
+    Best of LUCK! ❤️  
+    Mujhe Pata Hai Tum Kar Loge.
+  </p>
+
+  <p class="cover-footer">
+    Made with Love ❤️ Kunal
+  </p>
+</div>
+
+      <div id="reviewSection" class="review-section hidden">
+        <div id="reviewList"></div>
+      </div>
+    </div>
+
+    <p id="maxInfo">Tap on "None selected" above to choose a chapter.</p>
+  </div>
+
+<!-- Then your questions etc. -->
+<script src="questions.js"></script>
+<script src="storage.js"></script>
+
+  <script>
+    const WELCOME_KEY = "welcomeSeen";
+    const THEME_KEY = "quizTheme_v1";
+
+    const welcomeModal = document.getElementById("welcomeModal");
+    const welcomeClose = document.getElementById("welcomeClose");
+    const mainContainer = document.querySelector(".quiz-container");
+
+    const chapterSelect = document.getElementById("chapterSelect");
+    const currentChapterLabel = document.getElementById("currentChapterLabel");
+    const chapterTrigger = document.getElementById("chapterTrigger");
+    const chapterDropdown = document.getElementById("chapterDropdown");
+    const chapterDropdownList = document.getElementById("chapterDropdownList");
+
+    const questionCountInput = document.getElementById("questionCount");
+    const startBtn = document.getElementById("startBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const themeToggle = document.getElementById("themeToggle");
+    const navToggle = document.getElementById("navToggle");
+    const navPanel = document.getElementById("navPanel");
+    const navClose = document.getElementById("navClose");
+    const maxInfo = document.getElementById("maxInfo");
+    const timerToggle = document.getElementById("timerToggle");
+
+    const quizArea = document.getElementById("quizArea");
+    const questionText = document.getElementById("questionText");
+    const optionsForm = document.getElementById("optionsForm");
+    const optionLabels = [...document.querySelectorAll(".option")];
+    const optionInputs = [...document.querySelectorAll(".option input")];
+    const optionTextSpans = [...document.querySelectorAll(".option-text")];
+    
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const statusEl = document.getElementById("status");
+    const timerEl = document.getElementById("timer");
+    const phaseInfo = document.getElementById("phaseInfo");
+    const summaryEl = document.getElementById("summary");
+    const streakInfo = document.getElementById("streakInfo");
+    const explanationEl = document.getElementById("explanation");
+    const progressBarWrap = document.getElementById("progressBarWrap");
+    const progressBarInner = document.getElementById("progressBarInner");
+
+    const reviewToggleBtn = document.getElementById("reviewToggleBtn");
+    const savePdfBtn = document.getElementById("savePdfBtn");
+    if (savePdfBtn) {
+  savePdfBtn.addEventListener("click", () => {
+    // Fill time & date on the cover page
+    updatePdfDateTime();
+
+    // Make sure the review section is visible before printing
+    if (reviewSection && reviewSection.classList.contains("hidden")) {
+      buildReviewList?.();     // only if this function exists in that file
+      reviewSection.classList.remove("hidden");
+      reviewToggleBtn.textContent = "Hide review";
+    }
+
+    // Trigger browser's print → user chooses "Save as PDF"
+    window.print();
+  });
+}
+    const reviewSection = document.getElementById("reviewSection");
+    const reviewList = document.getElementById("reviewList");
+
+    const navGroupToggles = document.querySelectorAll(".nav-group-toggle");
+    
+    // RTP/MTP dropdowns (mobile + desktop)
+navGroupToggles.forEach((btn) => {
+  const group = btn.dataset.group;
+  const submenu = document.querySelector(
+    `.nav-submenu[data-group="${group}"]`
+  );
+  if (!submenu) return;
+
+  // scroll indicator
+  let scrollTimeout;
+  submenu.addEventListener("scroll", () => {
+    submenu.dataset.scrolling = "true";
+    clearTimeout(scrollTimeout);
+
+    const maxScroll = submenu.scrollHeight - submenu.clientHeight;
+    const ratio = maxScroll > 0 ? submenu.scrollTop / maxScroll : 0;
+
+    submenu.style.setProperty("--scroll-top", ratio * 80 + "%");
+    submenu.style.setProperty(
+      "--scroll-size",
+      maxScroll > 0
+        ? Math.max(20, (submenu.clientHeight / submenu.scrollHeight) * 100) + "%"
+        : "0%"
+    );
+
+    scrollTimeout = setTimeout(() => {
+      submenu.dataset.scrolling = "false";
+    }, 400);
+  });
+
+  // open this, close others
+  btn.addEventListener("click", () => {
+    const isOpen = submenu.getAttribute("data-open") === "true";
+
+    document.querySelectorAll(".nav-submenu[data-open='true']").forEach((other) => {
+      if (other !== submenu) {
+        other.setAttribute("data-open", "false");
+      }
+    });
+
+    submenu.setAttribute("data-open", isOpen ? "false" : "true");
+  });
+});
+
+
+    let quizTimeline = [];
+    let answers = [];
+    let retryQuestions = [];
+    let currentIndex = 0;
+    let firstPhaseLength = 0;
+
+    let timerInterval = null;
+    let autoNextTimeout = null;
+    let timeLeft = 45;
+    let currentTimeLimit = 45;
+    let uidCounter = 0;
+
+    let quizActive = false;
+    let timerEnabled = true;
+    let currentStreak = 0;
+    let bestStreak = 0;
+
+    let reviewRecords = [];
+
+    function shuffleArray(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+function shuffleOptionsWithSpecialRules(baseOptions, correctIndex) {
+  const indexed = baseOptions.map((text, idx) => ({ text, idx }));
+
+  const allAbove = [];
+  const noneArr = [];
+  const neitherAB = [];
+  const bothAB = [];
+  const bothOther = [];
+
+  indexed.forEach((o) => {
+    const lower = o.text.toLowerCase().trim();
+
+    const isAllAbove =
+      lower.includes("all of the above") || lower.includes("all of these");
+
+    const isNone =
+      lower.includes("none of the above") ||
+      lower.includes("none of these") ||
+      lower.includes("none of the given");
+
+    const hasA = lower.includes("(a)");
+    const hasB = lower.includes("(b)");
+    const hasC = lower.includes("(c)");
+
+    const isBothAB =
+      lower.includes("both") && hasA && hasB;
+
+    const isBothBC =
+      lower.includes("both") && hasB && hasC;
+
+    const isNeitherAB =
+      lower.includes("neither") && hasA && hasB;
+
+    if (isAllAbove) {
+      allAbove.push(o);
+      return;
+    }
+    if (isNone) {
+      noneArr.push(o);
+      return;
+    }
+    if (isNeitherAB) {
+      neitherAB.push(o);
+      return;
+    }
+    if (isBothAB) {
+      bothAB.push(o);
+      return;
+    }
+    if (isBothBC) {
+      bothOther.push(o);
+      return;
+    }
+  });
+
+  const usedIdx = new Set();
+  const final = new Array(indexed.length);
+  let slot3 = null;
+  let slot4 = null;
+
+  // Case: Both (a)&(b) AND Neither (a)&(b) present → Both in 3rd, Neither in 4th.
+  if (bothAB.length > 0 && neitherAB.length > 0) {
+    if (final.length >= 3) {
+      slot3 = bothAB[0];
+      usedIdx.add(slot3.idx);
+      final[2] = slot3;
+    }
+    if (final.length >= 4) {
+      slot4 = neitherAB[0];
+      usedIdx.add(slot4.idx);
+      final[3] = slot4;
+    }
+  }
+
+  function takeFirst(arr) {
+    return arr.find((o) => !usedIdx.has(o.idx)) || null;
+  }
+
+  if (!slot4 && final.length >= 4) {
+    let candidate =
+      takeFirst(allAbove) ||
+      takeFirst(noneArr) ||
+      takeFirst(neitherAB) ||
+      takeFirst(bothAB) ||
+      takeFirst(bothOther);
+
+    if (candidate) {
+      slot4 = candidate;
+      usedIdx.add(slot4.idx);
+      final[3] = slot4;
+    }
+  }
+
+  const normals = indexed.filter((o) => !usedIdx.has(o.idx));
+  const shuffledNormals = shuffleArray(normals);
+
+  let ni = 0;
+  for (let i = 0; i < final.length; i++) {
+    if (!final[i]) {
+      final[i] = shuffledNormals[ni++];
+    }
+  }
+
+  const newOptions = final.map((o) => o.text);
+  const newCorrectIndex = final.findIndex((o) => o.idx === correctIndex);
+
+  return { options: newOptions, correctIndex: newCorrectIndex };
+}
+
+function updatePdfDateTime() {
+  const timeEl = document.getElementById("pdfTime");
+  const dateEl = document.getElementById("pdfDate");
+  if (!timeEl || !dateEl) return;
+
+  const now = new Date();
+
+  // Time like: Time: 04:38 PM
+  const timeStr = now.toLocaleTimeString("en-IN", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true
+  });
+
+  // Date like: Date: 22 Nov 2k25
+  const day = String(now.getDate()).padStart(2, "0");
+  const monthShort = now.toLocaleString("en-US", { month: "short" }); // Nov
+  const yearShort = String(now.getFullYear()).slice(-2);              // 25
+  const dateStr = `${day} ${monthShort} 2k${yearShort}`;
+
+  timeEl.textContent = `Time: ${timeStr}`;
+  dateEl.textContent = `Date: ${dateStr}`;
+}
+
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        document.body.classList.add("dark-mode");
+        themeToggle.textContent = "☀️";
+      } else {
+        document.body.classList.remove("dark-mode");
+        themeToggle.textContent = "🌙";
+      }
+      try {
+        localStorage.setItem(THEME_KEY, theme);
+      } catch (_) {}
+    }
+
+    function initTheme() {
+      let saved = "light";
+      try {
+        const t = localStorage.getItem(THEME_KEY);
+        if (t === "dark" || t === "light") saved = t;
+      } catch (_) {}
+      applyTheme(saved);
+    }
+
+    function attachTapHover(el) {
+      if (!el) return;
+      let timeoutId;
+      el.addEventListener("pointerdown", () => {
+        clearTimeout(timeoutId);
+        el.classList.add("active-tap");
+      });
+      function clearState() {
+        timeoutId = setTimeout(() => {
+          el.classList.remove("active-tap");
+        }, 400);
+      }
+      el.addEventListener("pointerup", clearState);
+      el.addEventListener("pointercancel", clearState);
+      el.addEventListener("pointerleave", clearState);
+    }
+
+    attachTapHover(themeToggle);
+    attachTapHover(navToggle);
+    attachTapHover(navClose);
+
+    function openWelcomeModal() {
+      if (!welcomeModal || !mainContainer) return;
+      welcomeModal.classList.add("show");
+      mainContainer.classList.add("blur-bg");
+    }
+    function closeWelcomeModal() {
+      if (!welcomeModal || !mainContainer) return;
+      welcomeModal.classList.remove("show");
+      mainContainer.classList.remove("blur-bg");
+    }
+
+    if (welcomeClose) {
+      welcomeClose.addEventListener("click", () => {
+        try {
+          localStorage.setItem(WELCOME_KEY, "true");
+        } catch (_) {}
+        closeWelcomeModal();
+      });
+    }
+    if (welcomeModal) {
+      welcomeModal.addEventListener("click", (e) => {
+        if (e.target === welcomeModal) {
+          try {
+            localStorage.setItem(WELCOME_KEY, "true");
+          } catch (_) {}
+          closeWelcomeModal();
+        }
+      });
+    }
+
+    function selectChapter(ch) {
+      chapterSelect.value = ch;
+      currentChapterLabel.textContent = ch;
+      const evt = new Event("change");
+      chapterSelect.dispatchEvent(evt);
+      chapterDropdown.dataset.open = "false";
+      navPanel.classList.remove("show");
+    }
+
+    function populateChapters() {
+      if (!Array.isArray(QUESTIONS) || QUESTIONS.length === 0) {
+        maxInfo.textContent =
+          "No questions loaded. Check questions.js is next to index.html.";
+        return;
+      }
+
+      const seen = new Set();
+      QUESTIONS.forEach((q) => {
+        const ch = q.chapter || "Uncategorized";
+        if (seen.has(ch)) return;
+        seen.add(ch);
+
+        const opt = document.createElement("option");
+        opt.value = ch;
+        opt.textContent = ch;
+        chapterSelect.appendChild(opt);
+
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chapter-item-btn";
+        btn.textContent = ch;
+        btn.addEventListener("click", () => selectChapter(ch));
+        chapterDropdownList.appendChild(btn);
+      });
+    }
+
+    function clearTimer() {
+      if (timerInterval !== null) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+    }
+
+    function clearAutoNext() {
+      if (autoNextTimeout !== null) {
+        clearTimeout(autoNextTimeout);
+        autoNextTimeout = null;
+      }
+    }
+
+    function updateStreakUI() {
+      if (!quizActive) {
+        streakInfo.textContent = "";
+        return;
+      }
+      streakInfo.textContent =
+        "Streak: " + currentStreak + " | Best: " + bestStreak;
+    }
+
+    function updateProgressBar() {
+      if (!quizActive || quizTimeline.length === 0) {
+        progressBarWrap.classList.add("hidden");
+        progressBarInner.style.width = "0%";
+        return;
+      }
+      progressBarWrap.classList.remove("hidden");
+      const percent = (currentIndex / quizTimeline.length) * 100;
+      progressBarInner.style.width = percent.toFixed(2) + "%";
+    }
+
+    function startTimer() {
+      clearTimer();
+
+      if (!quizActive || answers[currentIndex] || !timerEnabled) {
+        timerEl.textContent =
+          quizActive && timerEnabled ? "Time left: —" : "";
+        return;
+      }
+
+      timeLeft = currentTimeLimit;
+      timerEl.textContent = "Time left: " + timeLeft + "s";
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) {
+          timerEl.textContent = "Time left: 0s";
+          clearTimer();
+          handleTimeout();
+        } else {
+          timerEl.textContent = "Time left: " + timeLeft + "s";
+        }
+      }, 1000);
+    }
+
+    function handleTimeout() {
+      if (!quizActive || answers[currentIndex]) return;
+      const q = quizTimeline[currentIndex];
+      answers[currentIndex] = { selected: null, isCorrect: false };
+      currentTimeLimit = 45;
+      retryQuestions.push({ ...q });
+      currentStreak = 0;
+      updateStreakUI();
+      optionInputs.forEach((i) => (i.disabled = true));
+      setTimeout(goToNextQuestion, 400);
+    }
+
+    function renderQuestion() {
+      if (!quizActive) return;
+      clearTimer();
+      clearAutoNext();
+
+      const q = quizTimeline[currentIndex];
+// Add serial number before the question text
+questionText.textContent = (currentIndex + 1) + ". " + (q.question || "");
+
+      optionLabels.forEach((l) => l.classList.remove("correct", "incorrect"));
+      optionInputs.forEach((i) => {
+        i.checked = false;
+        i.disabled = false;
+      });
+
+      explanationEl.classList.add("hidden");
+      explanationEl.textContent = "";
+
+      q.options.forEach((opt, i) => {
+        optionTextSpans[i].textContent = opt;
+      });
+
+      const ans = answers[currentIndex];
+      if (ans) {
+        if (ans.selected !== null && ans.selected !== undefined) {
+          optionInputs.forEach((i) => {
+            if (parseInt(i.value, 10) === ans.selected) i.checked = true;
+            i.disabled = true;
+          });
+          optionLabels[ans.selected].classList.add(
+            ans.isCorrect ? "correct" : "incorrect"
+          );
+          if (!ans.isCorrect && q.correctIndex != null) {
+            optionLabels[q.correctIndex].classList.add("correct");
+          }
+          if (q.explanation) {
+            explanationEl.textContent = "Explanation: " + q.explanation;
+            explanationEl.classList.remove("hidden");
+          }
+        } else {
+          optionInputs.forEach((i) => (i.disabled = true));
+        }
+      }
+
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = !answers[currentIndex];
+
+      phaseInfo.textContent =
+        currentIndex < firstPhaseLength ? "First round" : "Retrying wrong questions";
+
+      statusEl.textContent =
+        "Question " + (currentIndex + 1) + " of " + quizTimeline.length;
+
+      updateProgressBar();
+      updateStreakUI();
+      startTimer();
+    }
+
+    optionsForm.addEventListener("change", (event) => {
+      if (!quizActive) return;
+      const target = event.target;
+      if (target.name !== "option") return;
+      if (answers[currentIndex]) return;
+
+      const selected = parseInt(target.value, 10);
+      const q = quizTimeline[currentIndex];
+      const correct = selected === q.correctIndex;
+      
+      // record stats per chapter for logged-in user
+if (typeof getActiveUser === "function" && typeof recordAttempt === "function") {
+  const u = getActiveUser();
+  if (u) {
+    const chapterKey = q.chapter || document.getElementById("currentChapterLabel")?.textContent || "Chapter practice";
+    recordAttempt(u.id, "chapter", chapterKey, correct);
+  }
+}
+
+      answers[currentIndex] = { selected, isCorrect: correct };
+
+      optionInputs.forEach((i) => (i.disabled = true));
+      optionLabels[selected].classList.add(
+        correct ? "correct" : "incorrect"
+      );
+      if (!correct && q.correctIndex != null) {
+        optionLabels[q.correctIndex].classList.add("correct");
+      }
+
+      if (q.explanation) {
+        explanationEl.textContent = "Explanation: " + q.explanation;
+        explanationEl.classList.remove("hidden");
+      }
+
+      nextBtn.disabled = false;
+
+      if (correct) {
+        currentTimeLimit += 5;
+        currentStreak++;
+        if (currentStreak > bestStreak) bestStreak = currentStreak;
+      } else {
+        currentTimeLimit = 45;
+        retryQuestions.push({ ...q });
+        currentStreak = 0;
+      }
+
+      updateStreakUI();
+      clearTimer();
+      clearAutoNext();
+
+      const delay = correct ? 600 : 3000;
+      autoNextTimeout = setTimeout(() => {
+        autoNextTimeout = null;
+        goToNextQuestion();
+      }, delay);
+    });
+
+    function goToNextQuestion() {
+      if (!quizActive) return;
+      clearTimer();
+      clearAutoNext();
+
+      if (currentIndex < quizTimeline.length - 1) {
+        currentIndex++;
+        renderQuestion();
+        return;
+      }
+
+      if (retryQuestions.length > 0) {
+        const retryClones = retryQuestions.map((q) => ({ ...q }));
+        quizTimeline = quizTimeline.concat(retryClones);
+        const extraAnswers = new Array(retryClones.length).fill(null);
+        answers = answers.concat(extraAnswers);
+        retryQuestions = [];
+        currentIndex++;
+        renderQuestion();
+        return;
+      }
+
+      showSummary();
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (!quizActive) return;
+      if (currentIndex > 0) {
+        clearTimer();
+        clearAutoNext();
+        currentIndex--;
+        renderQuestion();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (!quizActive) return;
+      if (!answers[currentIndex]) return;
+      clearAutoNext();
+      goToNextQuestion();
+    });
+
+    function showSummary() {
+      clearTimer();
+      clearAutoNext();
+
+      const totalQuestions = firstPhaseLength;
+
+      const correctUIDs = new Set();
+      for (let i = 0; i < quizTimeline.length; i++) {
+        const ans = answers[i];
+        if (ans && ans.isCorrect) {
+          const q = quizTimeline[i];
+          if (typeof q.uid === "number" && q.uid < firstPhaseLength) {
+            correctUIDs.add(q.uid);
+          }
+        }
+      }
+      const eventualCorrect = correctUIDs.size;
+
+      let firstMarks = 0;
+      let firstCorrect = 0;
+      let firstWrong = 0;
+      for (let i = 0; i < firstPhaseLength; i++) {
+        const ans = answers[i];
+        if (!ans) continue;
+        if (ans.isCorrect) {
+          firstMarks += 1;
+          firstCorrect++;
+        } else {
+          firstMarks -= 0.25;
+          firstWrong++;
+        }
+      }
+      const accuracy =
+        totalQuestions > 0 ? (firstCorrect / totalQuestions) * 100 : 0;
+
+      summaryEl.innerHTML =
+        "Correct (eventual): " +
+        eventualCorrect +
+        " / " +
+        totalQuestions +
+        " &nbsp; | &nbsp; Accuracy (first round): " +
+        accuracy.toFixed(2) +
+        "%<br>" +
+        "Marks (first attempts only, +1 / -0.25): " +
+        firstMarks.toFixed(2) +
+        " &nbsp; (Correct: " +
+        firstCorrect +
+        ", Wrong: " +
+        firstWrong +
+        ")";
+
+      timerEl.textContent = "Quiz finished.";
+      nextBtn.disabled = true;
+      updateProgressBar();
+      updateStreakUI();
+
+      reviewToggleBtn.classList.remove("hidden");
+      reviewToggleBtn.textContent = "Review questions";
+      reviewSection.classList.add("hidden");
+      reviewList.innerHTML = "";
+      if (savePdfBtn) savePdfBtn.classList.remove("hidden");
+    }
+
+    function buildReviewList() {
+      reviewList.innerHTML = "";
+      reviewRecords = [];
+
+      for (let i = 0; i < firstPhaseLength; i++) {
+        const q = quizTimeline[i];
+        if (!q) continue;
+        const ans = answers[i] || {};
+
+        reviewRecords.push({
+          number: i + 1,
+          question: q.question,
+          options: q.options,
+          correctIndex: q.correctIndex,
+          userIndex:
+            typeof ans.selected === "number" ? ans.selected : null,
+        });
+
+        const card = document.createElement("div");
+        card.className =
+          "review-card " + (ans && ans.isCorrect ? "correct" : "incorrect");
+
+        const inner = document.createElement("div");
+        inner.className = "review-inner";
+
+        const header = document.createElement("div");
+        header.className = "review-q-header";
+        header.textContent = "Q" + (i + 1);
+
+        const qText = document.createElement("div");
+        qText.className = "review-q-text";
+        qText.textContent = q.question;
+
+        const optsWrap = document.createElement("div");
+        optsWrap.className = "review-options";
+
+        q.options.forEach((optText, idx) => {
+          const optRow = document.createElement("div");
+          optRow.className = "review-option";
+
+          const bullet = document.createElement("span");
+          bullet.textContent = String.fromCharCode(65 + idx) + ".";
+
+          const textSpan = document.createElement("span");
+          textSpan.textContent = optText;
+
+          optRow.appendChild(bullet);
+          optRow.appendChild(textSpan);
+
+          const isCorrect = idx === q.correctIndex;
+          const isSelected = ans && ans.selected === idx;
+
+          if (isCorrect || isSelected) {
+            const tag = document.createElement("span");
+            tag.className = "review-tag";
+            if (isCorrect) {
+              tag.classList.add("correct-tag");
+              tag.textContent = "Correct";
+            }
+            if (isSelected) {
+              tag.classList.add("selected-tag");
+              tag.textContent = isCorrect
+                ? "Correct (your choice)"
+                : "Your choice";
+            }
+            optRow.appendChild(tag);
+          }
+
+          optsWrap.appendChild(optRow);
+        });
+
+        inner.appendChild(header);
+        inner.appendChild(qText);
+        inner.appendChild(optsWrap);
+        card.appendChild(inner);
+        reviewList.appendChild(card);
+      }
+    }
+
+    function resetQuiz(keepChapter = true) {
+      clearTimer();
+      clearAutoNext();
+
+      quizTimeline = [];
+      answers = [];
+      retryQuestions = [];
+      currentIndex = 0;
+      firstPhaseLength = 0;
+      currentTimeLimit = 45;
+      uidCounter = 0;
+      quizActive = false;
+
+      currentStreak = 0;
+      bestStreak = 0;
+      updateStreakUI();
+
+      quizArea.classList.add("hidden");
+      statusEl.textContent = "";
+      timerEl.textContent = "";
+      questionText.textContent = "";
+      phaseInfo.textContent = "";
+      summaryEl.textContent = "";
+      explanationEl.textContent = "";
+      explanationEl.classList.add("hidden");
+      progressBarWrap.classList.add("hidden");
+      progressBarInner.style.width = "0%";
+
+      nextBtn.disabled = true;
+      prevBtn.disabled = true;
+      resetBtn.disabled = true;
+
+      reviewToggleBtn.classList.add("hidden");
+      reviewSection.classList.add("hidden");
+      reviewList.innerHTML = "";
+      if (savePdfBtn) savePdfBtn.classList.add("hidden");
+
+      chapterDropdown.dataset.open = "false";
+
+      if (!keepChapter) {
+        chapterSelect.value = "";
+        currentChapterLabel.textContent = "None selected";
+        maxInfo.textContent =
+          'Tap on "None selected" above to choose a chapter.';
+        questionCountInput.value = "";
+      }
+    }
+
+    chapterSelect.addEventListener("change", () => {
+      const chosen = chapterSelect.value;
+      if (!chosen) {
+        resetQuiz(false);
+        return;
+      }
+
+      const pool = QUESTIONS.filter(
+        (q) => (q.chapter || "Uncategorized") === chosen
+      );
+      const max = pool.length;
+
+      questionCountInput.max = max;
+      questionCountInput.value = Math.min(10, max);
+      maxInfo.textContent = "Available in this chapter: " + max;
+
+      resetQuiz(true);
+    });
+
+    startBtn.addEventListener("click", () => {
+      const chosen = chapterSelect.value;
+      if (!chosen) {
+        alert('Please select a chapter first (tap on "None selected").');
+        return;
+      }
+
+      const pool = QUESTIONS.filter(
+        (q) => (q.chapter || "Uncategorized") === chosen
+      );
+      if (pool.length === 0) {
+        alert("No questions found for this chapter.");
+        return;
+      }
+
+      let count = parseInt(questionCountInput.value, 10);
+      if (isNaN(count) || count <= 0) {
+        alert("Enter a valid number of questions.");
+        return;
+      }
+      if (count > pool.length) count = pool.length;
+
+      currentTimeLimit = 45;
+      uidCounter = 0;
+      currentStreak = 0;
+      bestStreak = 0;
+      timerEnabled = timerToggle.checked;
+
+      const shuffled = shuffleArray(pool)
+  .slice(0, count)
+  .map((q) => {
+    const base = { ...q };
+    base.uid = uidCounter++;
+
+    const result = shuffleOptionsWithSpecialRules(base.options, base.correctIndex);
+    base.options = result.options;
+    base.correctIndex = result.correctIndex;
+
+    return base;
+  });
+
+      quizTimeline = shuffled;
+      firstPhaseLength = quizTimeline.length;
+      retryQuestions = [];
+      answers = new Array(firstPhaseLength).fill(null);
+      currentIndex = 0;
+      summaryEl.textContent = "";
+      quizActive = true;
+
+      reviewToggleBtn.classList.add("hidden");
+      reviewSection.classList.add("hidden");
+      reviewList.innerHTML = "";
+      if (savePdfBtn) savePdfBtn.classList.add("hidden");
+
+      quizArea.classList.remove("hidden");
+      resetBtn.disabled = false;
+      renderQuestion();
+    });
+
+    resetBtn.addEventListener("click", () => {
+      resetQuiz(true);
+    });
+
+    themeToggle.addEventListener("click", () => {
+      const isDark = document.body.classList.contains("dark-mode");
+      applyTheme(isDark ? "light" : "dark");
+    });
+
+    const navPanelInner = document.querySelector(".nav-panel-inner");
+
+// MENU open/close (overlay)
+navToggle.addEventListener("click", () => {
+  if (navPanelInner && navToggle) {
+    const btnRect = navToggle.getBoundingClientRect();
+    // circle origin at the center of the menu button
+    const cx = btnRect.left + btnRect.width / 2;
+    const cy = btnRect.top + btnRect.height / 2;
+
+    navPanelInner.style.setProperty("--nav-cx", `${cx}px`);
+    navPanelInner.style.setProperty("--nav-cy", `${cy}px`);
+  }
+  navPanel.classList.add("show");
+});
+
+navClose.addEventListener("click", () => {
+  navPanel.classList.remove("show");
+});
+navPanel.addEventListener("click", e => {
+  if (e.target === navPanel) navPanel.classList.remove("show");
+});
+
+    timerToggle.addEventListener("change", () => {
+      timerEnabled = timerToggle.checked;
+      if (!quizActive) return;
+      clearTimer();
+      startTimer();
+    });
+
+    reviewToggleBtn.addEventListener("click", () => {
+      const hidden = reviewSection.classList.contains("hidden");
+      if (hidden) {
+        buildReviewList();
+        reviewSection.classList.remove("hidden");
+        reviewToggleBtn.textContent = "Hide review";
+      } else {
+        reviewSection.classList.add("hidden");
+        reviewToggleBtn.textContent = "Review questions";
+      }
+    });
+
+    function addReviewTextPages(doc, records) {
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const pageHeight = doc.internal.pageSize.getHeight();
+
+      const marginX = 40;
+      const marginTop = 50;
+      const marginBottom = 40;
+      const maxWidth = pageWidth - 2 * marginX;
+
+      let y = marginTop;
+
+      doc.setFont("Poppins-Regular", "normal");
+      doc.setFontSize(11);
+
+      records.forEach((rec) => {
+        if (y > pageHeight - marginBottom - 80) {
+          doc.addPage();
+          y = marginTop;
+        }
+
+        const qTitle = "Q" + rec.number + ". " + rec.question;
+        const qLines = doc.splitTextToSize(qTitle, maxWidth);
+
+        doc.setFont("Poppins-Bold", "bold");
+        doc.text(qLines, marginX, y);
+        y += qLines.length * 14 + 4;
+
+        doc.setFont("Poppins-Regular", "normal");
+        rec.options.forEach((opt, idx) => {
+          let marker = "";
+          if (idx === rec.correctIndex && idx === rec.userIndex) {
+            marker = " (correct – your choice)";
+          } else if (idx === rec.correctIndex) {
+            marker = " (correct)";
+          } else if (idx === rec.userIndex) {
+            marker = " (your choice)";
+          }
+
+          const label = String.fromCharCode(65 + idx);
+          const line = label + ") " + opt + marker;
+          const lines = doc.splitTextToSize(line, maxWidth);
+
+          doc.text(lines, marginX + 14, y);
+          y += lines.length * 12 + 2;
+        });
+
+        y += 10;
+      });
+    }
+
+   
+
+    chapterTrigger.addEventListener("click", () => {
+      const isOpen = chapterDropdown.dataset.open === "true";
+      chapterDropdown.dataset.open = isOpen ? "false" : "true";
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        !chapterDropdown.contains(e.target) &&
+        !chapterTrigger.contains(e.target)
+      ) {
+        chapterDropdown.dataset.open = "false";
+      }
+    });
+
+// ===== AUTH LINK VISIBILITY (shared with auth.html) =====
+    // ===== AUTH LINK VISIBILITY (using storage.js) =====
+function initAuthLinks() {
+  if (typeof getActiveUser !== "function") return;
+
+  const user = getActiveUser();
+
+  const mobileLogin   = document.getElementById("loginNavItem");
+  const mobileProfile = document.getElementById("profileNavItem");
+  const desktopLogin  = document.getElementById("loginNavItemDesktop");
+  const desktopProfile= document.getElementById("profileNavItemDesktop");
+
+  function applyPair(loginEl, profileEl, profileSpanSelector) {
+    if (!loginEl || !profileEl) return;
+
+    if (user) {
+      loginEl.style.display = "none";
+      profileEl.style.display = "flex";
+
+      // for mobile we show "Hello, name" in the <span>
+      if (profileSpanSelector && user.name) {
+        const span = profileEl.querySelector(profileSpanSelector);
+        if (span) {
+          const firstName = user.name.split(" ")[0];
+          span.textContent = "Hello, " + firstName;
+        }
+      }
+    } else {
+      loginEl.style.display = "flex";
+      profileEl.style.display = "none";
+    }
+  }
+
+  // mobile: has the extra subtitle span
+  applyPair(mobileLogin, mobileProfile, "span");
+
+  // desktop: simple text, no subtitle span to overwrite
+  applyPair(desktopLogin, desktopProfile, null);
+}
+
+    // INIT
+    initTheme();
+    initAuthLinks();
+    populateChapters();
+    resetQuiz(true);
+
+    const hasSeenWelcome = localStorage.getItem(WELCOME_KEY) === "true";
+    if (!hasSeenWelcome) {
+      openWelcomeModal();
+    }
+  </script>
+</body>
+</html>
