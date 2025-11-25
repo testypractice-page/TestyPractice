@@ -2,25 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<title>Testy – Profile</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Testy – Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script src="storage.js"></script>
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
-  rel="stylesheet"
-/>
-
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-<script src="firebase.js"></script>
+  <script src="storage.js"></script>
 
   <style>
     /* Basic Poppins include (regular, medium, semibold) */
-    
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Regular.ttf");
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Medium.ttf");
+      font-weight: 500;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-SemiBold.ttf");
+      font-weight: 600;
+    }
     
     body {
       margin: 0;
@@ -143,6 +146,10 @@
       (We will plug real stats after this step)
     </div>
 
+    <button id="exportBtn" class="btn-secondary">Export my data</button>
+    <button id="importBtn" class="btn-secondary">Import data</button>
+    <input id="importFile" type="file" style="display:none;">
+
     <button id="logoutBtn" class="logout-btn">Log out</button>
 
   </div>
@@ -177,25 +184,13 @@
       reader.readAsDataURL(file);
     });
 
-   document.getElementById("saveBtn").addEventListener("click", async () => {
-  const newName = nameInput.value.trim();
-
-  // 1) Save to your local system (storage.js)
+   document.getElementById("saveBtn").addEventListener("click", () => {
   saveUserProfile({
-    name: newName,
+    name: nameInput.value.trim(),
     dob: dobInput.value,
     avatar: avatarPreview.src || ""
   });
-
-  // 2) Also update Firebase displayName if available
-  if (typeof updateFirebaseProfileName === "function") {
-    try {
-      await updateFirebaseProfileName(newName);
-    } catch (e) {
-      console.warn("[Profile] Firebase name update failed:", e);
-    }
-  }
-
+  
   alert("Profile saved!");
   window.location.href = "index.html";
 });
@@ -204,25 +199,39 @@
       activityBox.style.display = activityBox.style.display === "block" ? "none" : "block";
     });
 
-    document.getElementById("logoutBtn").addEventListener("click", async () => {
-  // 1) Local logout
-  try {
-    logoutUser();
-  } catch (e) {
-    console.warn("[Profile] Local logout error:", e);
-  }
+    document.getElementById("exportBtn").addEventListener("click", () => {
+      const data = exportUserData(user.id);
+      const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
 
-  // 2) Firebase logout (if configured)
-  if (typeof logOutFromFirebase === "function") {
-    try {
-      await logOutFromFirebase();
-    } catch (e) {
-      console.warn("[Profile] Firebase logout error:", e);
-    }
-  }
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "testy_backup.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
 
-  window.location.href = "auth.html";
-});
+    document.getElementById("importBtn").addEventListener("click", () => {
+      document.getElementById("importFile").click();
+    });
+
+    document.getElementById("importFile").addEventListener("change", function () {
+      const file = this.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        importUserData(reader.result);
+        alert("Data imported successfully!");
+        window.location.reload();
+      };
+      reader.readAsText(file);
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      logoutUser();
+      window.location.href = "auth.html";
+    });
   </script>
 
 </body>

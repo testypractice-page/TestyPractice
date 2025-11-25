@@ -2,316 +2,254 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Testy – About</title>
+  <title>About – Testy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ===========================
-       LOCAL POPPINS FONT IMPORT
-       =========================== -->
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- FontAwesome for back icon -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
   <style>
-    @font-face {
-      font-family: "Poppins";
-      src: url("Poppins/Poppins-Regular.ttf") format("truetype");
-      font-weight: 400;
-    }
-    @font-face {
-      font-family: "Poppins";
-      src: url("Poppins/Poppins-Medium.ttf") format("truetype");
-      font-weight: 500;
-    }
-    @font-face {
-      font-family: "Poppins";
-      src: url("Poppins/Poppins-SemiBold.ttf") format("truetype");
-      font-weight: 600;
-    }
-    @font-face {
-      font-family: "Poppins";
-      src: url("Poppins/Poppins-Bold.ttf") format("truetype");
-      font-weight: 700;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
     }
 
     :root {
-      --bg-body: #f3f7fc;
-      --bg-card: #ffffff;
-      --bg-accent-soft: #e0edff;
-      --sidebar-soft: #fdf6e3;
-      --text-main: #111827;
+      --bg: #ffffff;
+      --text: #111827;
       --text-muted: #6b7280;
-      --border-soft: #e5e7eb;
-      --blue-accent: #3b82f6;
-      --blue-deep: #1d4ed8;
+      --line: #e5e7eb;
     }
 
     body.dark-mode {
-      --bg-body: #020617;
-      --bg-card: #020617;
-      --bg-accent-soft: #0b1120;
-      --sidebar-soft: #111827;
-      --text-main: #e5e7eb;
-      --text-muted: #9ca3af;
-      --border-soft: #1f2937;
-      --blue-accent: #60a5fa;
-      --blue-deep: #3b82f6;
-    }
-
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
+      --bg: #020617;
+      --text: #e5e7eb;
+      --text-muted: #94a3b8;
+      --line: #1e293b;
     }
 
     body {
-      margin: 0;
-      font-family: "Poppins", system-ui, sans-serif;
-      background: var(--bg-body);
-      color: var(--text-main);
-      transition: background 0.25s ease, color 0.25s ease;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.25s, color 0.25s;
+      padding-bottom: 50px;
     }
 
-    .page {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 16px 16px 32px;
-      display: flex;
-      gap: 16px;
-    }
-
-    /* LEFT STRIP (like PREXAM but cleaner) */
-    .side-strip {
-      display: none;
-      width: 72px;
-      background: var(--sidebar-soft);
-      border-radius: 0 18px 18px 0;
-      padding: 12px 10px;
-      border-right: 1px solid var(--border-soft);
-    }
-
-    .side-strip ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .side-strip li {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.8);
-      font-size: 16px;
-      color: var(--blue-deep);
-    }
-
-    /* MAIN CONTENT */
-    .content { flex: 1; }
-
-    .top-bar {
+    /* HEADER */
+    .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      padding: 18px 20px;
     }
 
-    .brand-title {
-      font-size: 24px;
+    .title {
+      font-size: 26px;
       font-weight: 600;
     }
 
-    .tagline {
-      font-size: 12px;
-      color: var(--text-muted);
+    .actions {
+      display: flex;
+      gap: 12px;
     }
 
-    .theme-toggle {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 1px solid var(--border-soft);
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
       background: transparent;
+      color: var(--text);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      font-size: 14px;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+      transition: border 0.25s, background 0.25s, color 0.25s, transform 0.15s;
     }
 
-    .hero-card {
-      background: var(--bg-card);
-      border-radius: 16px;
-      padding: 18px;
-      border: 1px solid var(--border-soft);
-      box-shadow: 0 10px 28px rgba(15,23,42,0.06);
-      margin-bottom: 16px;
+    .icon-btn:hover {
+      background: rgba(148,163,184,0.1);
+      border-color: #3b82f6;
     }
 
-    .hero-heading {
-      font-size: 22px;
+    .icon-btn:active {
+      transform: scale(0.92);
+    }
+
+    /* CONTENT */
+    .content {
+      padding: 10px 20px;
+      max-width: 950px;
+      margin: auto;
+    }
+
+    h2 {
+      margin-top: 26px;
+      font-size: 20px;
       font-weight: 600;
-      margin-bottom: 6px;
     }
 
-    .hero-sub {
-      font-size: 13px;
+    p {
+      margin-top: 12px;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .muted {
       color: var(--text-muted);
-      margin-bottom: 10px;
     }
 
-    .hero-highlight {
-      display: inline-flex;
-      gap: 4px;
-      background: var(--bg-accent-soft);
-      color: var(--blue-deep);
-      padding: 4px 8px;
-      border-radius: 12px;
-      font-size: 11px;
-      font-weight: 500;
-      margin-bottom: 10px;
+    hr {
+      border: none;
+      height: 1px;
+      background: var(--line);
+      margin: 26px 0;
     }
 
-    .hero-text {
-      font-size: 13px;
-      line-height: 1.7;
+    ul {
+      margin-left: 20px;
+      margin-top: 12px;
     }
 
-    .section-card {
-      background: var(--bg-card);
-      border-radius: 14px;
-      padding: 16px;
-      border: 1px solid var(--border-soft);
-      margin-bottom: 16px;
-    }
-
-    .section-title {
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .underline {
-      width: 60px;
-      height: 3px;
-      background: var(--blue-accent);
-      border-radius: 999px;
-      margin: 4px 0 10px;
-    }
-
-    .section-text {
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .email-link {
-      color: var(--blue-deep);
-      text-decoration: none;
-      border-bottom: 1px dashed rgba(59,130,246,0.5);
-    }
-
-    @media (min-width: 840px) {
-      .side-strip { display: block; }
+    li {
+      margin-bottom: 6px;
+      font-size: 15px;
     }
   </style>
 </head>
 
 <body>
-  <div class="page">
 
-    <!-- LEFT ICON STRIP -->
-    <aside class="side-strip">
-      <ul>
-        <li>📚</li>
-        <li>⏱</li>
-        <li>📈</li>
-        <li>📝</li>
-        <li>❤️</li>
-      </ul>
-    </aside>
+  <!-- TOP BAR -->
+  <div class="header">
+    <div>
+      <div class="title">Testy</div>
+      <div class="muted" style="font-size: 13px; margin-top: 2px;">About the platform & creator</div>
+    </div>
 
-    <!-- MAIN CONTENT -->
-    <main class="content">
+    <div class="actions">
+      <!-- THEME TOGGLE -->
+      <button id="themeToggle" class="icon-btn">🌙</button>
 
-      <div class="top-bar">
-        <div>
-          <div class="brand-title">Testy</div>
-          <div class="tagline">MCQ practice & exam readiness</div>
-        </div>
-        <button id="themeToggle" class="theme-toggle">🌙</button>
-      </div>
-
-      <!-- HERO -->
-      <section class="hero-card">
-        <div class="hero-heading">What is Testy?</div>
-        <div class="hero-sub">
-          A simple, fast and clean MCQ practice tool for CA Foundation.
-        </div>
-
-        <div class="hero-highlight">
-          🎯 Chapter-wise · Random MCQs · RTP/MTP Mode
-        </div>
-
-        <div class="hero-text">
-          Testy creates instant randomised practice sets based on the chapter
-          you choose. Every run is different. Solve → View Explanation → Improve.
-          The goal is to give you a calm, distraction-free exam practice space.
-        </div>
-      </section>
-
-      <!-- NOTE FOR USERS -->
-      <section class="section-card">
-        <div class="section-title">A Note for Users</div>
-        <div class="underline"></div>
-
-        <div class="section-text">
-          Testy is free for students.  
-          Your feedback shapes the next updates.  
-          If you find an error in a question/explanation, or want a new feature,
-          feel free to suggest it.  
-        </div>
-      </section>
-
-      <!-- COLLABORATIONS -->
-      <section class="section-card">
-        <div class="section-title">Collaborations & Advertising</div>
-        <div class="underline"></div>
-
-        <div class="section-text">
-          If you're an educator or coaching institute and want to use Testy for
-          your students, or want custom papers/branding:
-          <br><br>
-          Email:  
-          <a href="mailto: contact.globalratings@gmail.com" class="email-link">
-            contact.globalratings@gmail.com
-          </a>
-        </div>
-      </section>
-
-    </main>
+      <!-- BACK BUTTON -->
+      <button class="icon-btn" onclick="history.back()">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+    </div>
   </div>
 
-  <script>
-    /* Light/dark theme toggle */
-    const THEME_KEY = "quizTheme_v1";
-    const toggle = document.getElementById("themeToggle");
+  <!-- CONTENT -->
+  <div class="content">
 
-    function applyTheme(t) {
-      if (t === "dark") {
-        document.body.classList.add("dark-mode");
+    <p>
+      <strong>Testy</strong> is a clean, simple and completely free MCQ practice platform specially made for
+      <strong>CA Foundation</strong> students.
+    </p>
+
+    <p class="muted">
+      No subscriptions. No paid test series. No limits.
+      Just open → choose chapter → practice.
+    </p>
+
+    <hr style="border:none; height:1px; background:var(--line); margin:25px 0;">
+
+    <h2>A Note for Users</h2>
+
+    <p>
+      Testy is designed for consistency and clarity. You can use it for:
+    </p>
+
+    <ul>
+      <li>Daily MCQ practice</li>
+      <li>Chapter-wise preparation</li>
+      <li>RTP/MTP solving</li>
+      <li>Instant checking & review</li>
+      <li>Downloading your results as reports</li>
+    </ul>
+
+    <p>
+      Show up every day - even 20 minutes - and your performance will improve automatically.
+    </p>
+
+    <hr style="border:none; height:1px; background:var(--line); margin:25px 0;">
+
+    <h2>About the Creator</h2>
+
+    <p>
+      Hi, I'm <strong>Kunal Sharma</strong>, an 18-year-old CA Foundation student.
+    </p>
+
+    <p>
+      Many websites charge money even for basic MCQ practice and mock tests.
+      I believe preparation resources should be accessible to everyone -
+      especially students who cannot afford paid test series.
+    </p>
+
+    <p>
+      That’s why Testy is <strong>100% free</strong>, and always will be.
+    </p>
+
+    <p>
+      <strong>Mujhe pata hai tum kar loge ♥️</strong><br>
+      ✦ Kunal Sharma
+    </p>
+
+    <hr style="border:none; height:1px; background:var(--line); margin:25px 0;">
+
+    <h2>Suggestions & Feedback</h2>
+
+    <p>
+      If you have ideas, improvements or feature requests, feel free to share.
+      Students’ feedback is what keeps Testy improving every day.
+    </p>
+
+  </div>
+
+  <!-- THEME SCRIPT -->
+  <script>
+    const THEME_KEY = "testy_theme";
+
+    function applyTheme(theme) {
+      const body = document.body;
+      const toggle = document.getElementById("themeToggle");
+
+      if (theme === "dark") {
+        body.classList.add("dark-mode");
         toggle.textContent = "☀️";
       } else {
-        document.body.classList.remove("dark-mode");
+        body.classList.remove("dark-mode");
         toggle.textContent = "🌙";
       }
-      localStorage.setItem(THEME_KEY, t);
+      localStorage.setItem(THEME_KEY, theme);
     }
 
-    const saved = localStorage.getItem(THEME_KEY) || "light";
-    applyTheme(saved);
+    function initTheme() {
+      const saved = localStorage.getItem(THEME_KEY) || "light";
+      applyTheme(saved);
+    }
 
-    toggle.onclick = () => {
-      const now = document.body.classList.contains("dark-mode") ? "light" : "dark";
-      applyTheme(now);
-    };
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      const isDark = document.body.classList.contains("dark-mode");
+      applyTheme(isDark ? "light" : "dark");
+    });
+
+    initTheme();
   </script>
 
 </body>

@@ -5,24 +5,22 @@
   <title>Testy – Login / Sign up</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Icons -->
+  <!-- Google Fonts instead of local files -->
   <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    crossorigin="anonymous"
-  />
-
-  <!-- Poppins -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  crossorigin="anonymous"
+/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
     rel="stylesheet"
-  />
+  >
 
-  <!-- Local storage helpers -->
+  <!-- Local storage helpers (your existing logic) -->
   <script src="storage.js"></script>
 
-  <!-- Firebase (keep these exactly like this) -->
+  <!-- Firebase (for Google login and future cloud data) -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
@@ -42,13 +40,13 @@
     }
 
     body.dark-mode {
-      --bg-body: #0a0f1f;
-      --bg-card: #0d1528;
+      --bg-body: #020617;
+      --bg-card: #020617;
       --text-main: #e5e7eb;
       --text-muted: #9ca3af;
-      --border-soft: rgba(255, 255, 255, 0.08);
-      --blue-accent: #2563eb;
-      --blue-deep: #1e40af;
+      --border-soft: #1f2937;
+      --blue-accent: #60a5fa;
+      --blue-deep: #3b82f6;
       --danger: #f97373;
       --success: #22c55e;
     }
@@ -65,29 +63,11 @@
       align-items: center;
       justify-content: center;
       padding: 16px;
-      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
-        sans-serif;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background: radial-gradient(circle at top, #dbeafe 0, var(--bg-body) 55%);
       color: var(--text-main);
       transition: background-color 0.25s ease, color 0.25s ease;
     }
-    /* Input text in both modes */
-input::placeholder {
-  color: #8F959E !important;
-}
-input {
-  color: var(--text-main);
-}
-
-/* Dark mode fix */
-body.dark-mode input::placeholder {
-  color: #B0B6C0 !important;   /* Light grey/white text */
-}
-body.dark-mode input {
-  background-color: #111827 !important;  /* dark slate */
-  border-color: #374151 !important;       /* soft border */
-  color: #C2D0ED;
-}
 
     .auth-card {
       width: 100%;
@@ -104,7 +84,7 @@ body.dark-mode input {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
+      margin-bottom: 12px;
     }
 
     .brand-title {
@@ -114,80 +94,199 @@ body.dark-mode input {
     }
 
     .brand-sub {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-muted);
       margin-top: 2px;
     }
 
     .icon-btn {
-      padding: 6px;
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       border-radius: 999px;
       border: 1px solid var(--border-soft);
       background: transparent;
-      color: var(--text-main);
       cursor: pointer;
       font-size: 14px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.18s ease, border-color 0.18s ease,
+      transition:
+        background-color 0.18s ease,
+        color 0.18s ease,
+        box-shadow 0.18s ease,
         transform 0.08s ease;
-    }
-
-    .icon-btn:hover {
-      background: rgba(148, 163, 184, 0.1);
-      border-color: var(--blue-accent);
     }
 
     .icon-btn:active {
       transform: scale(0.94);
     }
 
+    .mode-switch {
+  position: relative;
+  display: flex;
+  margin-bottom: 12px;
+  background: rgba(148, 163, 184, 0.12);
+  border-radius: 999px;
+  padding: 3px;
+  overflow: hidden;
+}
+
+/* Sliding white/black background for active tab */
+.mode-indicator {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(148, 163, 184, 0.6);
+  transition: transform 0.22s ease-out, background-color 0.22s ease-out;
+  z-index: 0;
+}
+
+/* Dark mode indicator */
+body.dark-mode .mode-indicator {
+  background: #0b1220;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.9);
+}
+
+/* Buttons sit on top of the indicator */
+.mode-btn {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  font-size: 13px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  padding: 6px 8px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition:
+    color 0.18s ease,
+    transform 0.08s ease;
+}
+
+.mode-btn:hover {
+  transform: translateY(-0.5px);
+}
+
+.mode-btn:active {
+  transform: scale(0.97);
+}
+
+/* Only text color/weight change, background handled by indicator */
+.mode-btn.active {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+/* In dark mode, make indicator a bit darker so it’s visible 
+body.dark-mode .mode-indicator {
+  background: #0b1220;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.9);
+} */
+
+.mode-btn {
+  flex: 1;
+  font-size: 13px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  padding: 6px 8px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.08s ease;
+}
+
+.mode-btn:hover {
+  background: rgba(148, 163, 184, 0.18);
+}
+
+.mode-btn:active {
+  transform: scale(0.97);
+}
+
+.mode-btn.active {
+  background: var(--blue-accent);
+  color: #ffffff;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+}
+body,
+.auth-card,
+input,
+.mode-switch,
+.mode-btn,
+#googleLoginBtn {
+  transition: background-color 0.7s ease, color 0.7s ease;
+    color 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
     .hint-text {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-muted);
       margin-bottom: 12px;
     }
 
+    @keyframes slideInFromRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInFromLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
     .form-panel {
-      display: block;
-      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .hidden-panel {
       display: none;
     }
 
+    .form-slide-right { animation: slideInFromRight 0.28s ease; }
+    .form-slide-left  { animation: slideInFromLeft  0.28s ease; }
+
+    label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
     .field {
-      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
     }
 
-    .field label {
-      display: block;
-      font-size: 11px;
-      margin-bottom: 4px;
-    }
-
-    .field input {
-      width: 100%;
-      padding: 9px 11px;
-      border-radius: 10px;
-      border: 1px solid var(--border-soft);
-      font-size: 14px;
+    input {
       font-family: inherit;
+      font-size: 13px;
+      padding: 7px 8px;
+      border-radius: 8px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      color: var(--text-main);
+      transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background-color 0.18s ease,
+        color 0.18s ease;
+    }
+
+    input:focus {
       outline: none;
-      transition: border-color 0.18s ease, box-shadow 0.18s ease,
-        background-color 0.18s ease;
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    body.dark-mode .field input {
-      background: #020617;
-    }
-
-    .field input:focus {
       border-color: var(--blue-accent);
       box-shadow: 0 0 0 1px var(--blue-accent);
     }
@@ -196,69 +295,71 @@ body.dark-mode input {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
-      font-size: 12px;
+      margin-top: 2px;
+      font-size: 11px;
       color: var(--text-muted);
     }
 
     .checkbox-row {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       gap: 6px;
-      cursor: pointer;
-    }
-
-    .checkbox-row input {
-      width: 15px;
-      height: 15px;
-      accent-color: var(--blue-accent);
+      font-size: 11px;
     }
 
     .main-btn {
-      width: 100%;
-      padding: 9px 12px;
+      margin-top: 8px;
+      padding: 8px 10px;
       border-radius: 999px;
       border: none;
       cursor: pointer;
       background: var(--blue-accent);
       color: #ffffff;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
       letter-spacing: 0.02em;
-      box-shadow: 0 3px 10px rgba(37, 99, 235, 0.4);
-      transition: background-color 0.18s ease, box-shadow 0.18s ease,
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.25);
+      transition:
+        background-color 0.18s ease,
+        box-shadow 0.18s ease,
         transform 0.08s ease;
     }
 
     .main-btn:hover {
+      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.32);
       background: var(--blue-deep);
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.5);
     }
 
     .main-btn:active {
       transform: translateY(1px);
-      box-shadow: 0 1px 5px rgba(15, 23, 42, 0.3);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
     }
 
     .error-msg {
-      font-size: 12px;
+      margin-top: 4px;
+      font-size: 11px;
       color: var(--danger);
-      margin-top: 6px;
-      min-height: 16px;
+      min-height: 14px;
     }
 
     .success-msg {
-      font-size: 12px;
+      margin-top: 4px;
+      font-size: 11px;
       color: var(--success);
-      margin-top: 6px;
-      min-height: 16px;
+      min-height: 14px;
     }
 
-    .link-row {
-      text-align: center;
+    .logged-state {
       margin-top: 10px;
-      font-size: 13px;
-      color: var(--text-muted);
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      background: rgba(148, 163, 184, 0.08);
+      font-size: 12px;
+    }
+
+    .logged-state strong {
+      font-weight: 600;
     }
 
     .link-btn {
@@ -266,14 +367,13 @@ body.dark-mode input {
       background: none;
       padding: 0;
       margin: 0;
-      font-size: 13px;
+      font-size: 12px;
       color: var(--blue-accent);
       cursor: pointer;
-      text-decoration: none;
-      font-family: 'Poppins';
+      text-decoration: underline;
     }
 
-    /* Google button uses same base style as a "secondary" button */
+    /* Base secondary button */
     .secondary-btn {
       padding: 7px 10px;
       border-radius: 999px;
@@ -282,8 +382,11 @@ body.dark-mode input {
       font-size: 13px;
       cursor: pointer;
       color: var(--text-main);
-      transition: background-color 0.18s ease, border-color 0.18s ease,
-        box-shadow 0.18s ease, transform 0.08s ease;
+      transition:
+        background-color 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        transform 0.08s ease;
     }
 
     .secondary-btn:hover {
@@ -297,45 +400,36 @@ body.dark-mode input {
       box-shadow: 0 1px 3px rgba(15, 23, 42, 0.15);
     }
 
-    /* Google specific tweaks */
-    #googleLoginBtn {
-      background: #ffffff;
-      border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 2px 5px rgba(15, 23, 42, 0.16);
-      font-weight: 500;
-    }
+    /* Special styling for the Google button */
+   /* Base secondary button – already there, keep it */
 
-    #googleLoginBtn i {
-      font-size: 16px;
-    }
+/* Special styling for the Google button */
+#googleLoginBtn {
+  background: #ffffff;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.16);
+  font-weight: 500;
+}
 
-    body.dark-mode #googleLoginBtn {
-      background: #0f172a;
-      border-color: #4b5563;
-      color: #e5e7eb;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-    }
+#googleLoginBtn i {
+  font-size: 16px;
+}
 
-    body.dark-mode #googleLoginBtn i {
-      color: #e5e7eb;
-    }
+/* Dark mode: keep it clearly visible */
+body.dark-mode #googleLoginBtn {
+  background: #0f172a;
+  border-color: #4b5563;
+  color: #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode #googleLoginBtn i {
+  color: #e5e7eb;
+}
 
     #googleLoginBtn span:first-child {
       font-size: 16px;
-    }
-
-    .logged-state {
-      margin-top: 10px;
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .logged-state strong {
-      font-weight: 600;
-    }
-    hr {
-      opacity: 0;
     }
   </style>
 </head>
@@ -344,16 +438,22 @@ body.dark-mode input {
     <div class="auth-header">
       <div>
         <div class="brand-title">Testy</div>
-        <div class="brand-sub">Login / Sign up</div> <hr>
+        <div class="brand-sub">Login / Sign up</div>
       </div>
       <button id="themeToggle" type="button" class="icon-btn">🌙</button>
     </div>
 
+    <div class="mode-switch">
+  <div class="mode-indicator" id="modeIndicator"></div>
+  <button id="loginModeBtn" class="mode-btn active" type="button">Login</button>
+  <button id="signupModeBtn" class="mode-btn" type="button">Sign up</button>
+</div>
+
     <div id="hint" class="hint-text">
-      Login to continue your practice &amp; stats on this device.
+      Login to continue your practice & stats on this device.
     </div>
 
-    <!-- LOGIN FORM (default) -->
+    <!-- LOGIN FORM -->
     <form id="loginForm" class="form-panel" autocomplete="on" novalidate>
       <div class="field">
         <label for="loginId">Email</label>
@@ -366,7 +466,6 @@ body.dark-mode input {
           required
         />
       </div>
-
       <div class="field">
         <label for="loginPassword">Password</label>
         <input
@@ -389,22 +488,10 @@ body.dark-mode input {
       <button type="submit" class="main-btn">Login</button>
       <div id="loginError" class="error-msg"></div>
       <div id="loginSuccess" class="success-msg"></div>
-
-      <div class="link-row">
-        Don’t have an account?
-        <button type="button" id="toSignupLink" class="link-btn">
-          Create one
-        </button>
-      </div>
     </form>
 
-    <!-- SIGNUP FORM (hidden initially) -->
-    <form
-      id="signupForm"
-      class="form-panel hidden-panel"
-      autocomplete="on"
-      novalidate
-    >
+    <!-- SIGNUP FORM -->
+    <form id="signupForm" class="form-panel hidden-panel" autocomplete="on" novalidate>
       <div class="field">
         <label for="signupName">Name</label>
         <input
@@ -416,7 +503,6 @@ body.dark-mode input {
           required
         />
       </div>
-
       <div class="field">
         <label for="signupEmail">Email</label>
         <input
@@ -428,7 +514,6 @@ body.dark-mode input {
           required
         />
       </div>
-
       <div class="field">
         <label for="signupPassword">Password</label>
         <input
@@ -440,7 +525,6 @@ body.dark-mode input {
           required
         />
       </div>
-
       <div class="field">
         <label for="signupPassword2">Confirm password</label>
         <input
@@ -454,41 +538,25 @@ body.dark-mode input {
       <button type="submit" class="main-btn">Create account</button>
       <div id="signupError" class="error-msg"></div>
       <div id="signupSuccess" class="success-msg"></div>
-
-      <div class="link-row">
-        Already have an account?
-        <button type="button" id="toLoginLink" class="link-btn">
-          Login
-        </button>
-      </div>
     </form>
 
     <!-- GOOGLE LOGIN BUTTON -->
-    <div
-      class="hint-text"
-      style="text-align: center; margin-top: 10px; margin-bottom: 6px"
-    >
+    <div class="hint-text" style="text-align:center;margin-top:10px;margin-bottom:6px;">
       — or —
     </div>
     <button
-      id="googleLoginBtn"
-      type="button"
-      class="secondary-btn"
-      style="
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-      "
-    >
-      <i class="fa-brands fa-google"></i>
-      <span>Continue with Google</span>
-    </button>
+  id="googleLoginBtn"
+  type="button"
+  class="secondary-btn"
+  style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;"
+>
+  <i class="fa-brands fa-google"></i>
+  <span>Continue with Google</span>
+</button>
     <div id="googleError" class="error-msg"></div>
 
     <!-- LOGGED-IN STATE -->
-    <div id="loggedState" class="logged-state" style="display: none">
+    <div id="loggedState" class="logged-state" style="display:none;">
       Logged in as <strong id="currentUserLabel"></strong>
       <br />
       <button id="gotoApp" type="button" class="link-btn">Go to Testy</button>
@@ -500,7 +568,7 @@ body.dark-mode input {
   </div>
 
   <script>
-    // =============== THEME TOGGLE ===============
+    // ================= THEME TOGGLE =================
     const THEME_KEY = "quizTheme_v1";
     const themeToggle = document.getElementById("themeToggle");
 
@@ -512,9 +580,7 @@ body.dark-mode input {
         document.body.classList.remove("dark-mode");
         if (themeToggle) themeToggle.textContent = "🌙";
       }
-      try {
-        localStorage.setItem(THEME_KEY, theme);
-      } catch (_) {}
+      try { localStorage.setItem(THEME_KEY, theme); } catch (_) {}
     }
 
     function initTheme() {
@@ -535,8 +601,21 @@ body.dark-mode input {
 
     initTheme();
 
-    // =============== UI ELEMENTS ===============
+    // ================= UI ELEMENTS =================
+    const loginModeBtn = document.getElementById("loginModeBtn");
+    const signupModeBtn = document.getElementById("signupModeBtn");
     const hint = document.getElementById("hint");
+    
+    const modeIndicator = document.getElementById("modeIndicator");
+    function moveIndicator(target) {
+  if (!modeIndicator) return;
+
+  if (target === "login") {
+    modeIndicator.style.transform = "translateX(0)";
+  } else {
+    modeIndicator.style.transform = "translateX(100%)";
+  }
+}
 
     const loginForm = document.getElementById("loginForm");
     const signupForm = document.getElementById("signupForm");
@@ -555,41 +634,53 @@ body.dark-mode input {
     const googleBtn = document.getElementById("googleLoginBtn");
     const googleError = document.getElementById("googleError");
 
-    const toSignupLink = document.getElementById("toSignupLink");
-    const toLoginLink = document.getElementById("toLoginLink");
+    // ================ SLIDE SWITCH HELPERS ================
+   function showLoginMode() {
+  loginModeBtn.classList.add("active");
+  signupModeBtn.classList.remove("active");
 
-    // =============== SIMPLE MODE SWITCH ===============
-    function showLoginMode() {
-      loginForm.classList.remove("hidden-panel");
-      signupForm.classList.add("hidden-panel");
-      hint.textContent =
-        "Login to continue your practice & stats on this device.";
-      loginError.textContent = "";
-      loginSuccess.textContent = "";
-      signupError.textContent = "";
-      signupSuccess.textContent = "";
-      if (googleError) googleError.textContent = "";
-    }
+  moveIndicator("login");
 
-    function showSignupMode() {
-      signupForm.classList.remove("hidden-panel");
-      loginForm.classList.add("hidden-panel");
-      hint.textContent = "Create an account stored on this device only (for now).";
-      loginError.textContent = "";
-      loginSuccess.textContent = "";
-      signupError.textContent = "";
-      signupSuccess.textContent = "";
-      if (googleError) googleError.textContent = "";
-    }
+  loginForm.classList.remove("form-slide-right", "form-slide-left", "hidden-panel");
+  signupForm.classList.remove("form-slide-right", "form-slide-left");
+  signupForm.classList.add("hidden-panel");
 
-    if (toSignupLink) {
-      toSignupLink.addEventListener("click", showSignupMode);
-    }
-    if (toLoginLink) {
-      toLoginLink.addEventListener("click", showLoginMode);
-    }
+  void loginForm.offsetWidth;
+  loginForm.classList.add("form-slide-left");
 
-    // =============== SIGNUP (local storage) ===============
+  hint.textContent = "Login to continue your practice & stats on this device.";
+  loginError.textContent = "";
+  loginSuccess.textContent = "";
+  signupError.textContent = "";
+  signupSuccess.textContent = "";
+  if (googleError) googleError.textContent = "";
+}
+
+function showSignupMode() {
+  signupModeBtn.classList.add("active");
+  loginModeBtn.classList.remove("active");
+
+  moveIndicator("signup");
+
+  signupForm.classList.remove("form-slide-right", "form-slide-left", "hidden-panel");
+  loginForm.classList.remove("form-slide-right", "form-slide-left");
+  loginForm.classList.add("hidden-panel");
+
+  void signupForm.offsetWidth;
+  signupForm.classList.add("form-slide-right");
+
+  hint.textContent = "Create an account stored on this device only (for now).";
+  loginError.textContent = "";
+  loginSuccess.textContent = "";
+  signupError.textContent = "";
+  signupSuccess.textContent = "";
+  if (googleError) googleError.textContent = "";
+}
+
+    loginModeBtn.addEventListener("click", showLoginMode);
+    signupModeBtn.addEventListener("click", showSignupMode);
+
+    // ================= SIGNUP HANDLER (local storage) =================
     signupForm.addEventListener("submit", function (e) {
       e.preventDefault();
 
@@ -603,10 +694,7 @@ body.dark-mode input {
       if (googleError) googleError.textContent = "";
 
       const name = document.getElementById("signupName").value.trim();
-      const email = document
-        .getElementById("signupEmail")
-        .value.trim()
-        .toLowerCase();
+      const email = document.getElementById("signupEmail").value.trim().toLowerCase();
       const pass = document.getElementById("signupPassword").value;
       const pass2 = document.getElementById("signupPassword2").value;
 
@@ -621,12 +709,11 @@ body.dark-mode input {
 
       const result = createAccount(email, pass);
       if (!result.success) {
-        signupError.textContent =
-          result.message || "Could not create account.";
+        signupError.textContent = result.message || "Could not create account.";
         return;
       }
 
-      // local profile
+      // Save profile name right away (local system)
       saveUserProfile({ name });
 
       signupSuccess.textContent = "Account created. Redirecting to profile...";
@@ -637,7 +724,7 @@ body.dark-mode input {
       }, 500);
     });
 
-    // =============== LOGIN (local storage) ===============
+    // ================= LOGIN HANDLER (local storage) =================
     loginForm.addEventListener("submit", function (e) {
       e.preventDefault();
 
@@ -652,16 +739,12 @@ body.dark-mode input {
       signupSuccess.textContent = "";
       if (googleError) googleError.textContent = "";
 
-      const email = document
-        .getElementById("loginId")
-        .value.trim()
-        .toLowerCase();
+      const email = document.getElementById("loginId").value.trim().toLowerCase();
       const pass = document.getElementById("loginPassword").value;
 
       const result = loginUser(email, pass);
       if (!result.success) {
-        loginError.textContent =
-          result.message || "Invalid email or password.";
+        loginError.textContent = result.message || "Invalid email or password.";
         return;
       }
 
@@ -673,12 +756,12 @@ body.dark-mode input {
       }, 500);
     });
 
-    // =============== LOGGED STATE (local + Firebase) ===============
+    // ================= LOGGED STATE (local + Firebase) =================
     function updateLoggedState() {
       let labelText = "";
       let hasUser = false;
 
-      // local storage user
+      // 1) Local storage user
       if (typeof getActiveUser === "function") {
         try {
           const localUser = getActiveUser();
@@ -693,7 +776,7 @@ body.dark-mode input {
         } catch (_) {}
       }
 
-      // Firebase user
+      // 2) Firebase user (overrides label if exists)
       if (typeof getFirebaseUser === "function") {
         try {
           const fbUser = getFirebaseUser();
@@ -718,16 +801,14 @@ body.dark-mode input {
     }
 
     logoutBtn.addEventListener("click", async () => {
+      // Local logout
       if (typeof logoutUser === "function") {
-        try {
-          logoutUser();
-        } catch (_) {}
+        try { logoutUser(); } catch (_) {}
       }
 
+      // Firebase logout (if active)
       if (typeof logOutFromFirebase === "function") {
-        try {
-          await logOutFromFirebase();
-        } catch (_) {}
+        try { await logOutFromFirebase(); } catch (_) {}
       }
 
       updateLoggedState();
@@ -748,7 +829,7 @@ body.dark-mode input {
       window.location.href = "profile.html";
     });
 
-    // =============== GOOGLE LOGIN ===============
+    // ================= GOOGLE LOGIN HANDLER =================
     if (googleBtn) {
       googleBtn.addEventListener("click", async () => {
         if (googleError) googleError.textContent = "";
@@ -769,12 +850,12 @@ body.dark-mode input {
           const user = await loginWithGoogle();
           if (!user) {
             if (googleError) {
-              googleError.textContent =
-                "Google login was cancelled or failed.";
+              googleError.textContent = "Google login was cancelled or failed.";
             }
             return;
           }
 
+          // Optional: mirror name/email into local profile system
           if (typeof saveUserProfile === "function") {
             try {
               saveUserProfile({
@@ -792,19 +873,18 @@ body.dark-mode input {
         } catch (err) {
           console.error(err);
           if (googleError) {
-            googleError.textContent =
-              "Google login failed. Please try again.";
+            googleError.textContent = "Google login failed. Please try again.";
           }
         }
       });
     }
 
-    // =============== CUSTOM VALIDATION MESSAGES ===============
+    // ================= CUSTOM VALIDATION MESSAGES =================
     function attachCustomMessages() {
-      const signupEmail = document.getElementById("signupEmail");
-      const signupPass = document.getElementById("signupPassword");
-      const signupPass2 = document.getElementById("signupPassword2");
-      const loginEmail = document.getElementById("loginId");
+      const signupEmail   = document.getElementById("signupEmail");
+      const signupPass    = document.getElementById("signupPassword");
+      const signupPass2   = document.getElementById("signupPassword2");
+      const loginEmail    = document.getElementById("loginId");
       const loginPassword = document.getElementById("loginPassword");
 
       function wire(input, messages) {
@@ -826,30 +906,31 @@ body.dark-mode input {
 
       wire(signupEmail, {
         required: "Please enter your email",
-        typeMismatch: "Enter a valid email address",
+        typeMismatch: "Enter a valid email address"
       });
 
       wire(signupPass, {
-        required: "Please enter a password",
+        required: "Please enter a password"
       });
 
       wire(signupPass2, {
-        required: "Please confirm your password",
+        required: "Please confirm your password"
       });
 
       wire(loginEmail, {
         required: "Email is required to login",
-        typeMismatch: "Enter a valid email",
+        typeMismatch: "Enter a valid email"
       });
 
       wire(loginPassword, {
-        required: "Password is required to login",
+        required: "Password is required to login"
       });
     }
 
+    // INIT
     updateLoggedState();
     attachCustomMessages();
-    showLoginMode(); // start on login
+    moveIndicator("login"); // set initial position
   </script>
 </body>
 </html>

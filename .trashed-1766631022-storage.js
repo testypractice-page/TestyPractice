@@ -184,22 +184,8 @@ function recordAttempt(userId, mode, key, isCorrect) {
   } else {
     entry.incorrect += 1;
   }
-
-  // always keep local stats
+  
   saveStats(stats);
-
-  // optionally mirror to Firebase, if available
-  try {
-    if (typeof recordAttemptToFirebase === "function") {
-      const users = loadUsers();
-      const u = users[userId];
-      // use email as Firebase userId if we have it, otherwise fallback to local id
-      const cloudId = (u && u.email) ? u.email : userId;
-      recordAttemptToFirebase(cloudId, mode, key, !!isCorrect);
-    }
-  } catch (e) {
-    console.warn("[Storage] Firebase mirror failed:", e);
-  }
 }
 
 function getStatsForUser(userId) {

@@ -208,7 +208,7 @@
 
     h1 {
       margin: 0;
-      font-size: 26px;
+      font-size: 22px;
       letter-spacing: 0.02em;
       font-weight: 600;
     }
@@ -433,7 +433,7 @@
   transition: background 0.15s ease;
 }
    .nav-subitem + .nav-subitem {
-  border-top: none;
+  border-top: 1px solid var(--border-soft);
 }
 .nav-subitem:hover {
   background: var(--blue-faint);
@@ -934,7 +934,7 @@
       .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 18.4px;
+  gap: 10px;
   flex-wrap: nowrap;
   overflow-x: auto float;
   white-space: nowrap;
@@ -963,16 +963,6 @@
     .blur-bg {
       filter: blur(6px);
       transition: filter 0.25s ease;
-    }
-    @media (min-width: 600px) {
-      .desktop-nav {
-        display: flex;
-        align-items: center;
-        gap: 11px;
-        flex-wrap: nowrap;
-        overflow-x: auto float;
-        white-space: nowrap;
-      } 
     }
   </style>
   
@@ -1425,13 +1415,6 @@
   </div>
 
 <!-- Then your questions etc. -->
-<!-- Firebase (compat version, easiest with plain HTML) -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-
-<!-- Your config + helper wrappers -->
-<script src="firebase.js"></script>
 <script src="questions.js"></script>
 <script src="storage.js"></script>
 
@@ -1544,20 +1527,6 @@ navGroupToggles.forEach((btn) => {
   });
 });
 
-// Close all RTP/MTP dropdowns when clicking outside
-document.addEventListener("click", (e) => {
-  const clickedToggle = e.target.closest(".nav-group-toggle");
-  const clickedSubmenu = e.target.closest(".nav-submenu");
-  
-  // If click is NOT on a toggle AND NOT inside any submenu → close all
-  if (!clickedToggle && !clickedSubmenu) {
-    document
-      .querySelectorAll(".nav-submenu[data-open='true']")
-      .forEach((submenu) => {
-        submenu.setAttribute("data-open", "false");
-      });
-  }
-});
 
     let quizTimeline = [];
     let answers = [];

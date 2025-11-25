@@ -4,16 +4,66 @@
   <meta charset="UTF-8">
   <title>Testy – RTP/MTP Practice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
-  rel="stylesheet"
-/>
+
   <style>
     /* ===========================
        POPPINS LOCAL FONT IMPORT
        =========================== */
-       
+
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Thin.ttf") format("truetype");
+      font-weight: 100;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-ExtraLight.ttf") format("truetype");
+      font-weight: 200;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Light.ttf") format("truetype");
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-SemiBold.ttf") format("truetype");
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Bold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-ExtraBold.ttf") format("truetype");
+      font-weight: 800;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Black.ttf") format("truetype");
+      font-weight: 900;
+      font-style: normal;
+    }
     .cover-datetime {
   font-family: "Poppins", sans-serif;
   font-size: 14px;
@@ -498,7 +548,7 @@ body * {
     .desktop-nav {
       display: none;
       margin: 8px 0 4px;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
       align-items: center;
       font-size: 12px;
@@ -903,7 +953,7 @@ body * {
       href="auth.html"
     >
       Login / Sign up
-      <span>Save Progress</span>
+      <span>Save progress on this device</span>
     </a>
 
     <!-- Profile shown ONLY when logged in -->
@@ -1143,13 +1193,6 @@ body * {
   </div>
 
   <!-- RTP/MTP QUESTIONS -->
-  <!-- Firebase (compat version, easiest with plain HTML) -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-
-<!-- Your config + helper wrappers -->
-<script src="firebase.js"></script>
   <script src="questions_rtp_mtp.js"></script>
   <script src="storage.js"></script>
   <script>
@@ -1990,45 +2033,15 @@ navPanel.addEventListener("click", e => {
 });
 
     // RTP/MTP dropdowns
-    // RTP/MTP dropdowns (mobile + desktop) – same behaviour as index.html
-navGroupToggles.forEach((btn) => {
-  const group = btn.dataset.group;
-  const submenu = document.querySelector(
-    `.nav-submenu[data-group="${group}"]`
-  );
-  if (!submenu) return;
-  
-  btn.addEventListener("click", () => {
-    const isOpen = submenu.getAttribute("data-open") === "true";
-    
-    // close all other open submenus
-    document
-      .querySelectorAll(".nav-submenu[data-open='true']")
-      .forEach((other) => {
-        if (other !== submenu) {
-          other.setAttribute("data-open", "false");
-        }
+    navGroupToggles.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const group = btn.dataset.group;
+        const submenu = document.querySelector('.nav-submenu[data-group="' + group + '"]');
+        if (!submenu) return;
+        const isOpen = submenu.getAttribute("data-open") === "true";
+        submenu.setAttribute("data-open", isOpen ? "false" : "true");
       });
-    
-    // toggle the clicked one
-    submenu.setAttribute("data-open", isOpen ? "false" : "true");
-  });
-});
-
-// Close all RTP/MTP dropdowns when clicking outside
-document.addEventListener("click", (e) => {
-  const clickedToggle = e.target.closest(".nav-group-toggle");
-  const clickedSubmenu = e.target.closest(".nav-submenu");
-
-  // If click is NOT on a toggle AND NOT inside any submenu → close all
-  if (!clickedToggle && !clickedSubmenu) {
-    document
-      .querySelectorAll(".nav-submenu[data-open='true']")
-      .forEach((submenu) => {
-        submenu.setAttribute("data-open", "false");
-      });
-  }
-});
+    });
 
     timerToggle.addEventListener("change", () => {
       timerEnabled = timerToggle.checked;

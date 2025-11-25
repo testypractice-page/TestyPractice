@@ -6,16 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <script src="storage.js"></script>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
-  rel="stylesheet"
-/>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-<script src="firebase.js"></script>
+
   <style>
+    /* Poppins font (local) */
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Poppins";
+      src: url("Poppins/Poppins-SemiBold.ttf") format("truetype");
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
 
     :root {
       /* Light theme (match main app) */
@@ -58,6 +72,7 @@
       background: radial-gradient(circle at top, var(--blue-faint) 0, var(--bg-body) 55%);
       color: var(--text-main);
     }
+
     button, a {
       font-family: inherit;
     }
@@ -96,7 +111,7 @@
     }
 
     .brand-title {
-      font-size: 26px;
+      font-size: 20px;
       font-weight: 600;
       letter-spacing: 0.02em;
     }
@@ -495,7 +510,7 @@
     <div class="top-bar">
       <div class="brand-wrap">
         <div class="brand-title">Testy</div>
-        <div class="brand-sub">Your profile &amp; activity</div><hr>
+        <div class="brand-sub">Your profile &amp; activity</div>
       </div>
       <div class="top-actions">
         <button id="themeToggle" type="button" class="icon-btn">🌙</button>
@@ -850,23 +865,10 @@
       URL.revokeObjectURL(url);
     });
 
-    logoutBtn.addEventListener("click", async () => {
-  // local logout (your existing system)
-  try { logoutUser(); } catch (e) {
-    console.warn("[Profile] Local logout error:", e);
-  }
-  
-  // Firebase logout (if configured)
-  if (typeof logOutFromFirebase === "function") {
-    try {
-      await logOutFromFirebase();
-    } catch (e) {
-      console.warn("[Profile] Firebase logout error:", e);
-    }
-  }
-  
-  window.location.href = "auth.html";
-});
+    logoutBtn.addEventListener("click", () => {
+      logoutUser();
+      window.location.href = "auth.html";
+    });
 
     // TAB SWITCHING
     const tabs = document.querySelectorAll(".nav-tab");
