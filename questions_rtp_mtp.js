@@ -5821,6 +5821,3481 @@ window.RTP_MTP_QUESTIONS["mtp-may-2025-2"] = [
       "International Obligation"
     ],
     correctIndex: 1 // b
-  }
+  },
+    {
+    id: "mtp-may-2025-2-q41",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The best indicator of economic development of any country is:",
+    options: [
+      "Its agriculture",
+      "Its transport",
+      "Its gross production",
+      "Its per capita income."
+    ],
+    correctIndex: 2 // c
+  },
 
+  {
+    id: "mtp-may-2025-2-q42",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The regulatory body of mutual funds in India is:",
+    options: [
+      "RBI",
+      "SEBI",
+      "IRDA",
+      "Government"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-2-q43",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "A market for borrowing and lending funds for a period exceeding 14 days:",
+    options: [
+      "Term money market",
+      "Call money market",
+      "Commercial bill market",
+      "None of these"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-2-q44",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Which of the following are the instruments of money market?",
+    options: [
+      "Call money",
+      "Certificate of deposits",
+      "Trade bills",
+      "All of the above"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q45",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Finance Commission:",
+    options: [
+      "Is a Statutory Body",
+      "Recommends the distribution of taxes between Union and States",
+      "Cannot decide on principles related to Grants in Aid given by Union to States",
+      "All of the above"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-2-q46",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Statutory Liquidity Ratio is:",
+    options: [
+      "Banks have to keep deposits with RBI",
+      "Certain percentage of deposits are to be kept by the bank in form of liquid assets",
+      "It is the discount rate of the banks",
+      "None of the above"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-2-q47",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Which of the following Budget documents is mandated by Fiscal Responsibility and Budget Management Act, 2003?",
+    options: [
+      "Annual Financial Statement (AFS)",
+      "Demand for Grants",
+      "Finance Bill",
+      "Macro-Economic Framework Statement"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q48",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "In a free market economy, the allocation of resources is determined by",
+    options: [
+      "Consumer Preferences",
+      "Voting done by consumers",
+      "The level of profit",
+      "None of these"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-2-q49",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The Heckscher-Ohlin model differs from the Ricardian model of Comparative Advantage in that the former:",
+    options: [
+      "has only two countries.",
+      "has only two products.",
+      "has two factors of production.",
+      "None of these"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-2-q50",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "According to Musgrave the major functions of public finance are:",
+    options: [
+      "Allocative function",
+      "Distributive function",
+      "Stabilisation function",
+      "All the above"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q51",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "In the case of relatively elastic demand, the money burden of tax is on:",
+    options: [
+      "More on seller",
+      "More on buyer",
+      "Entirely on seller",
+      "Entirely on buyer"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-2-q52",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "One negative effect of high public expenditure is:",
+    options: [
+      "Decrease in government control",
+      "Increase in budget deficits and public debt",
+      "Increase in private sector growth",
+      "Reduction in social welfare"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-2-q53",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Law of demand is violated when:",
+    options: [
+      "Income effect is negative",
+      "Substitution effect is negative",
+      "Negative income effect is greater than the substitution effect",
+      "None of these"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-2-q54",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Elasticity is greater than utility for:",
+    options: [
+      "Luxuries",
+      "Necessaries",
+      "Complementary good",
+      "None of these"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-2-q55",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Which of the following is not studied in microeconomics?",
+    options: [
+      "Factor pricing",
+      "Location of Industry",
+      "Consumer Behaviour",
+      "External value of currency"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q56",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The Characteristics of capitalist economics does not include?",
+    options: [
+      "Right to Private property",
+      "Freedom of economic choice",
+      "Absence of Consumer choice",
+      "Completion"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-2-q57",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Which of the following are within the scope of business economies?",
+    options: [
+      "Capital Budgeting",
+      "Risk Analysis",
+      "Business cycles",
+      "All of the Above"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q58",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The Substitution effect will be stronger when:",
+    options: [
+      "The goods are closer substitution",
+      "There is lower cost of switching to the substitute goods",
+      "There is lower Inconvenience while switching to the substitute good",
+      "All the above"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-2-q59",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "In spite of the fact that the price of television sets, refrigerators, air conditioners etc. have been continuously rising their demand does not stand any tendency to fall because they are",
+    options: [
+      "Conspicuous goods",
+      "Giffen goods",
+      "Speculative goods",
+      "Conspicuous necessities."
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q60",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "What are the determinants of price elasticity?",
+    options: [
+      "Availability of substitutes",
+      "Price range",
+      "Position of a Commodity in the Consumer’s budget.",
+      "All the above"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q61",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The turning point of business cycle is produced by when economic indicates:",
+    options: [
+      "Coincident",
+      "Lagging indicates",
+      "leading Indicates",
+      "All of the above"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q62",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "U Shaped average cost curve is based on:",
+    options: [
+      "Law of variance proportions",
+      "Law of increasing cost",
+      "Law of decreasing cost",
+      "None of these"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-2-q63",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The reason behind the upward sloping portion of the long run cost curve is:",
+    options: [
+      "economy of scale",
+      "diseconomy of scale",
+      "diminishing marginal rate of substitution",
+      "None of these"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-2-q64",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Short run marginal cost of the firm will be increasing when:",
+    options: [
+      "average cost is decreasing",
+      "total fixed cost is increasing",
+      "average fixed cost is decreasing",
+      "None of these"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-2-q65",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Consumer is sovereign under:",
+    options: [
+      "Free Economy",
+      "Mixed Economy",
+      "Controlled Economy",
+      "Both (a) and (b)"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q66",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Demand curve under Oligopoly is:",
+    options: [
+      "Less Elastic",
+      "Perfectly Elastic",
+      "Highly Elastic",
+      "Indeterminate"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q67",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The substitution effect for a fall in the price of a commodity (ceteris paribus) is given by:",
+    options: [
+      "a movement up a given indifference curve,",
+      "a movement from a higher to a lower indifference curve,",
+      "a movement down a given indifference curve,",
+      "any of the above."
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-2-q68",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Who gave the theory of price discrimination?",
+    options: [
+      "Marshall",
+      "Pigou",
+      "Cournot",
+      "Simon"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-2-q69",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "At the shut-down point:",
+    options: [
+      "P = AVC",
+      "TR = TVC",
+      "the total losses of the firm equal TFC",
+      "all of the above."
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q70",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Total utility is maximum when:",
+    options: [
+      "marginal utility is zero",
+      "marginal utility is at its highest point",
+      "marginal utility is equal to average utility",
+      "average utility is maximum"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-2-q71",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The consumer is in equilibrium at a point where the budget line:",
+    options: [
+      "is above an indifference curve",
+      "is below an indifference curve",
+      "is tangent to an indifference curve",
+      "cuts an indifference curve"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-2-q72",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "An indifference curve slopes down towards right since more of one commodity and less of another result in:",
+    options: [
+      "same satisfaction",
+      "greater satisfaction",
+      "maximum satisfaction",
+      "decreasing expenditure"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-2-q73",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The consumer is in equilibrium when the following condition is satisfied:",
+    options: [
+      "MUx/MUy > Px/Py",
+      "MUx/MUy < Px/Py",
+      "MUx/MUy = Px/Py",
+      "None of the above"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-2-q74",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "In the case of a Giffen good, the demand curve will be:",
+    options: [
+      "horizontal",
+      "downward-sloping to the right",
+      "upward-sloping to the right",
+      "vertical"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-2-q75",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Which of the following is not an essential condition of pure competition?",
+    options: [
+      "large number of buyers and sellers",
+      "homogeneous product",
+      "freedom of entry",
+      "absence of transport cost"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q76",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Which is the first order condition for the profit of a firm to be maximum?",
+    options: [
+      "AC = MR",
+      "MC = MR",
+      "MR = AR",
+      "AC = AR"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-2-q77",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "In which form of the market structure is the degree of control over the price of its products by a firm very large?",
+    options: [
+      "monopoly",
+      "imperfect competition",
+      "oligopoly",
+      "perfect competition"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-2-q78",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Under which of the following forms of market structure does a firm have no control over the price of its product?",
+    options: [
+      "monopoly",
+      "monopolistic competition",
+      "oligopoly",
+      "perfect competition"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q79",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The net value-added method of measuring national income is also known as:",
+    options: [
+      "net output method",
+      "production method",
+      "industry of origin method",
+      "all of the above."
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q80",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Which of the following is incorrect?",
+    options: [
+      "GDP at market price = GDP at factor cost plus net indirect taxes",
+      "NNP at factor cost = NNP at market price minus indirect taxes",
+      "GNP at market price = GDP at market price plus net factor income from abroad",
+      "None of the above"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-2-q81",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Nearly ______ percent of working population is engaged in the service sector:",
+    options: [
+      "23 per cent",
+      "45 per cent",
+      "80 per cent",
+      "50 per cent"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-2-q82",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The industrial sector depends on the agricultural sector because:",
+    options: [
+      "the agricultural sector provides food and other products for the consumption purposes of industrial sector",
+      "the agricultural sector provides raw materials for the development of agro-based industries of the economy",
+      "the agricultural sector provides market for the industrial products",
+      "all of the above"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q83",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The Indian industry faced the process of retrogression and deceleration because of:",
+    options: [
+      "unsatisfactory performance of agriculture",
+      "slackening of real investment in public sector",
+      "narrow market for industrial goods, especially in rural areas",
+      "all of the above."
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q84",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Which of the following statements is incorrect?",
+    options: [
+      "About 80 per cent of agricultural area has irrigation facilities",
+      "About two third area is rain-fed in India",
+      "Productivity per worker in agriculture is much lower than that in industry",
+      "Cropping pattern is quite skewed in India."
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-2-q85",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "We can say Indian agriculture has become modern since:",
+    options: [
+      "there has been an increase in the use of high yielding varieties of seeds, fertilizers pesticides etc.",
+      "there has been noticeable positive change in the attitude of farmers towards new techniques of production",
+      "farmers are increasingly resorting to intensive cultivation, multiple cropping, scientific water management",
+      "all of the above."
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q86",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Generally, an economy is considered underdeveloped if:",
+    options: [
+      "the standard of living of people is low and productivity is also considerably low.",
+      "agriculture is the main occupation of the people and productivity in agriculture is quite low",
+      "the production techniques are backward",
+      "all of the above"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q87",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "_______ is the apex bank for agriculture credit in India.",
+    options: [
+      "RBI",
+      "SIDBI",
+      "NABARD",
+      "ICICI"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-2-q88",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The major cause of unemployment in India is:",
+    options: [
+      "underdevelopment",
+      "defective manpower planning",
+      "rapid population growth",
+      "all of the above"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q89",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The largest share of foreign aid in India has been used in the programme of:",
+    options: [
+      "agriculture development",
+      "industrial development",
+      "education",
+      "health"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-2-q90",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Before financial reforms, the banking system was characterised by all of the following except:",
+    options: [
+      "administered interest rate structure",
+      "quantitative restrictions on credit flow",
+      "high revenue requirements",
+      "keeping very less lendable resources for the priority sector"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q91",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The demand curve facing an industrial firm under monopoly is a/an",
+    options: [
+      "horizontal straight line",
+      "indeterminate",
+      "downward sloping",
+      "upward sloping"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-2-q92",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "The degree of monopoly power is measured in terms of difference between:",
+    options: [
+      "Marginal cost and the price",
+      "Average cost and average revenue",
+      "Marginal cost and average cost",
+      "Marginal revenue and average cost"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-2-q93",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "A monopoly producer usually earns ______ even in the long run.",
+    options: [
+      "super normal profits",
+      "only normal profits",
+      "losses",
+      "none of the above"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-2-q94",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Price discrimination is not possible:",
+    options: [
+      "under monopoly situation",
+      "under any market form",
+      "under monopolistic competition",
+      "under perfect competition"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q95",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Discriminating monopoly is possible if two markets have:",
+    options: [
+      "rising cost curves",
+      "rising and declining cost curves",
+      "different elasticities of demand",
+      "equal elasticities of demand"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-2-q96",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "Consumer's surplus left with the consumer under price discrimination is:",
+    options: [
+      "maximum",
+      "minimum",
+      "zero",
+      "not predictable"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-2-q97",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "A firm under monopolistic competition advertises:",
+    options: [
+      "as it has no control over the price of its product",
+      "to lower its cost of production",
+      "to increase its sales and profit",
+      "because it cannot raise price"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-2-q98",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "In short run, a firm in monopolistic competition:",
+    options: [
+      "always earns profits",
+      "incurs losses",
+      "earns normal profit only",
+      "may earn normal profit, super normal profit or incur losses"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-2-q99",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "In long run, all firms in monopolistic competition:",
+    options: [
+      "earn super normal profits",
+      "earn normal profits",
+      "incur losses",
+      "may earn super normal profit, normal profit or incur losses"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-2-q100",
+    paper: "MTP II May 2025",
+    type: "mtp",
+    question: "In terms of Ease of Doing Business in 2020 India ranks:",
+    options: [
+      "63",
+      "75",
+      "45",
+      "None of these"
+    ],
+    correctIndex: 0 // a
+  }];
+
+window.RTP_MTP_QUESTIONS["mtp-may-2025-1"] = [
+
+  {
+    id: "mtp-may-2025-1-q1",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following statements is correct regarding business cycles?",
+    options: [
+      "Business cycles always affect all sectors uniformly.",
+      "Business cycles may affect all sectors uniformly.",
+      "Business cycles do not affect all sectors uniformly.",
+      "None of these"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-1-q2",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Business cycle emerge in:",
+    options: [
+      "Socialist economy",
+      "Free market economy",
+      "Mixed economic system",
+      "None of the above"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q3",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "If the price elasticity of demand of a product is -3, what should be the price of the product for its MR to be 20?",
+    options: [
+      "10 unit",
+      "20 unit",
+      "30 unit",
+      "40 unit"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-1-q4",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "While drawing budget line of a consumer consuming Nachos chips and Pepsi, if the quantity of Nachos taken on Y-axis and quantity of Pepsi on X-axis. The slope of budget line will be–",
+    options: [
+      "PP/PN",
+      "PN/PP",
+      "M/PN",
+      "M/PP"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-1-q5",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Theory of Mercantilism propagates:",
+    options: [
+      "Encourage exports and imports",
+      "Encourage exports and discourage imports",
+      "Discourage exports and imports",
+      "Discourage exports and encourage imports"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q6",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "EVA digital assistance Robot of HDFC Bank is a:",
+    options: [
+      "An intermediate good",
+      "A consumer good",
+      "A capital good",
+      "None of these"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-1-q7",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following statement is incorrect, in the simple Keynesian model:",
+    options: [
+      "MPC + MPS = 1",
+      "APC + APS = 1",
+      "Both (a) and (b)",
+      "Neither (a) nor (b)"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-1-q8",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "National income accountants can avoid multiple counting by:",
+    options: [
+      "including transfers in their calculations.",
+      "counting both intermediate and final goods.",
+      "only counting final goods.",
+      "only counting intermediate goods."
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-1-q9",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Gross investment refers to:",
+    options: [
+      "private investment minus public investment.",
+      "net investment plus replacement investment.",
+      "net investment after it has been inflated for changes in the price level.",
+      "net investment plus net exports."
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q10",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The largest component of national income is:",
+    options: [
+      "compensation of employees.",
+      "rents.",
+      "interest.",
+      "corporate profits."
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-1-q11",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Transfer payments are:",
+    options: [
+      "excluded when calculating GDP because they only reflect inflation.",
+      "excluded when calculating GDP because they do not reflect current production.",
+      "included when calculating GDP because they are a category of investment spending.",
+      "included when calculating GDP because they increase the spending of recipients."
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q12",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Price Floor is the price fixed by the government, which is:",
+    options: [
+      "Equal to Equilibrium Price",
+      "Below the Equilibrium Price",
+      "Above the Equilibrium Price",
+      "None of these"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-1-q13",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "When actual price of a commodity is less than equilibrium price, its price:",
+    options: [
+      "starts rising",
+      "starts falling",
+      "starts fluctuating",
+      "remains constant"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-1-q14",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The cost which is never zero even when production is stopped is known as:",
+    options: [
+      "Supplementary Cost",
+      "Prime Cost",
+      "Explicit cost",
+      "Implicit cost"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-1-q15",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "At the Point of Inflexion:",
+    options: [
+      "Total Product is maximum",
+      "Average Product is maximum",
+      "Marginal Product is maximum",
+      "Marginal Product is zero"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-1-q16",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The Indian Government imposed heavy taxes on a commodity to reduce its consumption. Such heavy taxes will decrease the demand of the commodity only when:",
+    options: [
+      "ed = 0",
+      "ed > 1",
+      "Ed = 1",
+      "ed < 1"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q17",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "What does the term cascading effect in taxation refer to?",
+    options: [
+      "Tax on tax, leading to increased costs",
+      "Double taxation of the same income",
+      "A uniform tax rate across all commodities",
+      "A system where indirect taxes are completely avoided"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-1-q18",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which characteristic of money refers to its ability to hold value over time?",
+    options: [
+      "Divisibility",
+      "Durability",
+      "Portability",
+      "Store of value"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-1-q19",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "What is the purpose of a capital budget?",
+    options: [
+      "Funding day-to-day government operations",
+      "Financing long-term investments and projects",
+      "Managing short-term financial needs",
+      "Controlling inflation"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q20",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "According to Keynes, what is the role of the government in maintaining full employment?",
+    options: [
+      "Limited role, as the market will self-adjust",
+      "Active role through fiscal and monetary policies",
+      "Passive role, focusing on international trade",
+      "No role, as unemployment is a natural part of the business cycle"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q21",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Keynesian economics emphasizes the importance of:",
+    options: [
+      "Market self-regulation",
+      "Government intervention",
+      "International trade",
+      "Laissez-faire policies"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q22",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following factors does NOT directly affect the demand for money?",
+    options: [
+      "Interest rates",
+      "The level of income or output",
+      "The price level in the economy",
+      "The governments fiscal deficit"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-1-q23",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "In an economy, a change in the reserve ratio will directly affect the:",
+    options: [
+      "Level of interest rates in the market",
+      "Supply of money in circulation",
+      "Demand for money at different income levels",
+      "Governments budgetary balance"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q24",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following budget types specifically aims to reduce the deficit by either increasing taxes or reducing government spending?",
+    options: [
+      "Balanced budget",
+      "Expansionary budget",
+      "Contractionary budget",
+      "Surplus budget"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-1-q25",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following is the most important source of India’s foreign exchange earnings?",
+    options: [
+      "Industrial exports",
+      "Remittances from Indians working abroad",
+      "Tourism",
+      "Services exports, especially IT and software"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q26",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The Green Revolution in India focused primarily on increasing the production of:",
+    options: [
+      "Oilseeds",
+      "Food grains, especially wheat and rice",
+      "Fruits and vegetables",
+      "Cash crops like cotton and sugarcane"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q27",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following is a primary objective of India’s Five-Year Plans?",
+    options: [
+      "To regulate and control foreign trade",
+      "To promote balanced economic growth across all regions",
+      "To discourage the private sector in favor of public enterprises",
+      "To ensure foreign aid and capital inflows into the country"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q28",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "In international trade negotiations, which of the following is the most common objective for countries involved in multilateral trade talks?",
+    options: [
+      "To increase tariffs and protect domestic industries",
+      "To reduce trade barriers and promote free trade",
+      "To restrict foreign competition through quotas",
+      "To enhance domestic subsidies for agricultural sectors"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q29",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following is NOT a key assumption of Ricardo’s theory of comparative advantage?",
+    options: [
+      "Two countries, each specializing in the good it can produce most efficiently, will both gain from trade.",
+      "Resources are immobile between countries but mobile within a country.",
+      "Trade occurs only due to differences in technology between countries.",
+      "Both countries in trade can benefit even if one country is less efficient in producing both goods."
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-1-q30",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "According to the Quantity Theory of Money, if the money supply increases while the velocity of money and output remain constant, the general price level will:",
+    options: [
+      "Decrease",
+      "Increase proportionately",
+      "Stay the same",
+      "Increase, but unpredictably"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q31",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following situations best demonstrates a market failure due to asymmetric information?",
+    options: [
+      "A monopolist exploiting market power by reducing supply",
+      "Consumers buying substandard products because they lack information about quality",
+      "The government providing public goods like street lighting",
+      "A natural monopoly where economies of scale drive market concentration"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q32",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "When a market fails to allocate resources efficiently, leading to overproduction or underproduction of goods, it is called:",
+    options: [
+      "Monopoly",
+      "Externalities",
+      "Public Goods",
+      "Market Equilibrium"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q33",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "When e = 1 the MR is:",
+    options: [
+      "One",
+      "Negative",
+      "Positive",
+      "Zero"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-1-q34",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Price discrimination will be profitable only if the elasticity of demand in different sub market is:",
+    options: [
+      "different",
+      "uniform",
+      "zero",
+      "less"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-1-q35",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "When the Output of the firm increases in the Short run, its average fixed cost:",
+    options: [
+      "Decreases",
+      "Increases",
+      "First decline and then rise",
+      "remains constant"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-1-q36",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "A vertical supply curve parallel to Y axis implies that the elasticity of supply is:",
+    options: [
+      "Infinity",
+      "Zero",
+      "Greater than zero but less than infinity",
+      "Equal to one"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q37",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Inequality and Exploitation is minimal under:",
+    options: [
+      "Mixed economy",
+      "Capitalism",
+      "Socialism",
+      "None of these"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-1-q38",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Comfort lie between:",
+    options: [
+      "inferior goods and necessities",
+      "luxuries and inferior goods",
+      "necessities and luxury",
+      "None of these"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-1-q39",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following is not a determinant of the firm’s cost function?",
+    options: [
+      "Taxes",
+      "The Production Function",
+      "The Price of the firm’s output",
+      "None of these"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-1-q40",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following is correct about Cartel?",
+    options: [
+      "There are few firms",
+      "All of which are similar in size",
+      "Most Cartels have only a Subset of producers",
+      "All of the above"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-1-q41",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Secular Period is also known as:",
+    options: [
+      "Short Period",
+      "Very Long Period",
+      "long Period",
+      "Very short Period"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q42",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Price Rigidity explained by Sweezy’s model is related to which market form:",
+    options: [
+      "Monopoly",
+      "Oligopoly",
+      "Monopolistic competition",
+      "None of these"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q43",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "In business cycle peaks and troughs are collectively known as:",
+    options: [
+      "Turning Points",
+      "Equilibrium Points",
+      "Real business cycle events",
+      "None of these"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-1-q44",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Fluctuation in economic activities according to Keynes are due to:",
+    options: [
+      "Innovations",
+      "changes in money supply",
+      "Fluctuation in aggregate effective demand",
+      "Fluctuation in government spending"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-1-q45",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Demand for Electricity is elastic because:",
+    options: [
+      "it is very expensive",
+      "it has alternative uses",
+      "it has a number of close Substitute.",
+      "None of these"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q46",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The effectiveness of fiscal policy is limited by:",
+    options: [
+      "Time lags in implementation",
+      "Lack of flexibility in government expenditure",
+      "Political constraints",
+      "All of the above"
+    ],
+    correctIndex: 3 // d
+  },
+
+  {
+    id: "mtp-may-2025-1-q47",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Internal public debt refers to:",
+    options: [
+      "Loans taken from international financial institutions",
+      "Government borrowing from domestic sources",
+      "Borrowing from foreign investors",
+      "Foreign direct investment (FDI)"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q48",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Redistribution of income by the government is primarily done through:",
+    options: [
+      "Progressive taxation and social welfare programs",
+      "Privatization of public enterprises",
+      "Increase in indirect taxes",
+      "Encouraging monopolistic practices"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-1-q49",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The Finance Commission is responsible for:",
+    options: [
+      "Allocating financial resources between the Union and the States",
+      "Preparing the Union Budget",
+      "Controlling the Reserve Bank of India",
+      "Regulating stock markets"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-1-q50",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following is NOT a function of NITI Aayog?",
+    options: [
+      "Policy formulation and coordination",
+      "Allocation of financial resources to states",
+      "Promoting cooperative federalism",
+      "Serving as a think tank for the government"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q51",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Under Article 112, the Annual Financial Statement is presented in which house of Parliament first?",
+    options: [
+      "Lok Sabha",
+      "Rajya Sabha",
+      "Joint Session of Parliament",
+      "Finance Committee"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-1-q52",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following is a potential benefit of Foreign Direct Investment (FDI) for the host country?",
+    options: [
+      "Increased inflation due to higher government expenditure",
+      "Reduction in technological transfer to local industries",
+      "Creation of employment opportunities and skill development",
+      "Increased dependence on foreign companies for resources"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-1-q53",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "According to the Heckscher-Ohlin theory, a country will have a comparative advantage in the production of goods that:",
+    options: [
+      "Require labour-intensive techniques if the country has a surplus of capital.",
+      "Utilize abundant factors of production that the country has in large supply.",
+      "Require advanced technology in which the country is technologically superior.",
+      "Require high labor costs in a country with low wages."
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q54",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Production of milk is included in which sector?",
+    options: [
+      "Tertiary sector",
+      "Service sector",
+      "Primary sector",
+      "Secondary sector"
+    ],
+    correctIndex: 2 // c
+  },
+
+  {
+    id: "mtp-may-2025-1-q55",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following is the primary objective of bilateral trade agreements?",
+    options: [
+      "To create trade barriers between the two countries involved",
+      "To establish free trade between two countries by eliminating tariffs and restrictions",
+      "To focus on mutual military cooperation between the countries",
+      "To standardize monetary policies between two countries"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q56",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Agricultural goods markets depict characteristics close to:",
+    options: [
+      "Perfect competition.",
+      "Oligopoly.",
+      "Monopoly.",
+      "Monopolistic competition."
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-1-q57",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Monopsony means:",
+    options: [
+      "Where there are large firms",
+      "There is a single buyer",
+      "Small number of large buyers",
+      "Single seller and single buyer"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q58",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following is incurred first?",
+    options: [
+      "Historical Cost",
+      "Replacement Cost",
+      "Realized Value",
+      "None of these"
+    ],
+    correctIndex: 0 // a
+  },
+
+  {
+    id: "mtp-may-2025-1-q59",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The Great Depression occurred during:",
+    options: [
+      "1919-23",
+      "1929-33",
+      "1949-53",
+      "1901-05"
+    ],
+    correctIndex: 1 // b
+  },
+
+  {
+    id: "mtp-may-2025-1-q60",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The burden of long-term public debt fall on:",
+    options: [
+      "Present generation",
+      "Past generation",
+      "Future generation",
+      "All"
+    ],
+    correctIndex: 2 // c
+  },
+    {
+    id: "mtp-may-2025-1-q61",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The strategy of agricultural development in India before green revolution was:",
+    options: [
+      "High yielding varieties of seeds and chemical fertilizers to boost productivity",
+      "Institutional reforms such as land reforms",
+      "Technological up gradation of agriculture",
+      "All the above"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-may-2025-1-q62",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The transaction motive for holding money implies that money is held to:",
+    options: [
+      "Make speculative investments in financial markets",
+      "Provide liquidity for daily transactions and purchases",
+      "Protect wealth against inflationary risks",
+      "Save for future investment in assets"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-may-2025-1-q63",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "In the context of trade negotiations, the term Most-Favoured-Nation (MFN) status refers to:",
+    options: [
+      "A preferential treatment granted to one country over others in trade agreements.",
+      "The obligation to trade exclusively with a particular country.",
+      "A policy that allows countries to impose tariffs on imports from specific nations.",
+      "A requirement to offer the same trade terms to all trading partners."
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-may-2025-1-q64",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following is the most important source of India's foreign exchange earnings?",
+    options: [
+      "Industrial exports",
+      "Remittances from Indians working abroad",
+      "Tourism",
+      "Services exports, especially IT and software"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-may-2025-1-q65",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following statements is correct regarding business cycles?",
+    options: [
+      "Business cycles are contagious and international in character.",
+      "Business cycles begin in one country and spread to other countries through trade relations.",
+      "Business cycles have serious consequences on well-being of the societies.",
+      "All of the above"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-may-2025-1-q66",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Decrease in input demand:",
+    options: [
+      "Doesn't affect inputs prices",
+      "Pushes inputs prices up",
+      "Pulls inputs prices down",
+      "Either b or c"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-may-2025-1-q67",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "During business cycles the opposite of a peak is:",
+    options: [
+      "an inflation",
+      "a hyperinflation",
+      "a trend",
+      "a trough"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-may-2025-1-q68",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Nicholas Kaldor propounded:",
+    options: [
+      "Nocholas theory",
+      "Kaldor Theory",
+      "Cobweb theory",
+      "Cobb-Douglas theory"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-may-2025-1-q69",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Repercussions of business cycles get felt on nearly all economic variables.",
+    options: [
+      "alternatively",
+      "simultaneously",
+      "one by one",
+      "All of the above"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-may-2025-1-q70",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Different business cycles in duration and intensity.",
+    options: [
+      "differ",
+      "similar",
+      "consistent",
+      "Can't say"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-may-2025-1-q71",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Peak is the stage of expansion.",
+    options: [
+      "Later",
+      "Earlier",
+      "Either A or B",
+      "None of the above"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-may-2025-1-q72",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which one of the following is not an internal cause of business cycles?",
+    options: [
+      "Money supply",
+      "Technology shocks",
+      "Psychological factors",
+      "Fluctuations in investment"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-may-2025-1-q73",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following is a differentiated product?",
+    options: [
+      "A hamburger",
+      "A shirt",
+      "An automobile",
+      "All of the above"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-may-2025-1-q74",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "If the market demand curve for a commodity has a negative slope then the market structure must be:",
+    options: [
+      "Perfect competition",
+      "Monopoly",
+      "Imperfect competition",
+      "The market structure cannot be determined as the information is insufficient"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-may-2025-1-q75",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The market demand curve for a perfectly competitive industry is Qd=12-2P and the market supply curve is Qs=3P. The market will be in equilibrium if:",
+    options: [
+      "P=6 and Q=9",
+      "P=5 and Q=2",
+      "P=4 and Q=4",
+      "P=3 and Q=6"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-may-2025-1-q76",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The short run supply curve of a perfectly competitive firm is equal to:",
+    options: [
+      "That portion of the short run marginal cost curve that is above the average variable cost curve",
+      "That portion of the short run marginal cost curve that is above the average total cost curve",
+      "That portion of the short run average total cost curve that is above the average variable cost curve",
+      "None of the above is correct."
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-may-2025-1-q77",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Marginal revenue is equal to the price under:",
+    options: [
+      "Monopoly market structure",
+      "Oligopoly form of market",
+      "Monopolistically competitive market",
+      "Perfect competition"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-may-2025-1-q78",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "When demand increases and supply decreases:",
+    options: [
+      "the equilibrium price and quantity both rise",
+      "the equilibrium price and quantity both fall",
+      "the equilibrium price rises but nothing certain can be said about the change in equilibrium quantity.",
+      "the equilibrium quantity rises but nothing certain can be said about the change in equilibrium price."
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-may-2025-1-q79",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Isoquant in the relevant range are:",
+    options: [
+      "Convex to the Origin",
+      "Negatively Sloped",
+      "Cannot cross",
+      "All of the Above"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-may-2025-1-q80",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "For Giffen good the angle Curve is:",
+    options: [
+      "Vertical",
+      "Horizontal",
+      "Negatively Sloped",
+      "Positively Sloped"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-may-2025-1-q81",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Demand for a commodity with negative income elasticity indicates that as income falls the amount of the commodity purchased:",
+    options: [
+      "falls",
+      "rises",
+      "remains unchanged",
+      "None of these"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-may-2025-1-q82",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Normative economics can be explained through:",
+    options: [
+      "Fairness to tax",
+      "Incidence to tax",
+      "Effect of tax on incentives to work",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-may-2025-1-q83",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Entry of new firm in monopoly is:",
+    options: [
+      "Possible only in the long run",
+      "Possible only in the short run",
+      "Restricted at all times",
+      "Both a and b"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-may-2025-1-q84",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The market price cannot be influenced by a seller under:",
+    options: [
+      "Monopolistic Competition",
+      "Monopoly",
+      "Perfect Competition",
+      "All the above"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-may-2025-1-q85",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "There is an inverse relation between price and demand for the products of a firm under:",
+    options: [
+      "Monopoly only",
+      "Monopolistic Competition only",
+      "Both Monopoly and Monopolistic Competition",
+      "Perfect competition"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-may-2025-1-q86",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Price elasticity of demand under monopoly is:",
+    options: [
+      "Infinity",
+      "Equal to one",
+      "Less than one",
+      "None of these"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-may-2025-1-q87",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Business Economics in its approach is:",
+    options: [
+      "Pragmatic",
+      "Idealistic",
+      "Normative",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-may-2025-1-q88",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Contraction of demand is the result of:",
+    options: [
+      "Decrease in the number of Consumers",
+      "Increase in the price of the good concerned",
+      "Price of related products",
+      "None of these"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-may-2025-1-q89",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The rate at which the consumer is prepared to exchange good x and y is:",
+    options: [
+      "Marginal rate of substitution",
+      "Elasticity of Substitution",
+      "Diminishing Marginal Utility",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-may-2025-1-q90",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Indifference Curve Analysis was proposed by:",
+    options: [
+      "J. R Hicks and R.G.D Allen",
+      "Alfred Marshall",
+      "Jeremy Bentham",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-may-2025-1-q91",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of the following statement is correct concerning the relationship among the firm's cost function?",
+    options: [
+      "TC = TVC + TFC",
+      "TFC = TC - TVC",
+      "TC = TFC + TVC",
+      "TVC = TFC - TC"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-may-2025-1-q92",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The marginal utility from last unit consumed of commodity Y is 50 Units and MU of m is 10. The consumer is in equilibrium and consuming commodity Y only. Find the Price of Commodity Y:",
+    options: [
+      "5",
+      "10",
+      "40",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-may-2025-1-q93",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The price in collusive oligopoly is decided by:",
+    options: [
+      "firm",
+      "price leader",
+      "industry",
+      "none of these"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-may-2025-1-q94",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The Government offer minimum assured price to the farmers to purchase their output is called:",
+    options: [
+      "market Price",
+      "support Price",
+      "equilibrium Price",
+      "ceiling Price"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-may-2025-1-q95",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "What are the internal causes of business cycle?",
+    options: [
+      "fluctuations in effective demand.",
+      "macroeconomic policies",
+      "money Supply",
+      "All the above"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-may-2025-1-q96",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The substitution effect will be stronger when:",
+    options: [
+      "the goods are closer substitute",
+      "there is lower cost of switching to the substitute good.",
+      "there is lower inconvenience while switching to the substitute good.",
+      "all the above"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-may-2025-1-q97",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Rational decision making requires that:",
+    options: [
+      "one’s choice be arrived at logically and without error.",
+      "one’s choice be consistent with one’s goal.",
+      "one’s choice never varies.",
+      "the consumer plans to attain the highest possible level of satisfaction."
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-may-2025-1-q98",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "Which of these country is a purely socialist economy?",
+    options: [
+      "USSR",
+      "China",
+      "Vietnam",
+      "None of these"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-may-2025-1-q99",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The Nature of Business Economics:",
+    options: [
+      "Business Economics is a Science",
+      "Incorporate elements of Macro Analysis",
+      "Interdisciplinary in Nature",
+      "All the above"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-may-2025-1-q100",
+    paper: "MTP I May 2025",
+    type: "mtp",
+    question: "The Book “The Wealth of Nations” is written by:",
+    options: [
+      "Adam Smith",
+      "Arthur Pigou",
+      "Robinson",
+      "Ragnar Nurske"
+    ],
+    correctIndex: 0
+  }
+];
+
+window.RTP_MTP_QUESTIONS["mtp-jan-2025-1"] = [
+
+  {
+    id: "mtp-jan-2025-1-q1",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following is key operational target in a Budget?",
+    options: ["Fiscal Deficit", "Revenue Deficit", "The General Government Debt", "The Central Government Debt"],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q2",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "The External Debt has been shown at the exchange rate applicable at the time of:",
+    options: ["Contracting the debt.", "Expanding the debt.", "Both a & b", "None of the above"],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q3",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following is not a classification of public expenditure?",
+    options: ["Functional classification", "Revenue and Capital", "Voted and Charged", "Plan and Non Plan"],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q4",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following curve cannot be u-shaped?",
+    options: ["Average total cost", "Average variable cost", "Average fixed cost", "Marginal cost"],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q5",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following assumptions is correct in connection with oligopoly?",
+    options: [
+      "If an oligopolist increases his price his rivals will follow.",
+      "If an oligopolist increases his price his rivals will not follow.",
+      "If an oligopolist increases his price his rivals will lower their prices.",
+      "If an oligopolist decreases his price his rivals will not react."
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q6",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Business cycle emerge in:",
+    options: ["Socialist economy", "Free market economy", "Mixed economic system", "None of the above"],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q7",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following does not enter the calculation of national income?",
+    options: [
+      "Exchange of previously produced goods",
+      "Exchange of second-hand goods",
+      "Exchange of stocks and bonds",
+      "All the above"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q8",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "In the Keynesian cross diagram, the point at which the aggregate demand function crosses the 45-degree line indicates the:",
+    options: [
+      "level of full employment income.",
+      "less than full employment level of income.",
+      "equilibrium level of income which may or may not be full employment level of income",
+      "autonomous level of income which may not be full employment level of income"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q9",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following is an implication of the imposition of price ceiling below the equilibrium price?",
+    options: [
+      "Shortages in the market",
+      "Problem of allocation of limited supplies among large number of consumers",
+      "Black marketing",
+      "All of the above"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q10",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Nationalization means:",
+    options: [
+      "Selling of government stake to private sector",
+      "Selling of government companies to private sector",
+      "Government purchasing 26% shares in private companies",
+      "Taking of full control and management from Private Sector by the Government"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q11",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "While drawing budget line of a consumer consuming Nachos chips and Pepsi, if the quantity of Nachos taken on Y-axis and quantity of Pepsi on X-axis. The slope of budget line will be:",
+    options: ["P_N/P_P", "N_P/P_P", "N/M/P", "P/M/P"],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q12",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Net domestic expenditure is consumption expenditure plus",
+    options: [
+      "Net foreign investment",
+      "Net foreign investment plus net domestic investment",
+      "Net domestic investment",
+      "Replacement expenditure"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q13",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following measures of meeting deficit in a budget, leads to an increase in money supply in the economy.",
+    options: [
+      "Disinvestment",
+      "Loan from World Bank",
+      "Deficit Financing",
+      "All of these"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q14",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "With fall in price of commodity, demand of the commodity increases as it becomes relatively cheaper in comparison to other commodities. This effect is known as:",
+    options: [
+      "Substitution Effect",
+      "Income Effect",
+      "Law of Demand",
+      "Law of diminishing Returns"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q15",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following conditions would violate the consumer equilibrium in a two-good world?",
+    options: [
+      "The marginal rate of substitution between the two goods equals the ratio of their prices.",
+      "The marginal utility per dollar spent on each good is equal.",
+      "The consumer's indifference curve is steeper than the budget line at the chosen bundle.",
+      "The consumer is spending their entire budget."
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q16",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Assertion (A): Consumer surplus is the difference between the potential price and actual price. Reason (R): There exists an inverse relationship between the price and consumer surplus.",
+    options: [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is not the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q17",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "The point at which the total product curve begins to flatten out indicates:",
+    options: [
+      "The onset of diminishing marginal returns",
+      "Maximum efficiency in production",
+      "A decrease in fixed costs",
+      "The end of increasing returns to scale"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q18",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Assertion (A): Sunk costs are not relevant in economic decisions. Reason (R): The opportunity cost of such resources is zero.",
+    options: [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is not the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q19",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "In an oligopoly, price determination is often influenced by:",
+    options: [
+      "The actions of a single firm",
+      "The collective behavior of a few dominant firms",
+      "Government-imposed price floors",
+      "The elasticity of supply alone"
+    ],
+    correctIndex: 1
+  },
+    {
+    id: "mtp-jan-2025-1-q20",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "In a monopoly, the lack of close substitutes for the product typically results in:",
+    options: [
+      "Perfect elasticity of demand",
+      "A downward-sloping demand curve for the monopolist",
+      "Constant returns to scale",
+      "The ability to practice price discrimination"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q21",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following is NOT included in the calculation of GDP using the expenditure approach?",
+    options: [
+      "Consumption expenditure",
+      "Government purchases",
+      "Business investment",
+      "Transfer payments"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q22",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which organization is primarily responsible for compiling and publishing regional accounts data in India?",
+    options: [
+      "Reserve Bank of India (RBI)",
+      "National Sample Survey Organization (NSSO)",
+      "Central Statistical Office (CSO)",
+      "Ministry of Finance"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q23",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following components is used to assess the regional economic performance in India?",
+    options: [
+      "Poverty Ratio",
+      "Employment Rate",
+      "Per Capita Income",
+      "All of the above"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q24",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "If government wants to contribute to capital formation, then revenue surplus should be:",
+    options: [
+      "Negative",
+      "Positive",
+      "Zero",
+      "None of the above"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q25",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "What is the primary purpose of the Finance Commission in India?",
+    options: [
+      "To formulate monetary policy",
+      "To allocate central taxes to state governments",
+      "To recommend measures for economic planning",
+      "To audit the accounts of the government"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q26",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "What is the purpose of a debt-to-GDP ratio in public debt management?",
+    options: [
+      "To measure the government's annual revenue",
+      "To evaluate the proportion of debt relative to the country’s economic output",
+      "To assess the level of inflation in the economy",
+      "To determine the amount of currency in circulation"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q27",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "In the Cambridge equation for money demand, what does *k* represent?",
+    options: [
+      "The velocity of money",
+      "The money supply",
+      "The income elasticity of money demand",
+      "The proportion of income held as money"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q28",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which measure of the money supply includes M1 and all other forms of near money that are less liquid than M1?",
+    options: [
+      "M3",
+      "M2",
+      "L",
+      "M0"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q29",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Most Favoured Nation (MFN) clause was introduced by:",
+    options: [
+      "WTO",
+      "GATT",
+      "ADB",
+      "IBRD"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q30",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which term describes the movement of capital from one country to another to exploit investment opportunities?",
+    options: [
+      "Foreign Direct Investment (FDI)",
+      "Foreign Portfolio Investment (FPI)",
+      "Exchange Rate Speculation",
+      "Capital Flight"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q31",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "What is the primary objective of the Indian government’s “Make in India” initiative?",
+    options: [
+      "To increase imports from other countries",
+      "To promote local manufacturing and attract foreign investment",
+      "To reduce domestic production costs",
+      "To expand the agricultural sector"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q32",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following is NOT a function of NITI Aayog?",
+    options: [
+      "Formulating five-year plans",
+      "Promoting sustainable development",
+      "Facilitating cooperative federalism",
+      "Providing policy and technical advice to the central and state governments"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q33",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "The Indian government’s policy of *Import Substitution Industrialization* (ISI) primarily aimed to:",
+    options: [
+      "Increase imports to stimulate economic growth",
+      "Reduce dependence on foreign goods by promoting domestic industries",
+      "Encourage foreign investment in local industries",
+      "Expand the agricultural sector for export"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q34",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which economic indicator is commonly used to measure inflation in India?",
+    options: [
+      "Gross Domestic Product (GDP)",
+      "Consumer Price Index (CPI)",
+      "Producer Price Index (PPI)",
+      "Index of Industrial Production (IIP)"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q35",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "In a mixed economy resources are used as a result of:",
+    options: [
+      "The decisions of consumers",
+      "The decisions of firms only",
+      "The decisions of consumers and firms",
+      "The decisions of consumers and firms and government"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q36",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "If students’ expenditures on airline travel increase as a consequence of more heavily discounted fares, students’ demand for airline travel must be:",
+    options: [
+      "income elastic.",
+      "income inelastic.",
+      "price elastic.",
+      "price inelastic"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q37",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Shift in demand is caused by changes in the:",
+    options: [
+      "non-price factors",
+      "price of a good alone",
+      "cost of production",
+      "raw material prices"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q38",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Let QX = 111111/ PX, the elasticity of demand of the good X when its price falls from $8 to $2 per unit, will be:",
+    options: [
+      "greater than one",
+      "less than one",
+      "equal to one",
+      "can’t say"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q39",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "With reference to Arc elasticity measures the responsiveness of demand ___________ on the demand curve.",
+    options: [
+      "at one given point",
+      "at intercepts on X-axis & Y-axis",
+      "between two points",
+      "Any of the above"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q40",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "According to British economist J. M. Keynes ______ was the main cause of massive decline in income and employment during Great Depression of 1930.",
+    options: [
+      "Lower aggregate expenditure in the economy.",
+      "Banking crises and low money supply.",
+      "Overdebtness.",
+      "Lower profits & pessimism"
+    ],
+    correctIndex: 0
+  },
+    {
+    id: "mtp-jan-2025-1-q41",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following is a zero-sum game?",
+    options: [
+      "Prisoners dilemma",
+      "Competition for market share",
+      "Pricing strategy",
+      "None of the above is correct."
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q42",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following elasticities measure a movement along a curve rather than a shift in the curve?",
+    options: [
+      "The price elasticity of demand",
+      "The cross elasticity of demand",
+      "The income elasticity of demand",
+      "The price elasticity of supply"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q43",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "If only part of the labour force employed by a firm can be dismissed at any time and without pay, the total wages and salaries paid out by the firm must be considered:",
+    options: [
+      "a fixed cost",
+      "a variable cost",
+      "partly a fixed and partly a variable cost",
+      "any of the above"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q44",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "When the law of diminishing returns begins to operate, the Total Variable Cost (TVC) curve begins to:",
+    options: [
+      "fall at an increasing rate",
+      "rise at a decreasing rate",
+      "fall at a decreasing rate",
+      "rise at an increasing rate"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q45",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "At the shut-down point:",
+    options: [
+      "P = AVC",
+      "TR = TVC",
+      "the total losses of the firm equal TFC",
+      "all of the above"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q46",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "When the industry is in long-run equilibrium, the monopolistic competitor will produce at the lowest point on its Long-Average Cost (LAC) curve:",
+    options: [
+      "Always",
+      "Never",
+      "Sometimes",
+      "Cannot say"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q47",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "In both the Chamberlin and the kinked demand curve models, the oligopolists:",
+    options: [
+      "recognize their interdependence",
+      "do not collude",
+      "tend to keep prices constant",
+      "all of the above"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q48",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "In India agricultural income is calculated by:",
+    options: [
+      "Income method",
+      "Output method",
+      "Expenditure method",
+      "None of them"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q49",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Savings represent:",
+    options: [
+      "An injection to the circular flow of income",
+      "A withdrawal into the circular flow",
+      "Both an injection and a withdrawal",
+      "None of the above"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q50",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "In Heckscher Ohlin theory factors of production are–",
+    options: [
+      "one",
+      "two",
+      "three",
+      "four"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q51",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "A period of expansion and contraction measured by real GDP is called:",
+    options: [
+      "Business cycle",
+      "Expansion",
+      "Recession",
+      "Contraction"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q52",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Who maintains a buffer stock of foodgrains in India?",
+    options: [
+      "FCI",
+      "NAFED",
+      "Ministry of Agriculture",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q53",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "The minimum support price is declared by:",
+    options: [
+      "Ministry of Agriculture",
+      "Ministry of Finance",
+      "The Cabinet Committee on economic affairs",
+      "None of these"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q54",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Atal Tinkering lab is an initiative by which of the following institution?",
+    options: [
+      "Niti Aayog",
+      "CBSE",
+      "National Ayush Mission",
+      "Reserve bank of India"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q55",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following are the major taxes in India?",
+    options: [
+      "Corporation Tax",
+      "Stamp Duty and Registration",
+      "Customs duty",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q56",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Fiscal Policy is formulated by _____ in India?",
+    options: [
+      "Finance Ministry",
+      "RBI",
+      "Different Banks",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q57",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "A Substantial increase in capital expenditure or revenue expenditure leads to _______",
+    options: [
+      "Fiscal deficit",
+      "Budgetary deficit",
+      "Primary deficit",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q58",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Tax reforms are concerned with the reforms in the government taxation and public expenditure policies which are collectively known as its __",
+    options: [
+      "Financial reform",
+      "Fiscal Policy",
+      "Financial Policy",
+      "None of these"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q59",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Goods and services tax (GST) was enacted by parliament vide ___ Constitutional Amendments Act 2016.",
+    options: [
+      "103rd",
+      "105th",
+      "101",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q60",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "When some people start investing money in share market then many people start following the same without considering its advantage and disadvantages is called:",
+    options: [
+      "Demonstration effect",
+      "Snob effect",
+      "Veblan effect",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+    // Starting from question 61
+  {
+    id: "mtp-jan-2025-1-q61",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following cost curve is never U Shaped?",
+    options: [
+      "Marginal cost curves",
+      "Average cost curve",
+      "Average fixed cost curve",
+      "None of these"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q62",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "The most important function of an entrepreneur is to:",
+    options: [
+      "Innovate",
+      "Bear the sense of responsibility",
+      "Finance",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q63",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Game theory in oligopoly was developed by:",
+    options: [
+      "Von Neumann and Oskar Morgenstern",
+      "Maltas",
+      "Adam Smith",
+      "Robinson"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q64",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "If the growth rate of population is higher than the rate of economic growth, there will be ___ in the economy:",
+    options: [
+      "more saving",
+      "lesser saving",
+      "no effects on saving",
+      "None of these"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q65",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Macroeconomic stabilization may be achieved through:",
+    options: [
+      "Free market economy",
+      "Fiscal Policy",
+      "Monetary Policy",
+      "Both (b) & (c)"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q66",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Fiscal Federalism refers to:",
+    options: [
+      "Organising and Implementing development plan",
+      "The management of Fiscal Policy by a nation",
+      "Division of economic functions and resources among different layers of the government",
+      "None of these"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q67",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "The major reason for market failure:",
+    options: [
+      "Market Power",
+      "Externalities",
+      "Public Good",
+      "All the above"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q68",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "The Public debt management cell was created in:",
+    options: [
+      "2016",
+      "2015",
+      "2020",
+      "1995"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q69",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following policies is likely to shift the economy’s aggregate demand curve to the right?",
+    options: [
+      "Increase in government spending",
+      "Increase in taxes",
+      "A tax cut along with increase in public expenditure",
+      "All the above"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q70",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "___ considered demand for money is an application of a more general theory of demand for capital assets.",
+    options: [
+      "Baumol",
+      "Milton Friedman",
+      "J M Keynes",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q71",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "The ratio that relates the change in the money supply to a given change in the monetary base is called the:",
+    options: [
+      "required reserve ratio",
+      "money multiplier",
+      "Deposit ratio",
+      "None of these"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q72",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following holds that a country can increase its wealth by encouraging exports and discouraging imports:",
+    options: [
+      "Capitalism",
+      "Socialism",
+      "Mercantilism",
+      "None of these"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q73",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following is not a non-tariff barrier:",
+    options: [
+      "Complex documentation requirement",
+      "Countervailing duties charged by importing country",
+      "Pre -Shipment product inspection and certification on requirements",
+      "None of these"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q74",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "At any point of time all markets tend to have the same exchange rate for a given currency due to:",
+    options: [
+      "Hedging",
+      "Arbitrage",
+      "Speculation",
+      "None of these"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q75",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Inflationary gap:",
+    options: [
+      "raises the level of output",
+      "does not impact the level of output",
+      "raises the general price level",
+      "both (b) and (c)"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q76",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following component of monetary policy can be adopted to correct excess demand?",
+    options: [
+      "Increase in repo rate",
+      "Increase in CRR",
+      "Increase in margin requirement",
+      "All of these"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q77",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Reverse repo rate:",
+    options: [
+      "generate interest income",
+      "is increased to curb inflation",
+      "is not a policy rate",
+      "both (a) & (b)"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q78",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "The RBI is mandated to Publish a monetary policy report every:",
+    options: [
+      "Six months",
+      "Three months",
+      "Twelve months",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q79",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "The argument for education subsidy is based on:",
+    options: [
+      "Education is costly",
+      "The ground that education is merit good",
+      "Education creates positive externalities",
+      "(b) & (c)"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q80",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Public financial management system in the central government and matters connected with state finance is managed by:",
+    options: [
+      "The department of expenditure",
+      "The department of financial services",
+      "The department of economic affairs",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+    {
+    id: "mtp-jan-2025-1-q81",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "The Liquidity Trap is the extreme effect of:",
+    options: [
+      "Monetary Policy",
+      "Fiscal Policy",
+      "Either (a) or (b)",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q82",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which of the following is an intermediate good?",
+    options: [
+      "The Purchase of gasoline for a ski trip to colorado",
+      "The Purchase of Pizza by a college student",
+      "The Purchase of baseball uniform by a professional baseball team",
+      "The Purchase of Jogging Shoes by a Professor"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q83",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "National Income accountants can avoid multiple counting by:",
+    options: [
+      "including transfers in their calculation",
+      "only counting final goods",
+      "counting both intermediate and final Goods",
+      "only counting intermediate goods"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q84",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Gross Investment refers to:",
+    options: [
+      "Private investment minus Public Investment",
+      "Net Investment plus replacement investment",
+      "net investment after it has been inflated for changes in the price level",
+      "net investment plus net exports"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q85",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "If an oligopolist incur losses in the short run then in the long run:",
+    options: [
+      "The oligopolist will go out of the business",
+      "The oligopolist will stay in business",
+      "The Oligopolist will break even",
+      "any of the above is possible"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q86",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "In the long run, all production costs are:",
+    options: [
+      "Fixed",
+      "Sunk",
+      "Variable",
+      "Marginal"
+    ],
+    correctIndex: 2
+  },
+  {
+    id: "mtp-jan-2025-1-q87",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Assertion (A): New Economic Policy is to expand the economic wings of the country. Reason (R): Due to economic liberalisation or relaxation in the import tariffs, deregulation of markets or opening the markets for private and foreign players, and reduction of taxes.",
+    options: [
+      "Both Assertion (A) and Reason (R) are true, and Reason (R) is the correct explanation of Assertion (A).",
+      "Both Assertion (A) and Reason (R) are true, and Reason (R) is not the correct explanation of Assertion (A).",
+      "Assertion (A) is true, but Reason (R) is false.",
+      "Assertion (A) is false but Reason (R) is true."
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q88",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Given Consumption Function is C = 300 + 0.75 Y; Investment = ₹ 800; Net Imports = ₹ 100. The equilibrium level of output is:",
+    options: [
+      "4000",
+      "5000",
+      "8000",
+      "None of these"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q89",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "What is the value of Investment Multiplier when saving function is represented as S= -60 + 0.2Y?",
+    options: [
+      "2",
+      "5",
+      "4",
+      "0.2"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q90",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "If a bank has deposits of INR 50,00,000 and a reserve requirement of 10%, what is its excess reserves?",
+    options: [
+      "INR 55,00,000",
+      "INR 30,00,000",
+      "INR 45,00,000",
+      "INR 5,00,000"
+    ],
+    correctIndex: 3
+  },
+  {
+    id: "mtp-jan-2025-1-q91",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "What will be the value of Credit Multiplier when the Required Reserve ratio is 50%?",
+    options: [
+      "4",
+      "2",
+      "3",
+      "1"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q92",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Which concept involves a one-shot injection of government expenditure into a depressed economy with the aim of boosting business confidence and encouraging larger private investment?",
+    options: [
+      "Pump Priming",
+      "Deficit Financing",
+      "Compensatory Spending",
+      "Public Spending"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q93",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "From the following data, calculate “Gross value added at factor cost”: Sale: 180, Rent: 5, Subsidy: 10, Change in Stock: 15, Purchase of Raw Material: 100, Profits: 25 (in Crores)",
+    options: [
+      "105",
+      "210",
+      "185",
+      "None of these"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q94",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "If the required reserve ratio is 20 percent, currency in circulation is ₹800 billion, demand deposits are ₹2000 billion, and excess reserves total ₹2 billion, find the value of money multiplier:",
+    options: [
+      "2.50",
+      "2.90",
+      "2.60",
+      "2.40"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q95",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Money Supply is directly proportional to:",
+    options: [
+      "Cash reserve ratio (r)",
+      "Monetary base (H)",
+      "Currency deposit ratio (k)",
+      "Money Multiplier (m)"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q96",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "A group of countries that have a free trade agreement between themselves and may apply a common external tariff to other countries:",
+    options: [
+      "Free trade area",
+      "Custom union",
+      "Trade bloc",
+      "Regional preferential trade agreements"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q97",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "National Treatment Principle (NTP) says:",
+    options: [
+      "Imported goods and domestic goods should be treated equally",
+      "Exported goods and imported goods should be treated equally",
+      "Imported goods and domestic goods should be treated differently",
+      "Internal trade is more important than international trade"
+    ],
+    correctIndex: 0
+  },
+  {
+    id: "mtp-jan-2025-1-q98",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "The terms revaluation is applied to:",
+    options: [
+      "Flexible exchange rate",
+      "Fixed exchange rate",
+      "Gold",
+      "ECB"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q99",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "Any act of interference by a Central Bank like the RBI in influencing the exchange rate is referred to as which of the following in India?",
+    options: [
+      "Dirty Floats",
+      "Managed Floats",
+      "Fixed Floats",
+      "Market Stabilization Floats"
+    ],
+    correctIndex: 1
+  },
+  {
+    id: "mtp-jan-2025-1-q100",
+    paper: "MTP I Jan 2025",
+    type: "mtp",
+    question: "According to Cambridge equation, the value of money depends upon:",
+    options: [
+      "Demand for money",
+      "Supply of money",
+      "Demand for goods and services",
+      "All of the above"
+    ],
+    correctIndex: 0
+  }
 ];
