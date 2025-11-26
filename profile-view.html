@@ -4,7 +4,14 @@
   <meta charset="UTF-8">
   <title>Testy – My Profile</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="manifest" href="favicon/site.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon/android-chrome-512x512.png">
+<link rel="shortcut icon" href="favicon/favicon.ico">
   <script src="storage.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
@@ -61,6 +68,10 @@
     button, a {
       font-family: inherit;
     }
+    a {
+  color: inherit;
+  text-decoration: none;
+}
     button:focus,
     a:focus,
     button:focus-visible,
@@ -494,7 +505,7 @@
   <div class="page">
     <div class="top-bar">
       <div class="brand-wrap">
-        <div class="brand-title">Testy</div>
+        <div class="brand-title"><a href="index.html">Testy</a></div>
         <div class="brand-sub">Your profile &amp; activity</div><hr>
       </div>
       <div class="top-actions">
@@ -904,6 +915,14 @@
     renderProfileHeader();
     renderSummaryStatsSections();
     renderActivity();
+    
+    if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js")
+      .then(() => console.log("Service Worker Registered"))
+      .catch(err => console.log("SW registration failed:", err));
+  });
+}
   </script>
 </body>
 </html>

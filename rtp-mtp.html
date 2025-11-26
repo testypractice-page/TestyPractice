@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <title>Testy – RTP/MTP Practice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="manifest" href="favicon/site.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon/android-chrome-512x512.png">
+<link rel="shortcut icon" href="favicon/favicon.ico">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
   href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
@@ -30,7 +39,10 @@ body * {
     border-color 0.35s ease,
     box-shadow 0.35s ease;
 }
-
+a {
+  color: inherit;
+  text-decoration: none;
+}
 #pdfCoverPage {
   padding: 30px;
 }
@@ -891,7 +903,7 @@ body * {
         <div class="nav-panel-section">
           <div class="nav-panel-section-label">LINKS</div>
             <div class="nav-links">
-    <a class="nav-item" href="index.html">
+    <a class="nav-item" href="practice.html">
       Back to chapters
       <span>Normal practice</span>
     </a>
@@ -948,7 +960,7 @@ body * {
     <!-- TOP BAR -->
     <div class="top-bar">
       <div class="title-wrap">
-        <h1>Testy</h1>
+        <h1><a href="index.html">Testy</a></h1>
         <span id="paperTypeLabel" class="title-badge"></span>
       </div>
       <div class="top-actions">
@@ -2084,6 +2096,14 @@ function initAuthLinks() {
     if (!hasSeenWelcome) {
       openWelcomeModal();
     }
+    
+    if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js")
+      .then(() => console.log("Service Worker Registered"))
+      .catch(err => console.log("SW registration failed:", err));
+  });
+}
   </script>
 </body>
 </html>

@@ -4,7 +4,14 @@
   <meta charset="UTF-8" />
   <title>About – Testy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="manifest" href="favicon/site.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon/android-chrome-512x512.png">
+<link rel="shortcut icon" href="favicon/favicon.ico">
   <!-- Google Fonts: Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -110,6 +117,10 @@
       line-height: 1.7;
       font-size: 15px;
     }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
     .muted {
       color: var(--text-muted);
@@ -139,7 +150,7 @@
   <!-- TOP BAR -->
   <div class="header">
     <div>
-      <div class="title">Testy</div>
+      <div class="title"><a href="index.html">Testy</a></div>
       <div class="muted" style="font-size: 13px; margin-top: 2px;">About the platform & creator</div>
     </div>
 
@@ -250,6 +261,14 @@
     });
 
     initTheme();
+    
+    if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js")
+      .then(() => console.log("Service Worker Registered"))
+      .catch(err => console.log("SW registration failed:", err));
+  });
+}
   </script>
 
 </body>
