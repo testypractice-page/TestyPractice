@@ -13,6 +13,12 @@
     rel="stylesheet"
   />
 
+  <!-- Font Awesome for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
   <!-- Favicons & manifest (adjust paths if your folder is different) -->
   <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
@@ -51,7 +57,6 @@
       --nav-blur-bg: rgba(15, 23, 42, 0.88);
     }
 
-    /* Smooth theme transition */
     * {
       box-sizing: border-box;
     }
@@ -73,7 +78,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* remove blue tap highlight on mobile */
     button,
     a {
       -webkit-tap-highlight-color: transparent;
@@ -207,43 +211,127 @@
     }
 
     /* Mobile menu */
-    .mobile-menu {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.75);
-      display: none;
-      z-index: 30;
-      justify-content: flex-end;
-    }
+    /* Mobile menu */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 30;
 
-    .mobile-menu.open {
-      display: flex;
-    }
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
 
-    .mobile-menu-panel {
-      width: min(260px, 78vw);
-      background: var(--bg-surface);
-      padding: 16px 14px 18px;
-      box-shadow: -8px 0 30px rgba(15, 23, 42, 0.6);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
+.mobile-menu.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu-panel {
+  width: min(340px, 90vw);
+  background: var(--bg-surface);
+  padding: 18px 18px 20px;
+  box-shadow: -8px 0 30px rgba(15, 23, 42, 0.6);
+
+  /* NEW SLIDE-IN ANIMATION */
+  transform: translateX(100%);
+  transition: transform 0.38s cubic-bezier(.25, .8, .25, 1);
+}
+
+.mobile-menu.open .mobile-menu-panel {
+  transform: translateX(0);
+}
+
 
     .mobile-menu-panel-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 6px;
-      font-size: 14px;
+      margin-bottom: 10px;
+      font-size: 16px; /* bigger */
       font-weight: 600;
     }
 
     .mobile-menu-panel a {
-      padding: 6px 0;
+  display: block;               /* forces each link to new line */
+  padding: 12px 0;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+  line-height: 1.35;
+}
+
+    /* Updates button in sidebar */
+    .updates-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--primary-soft);
+      background: var(--primary-soft);
+      color: var(--primary-soft);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .updates-btn i {
+      font-size: 16px;
+    }
+
+    /* ===== Updates Modal ===== */
+    .updates-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(8px);   /* blur whole background */
+      z-index: 40;
+    }
+    .updates-modal.open {
+      display: flex;
+      max-height: 100%;
+    }
+    
+
+    .updates-modal-box {
+      width: min(420px, 92vw);
+      background: var(--bg-surface);
+      border-radius: 18px;
+      padding: 16px 16px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.65);
+      
+    }
+
+    .updates-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .updates-modal-header .main-text {
+      padding: 2px 7px;
+      border-radius: 20px;
+      background: var(--primary-soft);
+      
+    }
+    .updates-list {
+      margin: 0;
+      padding-left: 18px;
       font-size: 13px;
-      color: var(--text-main);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+      color: var(--text-muted);
+      
+    }
+    .updates-list li {
+      margin-bottom: 4px;
     }
 
     /* ===== Hero / main content ===== */
@@ -318,7 +406,6 @@
       color: var(--text-muted);
     }
 
-    /* Cards section */
     .cards {
       display: grid;
       margin-top: 18px;
@@ -385,7 +472,6 @@
       background: var(--primary-soft);
     }
 
-    /* Footer mini */
     .footer {
       padding: 12px 16px 18px;
       font-size: 11px;
@@ -397,7 +483,6 @@
       color: var(--primary);
     }
 
-    /* Desktop tweaks */
     @media (min-width: 768px) {
       .nav-links {
         display: flex;
@@ -423,6 +508,35 @@
         grid-column: span 2;
       }
     }
+    /* Floating Updates Button */
+.floating-updates-btn {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: none;
+  background: var(--primary-strong);
+  color: #fff;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  z-index: 50;
+}
+
+.floating-updates-btn:hover {
+  background: var(--primary);
+  transform: scale(1.06);
+}
+
+.floating-updates-btn:active {
+  transform: scale(0.92);
+}
+
   </style>
 </head>
 <body>
@@ -465,6 +579,13 @@
             <span>✕</span>
           </button>
         </div>
+
+        <!-- Updates button with i icon -->
+       <!-- <button id="updatesBtn" class="updates-btn" type="button">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Updates</span>
+        </button>-->
+
         <a href="practice.html">Chapters practice</a>
         <a href="rtp-mtp.html">RTP / MTP</a>
         <a href="auth.html">Login / Sign up</a>
@@ -472,6 +593,24 @@
         <a href="donation.html">Donate ₹1</a>
         <a href="https://instagram.com/__be1oved_once" target="_blank" rel="noopener">Instagram</a>
         <a href="https://t.me/kanhaiyaachaudhary" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </div>
+
+    <!-- UPDATES POPUP MODAL -->
+    <div id="updatesModal" class="updates-modal">
+      <div class="updates-modal-box">
+        <div class="updates-modal-header">
+          <span class="main-text">Latest updates</span>
+          <button id="updatesClose" class="icon-btn" type="button" style="width:26px;height:26px;font-size:14px;">
+            <span>✕</span>
+          </button>
+        </div>
+        <ul class="updates-list">
+          <li>New RTP / MTP sets added for Jan 2025 attempt.</li>
+          <li>Improved timer and accuracy tracking for chapter practice.</li>
+          <li>Dark mode tweaks for better readability at night.</li>
+          <!-- You can edit/add more updates here -->
+        </ul>
       </div>
     </div>
 
@@ -507,7 +646,6 @@
         </div>
 
         <div class="cards">
-          <!-- Card 1 -->
           <article class="card">
             <div class="card-title">Chapters practice</div>
             <div class="card-sub">
@@ -522,7 +660,6 @@
             </div>
           </article>
 
-          <!-- Card 2 -->
           <article class="card">
             <div class="card-title">RTP / MTP mode</div>
             <div class="card-sub">
@@ -537,7 +674,6 @@
             </div>
           </article>
 
-          <!-- Card 3 -->
           <article class="card">
             <div class="card-title">Login & progress (coming up)</div>
             <div class="card-sub">
@@ -560,50 +696,91 @@
     </footer>
   </div>
 
-  <script>
-    const THEME_KEY = "quizTheme_v1";
-    const body = document.body;
-    const themeToggle = document.getElementById("themeToggle");
-    const mobileMenu = document.getElementById("mobileMenu");
-    const menuToggle = document.getElementById("menuToggle");
-    const menuClose = document.getElementById("menuClose");
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const THEME_KEY = "quizTheme_v1";
+  const body = document.body;
 
-    function applyTheme(theme) {
-      if (theme === "dark") {
-        body.classList.add("dark-mode");
-        themeToggle.innerHTML = "<span>☀️</span>";
-      } else {
-        body.classList.remove("dark-mode");
-        themeToggle.innerHTML = "<span>🌙</span>";
-      }
-      localStorage.setItem(THEME_KEY, theme);
+  const themeToggle = document.getElementById("themeToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const menuToggle = document.getElementById("menuToggle");
+  const menuClose = document.getElementById("menuClose");
+
+  const updatesModal = document.getElementById("updatesModal");
+  const updatesClose = document.getElementById("updatesClose");
+  const floatingUpdatesBtn = document.getElementById("floatingUpdatesBtn");
+
+  /* THEME */
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      body.classList.add("dark-mode");
+      themeToggle.innerHTML = "<span>☀️</span>";
+    } else {
+      body.classList.remove("dark-mode");
+      themeToggle.innerHTML = "<span>🌙</span>";
     }
+    localStorage.setItem(THEME_KEY, theme);
+  }
 
-    function initTheme() {
-      let saved = localStorage.getItem(THEME_KEY) || "light";
-      applyTheme(saved);
-    }
+  function initTheme() {
+    const saved = localStorage.getItem(THEME_KEY) || "light";
+    applyTheme(saved);
+  }
+  initTheme();
 
-    initTheme();
+  themeToggle.addEventListener("click", () => {
+    const isDark = body.classList.contains("dark-mode");
+    applyTheme(isDark ? "light" : "dark");
+  });
 
-    themeToggle.addEventListener("click", () => {
-      const isDark = body.classList.contains("dark-mode");
-      applyTheme(isDark ? "light" : "dark");
-    });
+  /* MOBILE MENU */
+  menuToggle.addEventListener("click", () => {
+    mobileMenu.classList.add("open");
+  });
 
-    menuToggle.addEventListener("click", () => {
-      mobileMenu.classList.add("open");
-    });
+  menuClose.addEventListener("click", () => {
+    mobileMenu.classList.remove("open");
+  });
 
-    menuClose.addEventListener("click", () => {
+  mobileMenu.addEventListener("click", (e) => {
+    if (e.target === mobileMenu) {
       mobileMenu.classList.remove("open");
-    });
+    }
+  });
 
-    mobileMenu.addEventListener("click", (e) => {
-      if (e.target === mobileMenu) {
-        mobileMenu.classList.remove("open");
+  /* UPDATES MODAL + FLOATING BUTTON */
+  if (floatingUpdatesBtn && updatesModal) {
+    floatingUpdatesBtn.addEventListener("click", () => {
+      updatesModal.classList.toggle("open");
+    });
+  }
+
+  if (updatesClose && updatesModal) {
+    updatesClose.addEventListener("click", () => {
+      updatesModal.classList.remove("open");
+    });
+  }
+
+  if (updatesModal) {
+    // click outside the box
+    updatesModal.addEventListener("click", (e) => {
+      if (e.target === updatesModal) {
+        updatesModal.classList.remove("open");
       }
     });
-  </script>
+
+    // ESC key to close
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        updatesModal.classList.remove("open");
+      }
+    });
+  }
+});
+</script>
+  <!-- FLOATING UPDATES BUTTON -->
+<button id="floatingUpdatesBtn" class="floating-updates-btn">
+  <i class="fa-solid fa-circle-info"></i>
+</button>
 </body>
 </html>

@@ -1,16 +1,16 @@
 // sw.js
 const CACHE_NAME = "testy-cache-v1";
 const URLS_TO_CACHE = [
-  "/",
-  "/index.html",
-  "/about.html",
-  "/auth.html",
-  "/profile.html",
-  "/rtp-mtp.html",
-  "/questions.js",
-  "/styles.css",    // if you have external css
-  "/script.js",     // if you split JS
-  "/favicon/favicon-32x32.png"
+  "testypractice.netlify.app/",
+  "testypractice.netlify.app/practice",
+  "testypractice.netlify.app/about",
+  "testypractice.netlify.app/auth.html",
+  "testypractice.netlify.app/profile-view",
+  "testypractice.netlify.app/rtp-mtp",
+  "testypractice.netlify.app/questions.js",
+  "testypractice.netlify.app/styles.css",    // if you have external css
+  "testypractice.netlify.app/script.js",     // if you split JS
+  "testypractice.netlify.app/favicon/favicon-32x32.png"
 ];
 
 // Install – cache core files
