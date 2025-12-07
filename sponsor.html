@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TESTY – Sponsor Us</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Your main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+  <!-- ========== HEADER ========== -->
+  <header class="top-bar">
+    <div class="logo">TESTY</div>
+
+    <nav class="top-nav">
+      <a href="index.html">Home</a>
+      <a href="index.html">Home</a>
+      <a href="auth.html">Login</a>
+      <a href="rtp_mtp.html">RTP/MTP</a>
+      <a href="settings.html">Settings</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Drop Suggestion</a>
+      <a href="sponsor.html" class="desk-nav-item">Sponsor</a>
+    </nav>
+
+    <div class="right-controls">
+      <button class="top-btn" id="themeToggle">🌙</button>
+      <button class="top-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- ========== LEFT SIDEBAR ========== -->
+  <div class="left-handle" id="leftHandle"></div>
+
+  <aside class="left-sidebar" id="leftSidebar">
+    <ul class="left-list">
+<li>
+  <a href="profile.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-user"></i></span>
+    My Profile
+  </a>
+</li>
+
+<li>
+  <a href="bookmarks.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-bookmark"></i></span>
+    Bookmarks
+  </a>
+</li>
+
+<li>
+  <a href="#" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-trophy"></i></span>
+    Leaderboard
+  </a>
+</li>
+
+<li>
+  <a href="chatrooms.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-comments"></i></span>
+    Chatrooms
+  </a>
+</li>
+<li>
+  <a href="articles/How To Overcome Overthinking while exams.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-note-sticky"></i></span>
+    Article
+  </a>
+</li>
+<li>
+  <a href="wrongs.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-pen-to-square"></i></span>
+    Take a Correction Test
+  </a>
+</li>
+    </ul>
+  </aside>
+  <div class="left-overlay" id="leftOverlay"></div>
+
+  <!-- ========== RIGHT SIDEBAR ========== -->
+  <aside class="right-sidebar" id="rightSidebar">
+    <div class="right-header">
+      <span>TESTY Menu</span>
+      <button class="right-close" id="rightClose">✕</button>
+    </div>
+    <ul class="right-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="auth.html">Login / Signup</a></li>
+      <li><a href="rtp_mtp.html">RTP/MTP</a></li>
+      <li><a href="settings.html">Settings</a></li>
+      <li><a href="about.html">About</a></li>
+      <li class="nav-item" data-page="sponsor"><a href="sponsor.html">Sponsor</a></li>
+      <li><a href="feedback.html">Drop Suggestion</a></li>
+    </ul>
+  </aside>
+  <div class="right-overlay" id="rightOverlay"></div>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="sponsor-page">
+    <div class="sponsor-hero-pill">
+      <i class="fa-solid fa-hand-holding-heart"></i>
+      Sponsor TESTY
+    </div>
+    <h1 class="sponsor-hero-title">Help us keep TESTY free for students 🎯</h1>
+    <p class="sponsor-hero-sub">
+      Your support helps us add more questions, better explanations, and new features for
+      CA students all over India. Even a small contribution means a lot.
+    </p>
+    <p class="sponsor-small-note">
+      You’ll be directly supporting server costs, new question sets, and future features like
+      detailed analytics and community discussions.
+    </p>
+
+    <section class="sponsor-grid">
+      <!-- Left: UPI details -->
+      <article class="sponsor-card">
+        <h2><i class="fa-solid fa-indian-rupee-sign"></i> UPI / Sponsorship Details</h2>
+        <p class="upi-note">
+          Scan the QR or send directly to this UPI ID. After sponsoring, you can also
+          ping us on Instagram / email with a screenshot so we can thank you properly. ❤️
+        </p>
+
+        <div class="upi-box">
+          <div>
+            <div class="upi-main">
+              UPI ID:
+              <span id="upiIdText">viveksb11327@naviaxis</span>
+            </div>
+            <div class="upi-sub">
+              You can use any UPI app – PhonePe, GPay, Paytm etc.
+            </div>
+          </div>
+          <button type="button" class="upi-copy-btn" id="upiCopyBtn">
+            <i class="fa-regular fa-copy"></i>
+            Copy
+          </button>
+        </div>
+
+        <p class="upi-note">
+          💡 Tip: If you want your name to appear as a sponsor inside the app in future,
+          keep the same name in UPI so we can recognise you.
+        </p>
+      </article>
+
+      <!-- Right: QR -->
+      <article class="sponsor-card">
+        <div class="qr-box">
+          <div class="qr-frame">
+            <!-- CHANGE THIS SRC TO YOUR REAL QR IMAGE -->
+            <img src="assets/upi-qr.png" alt="UPI QR code for sponsoring TESTY" />
+          </div>
+          <div class="qr-caption">
+            Scan this QR to sponsor via UPI.<br />
+            You can enter any amount that feels right to you.
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Tiers -->
+    <section>
+      <h3 class="sponsor-tiers-title">Sponsor levels (future shoutouts)</h3>
+      <div class="sponsor-tiers">
+        <!-- Gold -->
+        <div class="tier-gold">
+          <div class="tier-gold-inner">
+            <div class="tier-title">
+              <span class="tier-gold-icon">🏅</span>
+              Premium Gold Sponsor
+              <span class="tier-chip">Top Supporter</span>
+            </div>
+            <p class="tier-body">
+              For people who really want to push this project forward. In a future
+              update, Gold Sponsors will get a special mention on a dedicated “Hall of
+              Fame” page inside TESTY.
+            </p>
+            <div class="tier-line">
+              Suggested: <strong>₹100+</strong> one-time or over multiple supports.
+            </div>
+          </div>
+        </div>
+
+        <!-- Regular supporter -->
+        <div class="tier-card">
+          <div class="tier-title">
+            ❤️ Supporter
+          </div>
+          <p class="tier-body">
+            Perfect if TESTY helped you in your prep and you just want to say “thanks”.
+            Every bit genuinely helps keep the app alive.
+          </p>
+          <div class="tier-line">
+            Suggested: <strong>₹30 - 100</strong>
+          </div>
+        </div>
+
+        <!-- Coffee sponsor -->
+        <div class="tier-card">
+          <div class="tier-title">
+            ☕ Coffee Sponsor
+          </div>
+          <p class="tier-body">
+            Just sponsoring a chai / coffee for the developer. Small amount,
+            big motivation. 🙂
+          </p>
+          <div class="tier-line">
+            Suggested: <strong>₹10 - ₹30</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- ========== SCRIPT ========== -->
+  <script>
+    (function () {
+      /* ===== THEME (light / dark) ===== */
+      const themeToggle = document.getElementById("themeToggle");
+      const savedTheme  = localStorage.getItem("theme");
+      if (savedTheme === "dark") document.body.classList.add("dark");
+
+      if (themeToggle) {
+        themeToggle.textContent =
+          document.body.classList.contains("dark") ? "☀️" : "🌙";
+
+        themeToggle.addEventListener("click", () => {
+          const isDark = !document.body.classList.contains("dark");
+          document.body.classList.toggle("dark", isDark);
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+          themeToggle.textContent = isDark ? "☀️" : "🌙";
+        });
+      }
+
+      /* ===== Minimalist theme flag (from settings) ===== */
+const minimalSwitch = document.getElementById("Minimilist");
+
+      const minimalSaved = localStorage.getItem("minimalTheme") === "1";
+      if (minimalSaved) {
+        document.body.classList.add("minimal-theme");
+      }
+
+      /* ===== Left-sidebar visibility (global setting) ===== */
+      const hideLS = localStorage.getItem("set_leftSidebarHidden") === "1";
+      document.body.classList.toggle("hide-left-sidebar", hideLS);
+
+      /* ===== RIGHT SIDEBAR ===== */
+      const menuBtn      = document.getElementById("menuBtn");
+      const rightSidebar = document.getElementById("rightSidebar");
+      const rightOverlay = document.getElementById("rightOverlay");
+      const rightClose   = document.getElementById("rightClose");
+
+      function openRightSidebar() {
+        if (!rightSidebar || !rightOverlay) return;
+        rightSidebar.classList.add("open");
+        rightOverlay.classList.add("show");
+      }
+      function closeRightSidebar() {
+        if (!rightSidebar || !rightOverlay) return;
+        rightSidebar.classList.remove("open");
+        rightOverlay.classList.remove("show");
+      }
+
+      if (menuBtn)    menuBtn.addEventListener("click", openRightSidebar);
+      if (rightClose) rightClose.addEventListener("click", closeRightSidebar);
+      if (rightOverlay) rightOverlay.addEventListener("click", closeRightSidebar);
+
+      /* ===== LEFT SIDEBAR + SWIPE ===== */
+      const leftSidebar = document.getElementById("leftSidebar");
+      const leftOverlay = document.getElementById("leftOverlay");
+      const leftHandle  = document.getElementById("leftHandle");
+
+      function openLeftSidebar() {
+        if (!leftSidebar || !leftOverlay) return;
+        leftSidebar.classList.add("open");
+        leftOverlay.classList.add("show");
+      }
+      function closeLeftSidebar() {
+        if (!leftSidebar || !leftOverlay) return;
+        leftSidebar.classList.remove("open");
+        leftOverlay.classList.remove("show");
+      }
+
+      if (leftHandle)  leftHandle.addEventListener("click", openLeftSidebar);
+      if (leftOverlay) leftOverlay.addEventListener("click", closeLeftSidebar);
+
+      let startX = null;
+      if (leftHandle) {
+        leftHandle.addEventListener("touchstart", e => {
+          startX = e.touches[0].clientX;
+        }, { passive: true });
+        leftHandle.addEventListener("touchend", e => {
+          if (startX == null) return;
+          const diff = e.changedTouches[0].clientX - startX;
+          if (diff > 40) openLeftSidebar();
+          startX = null;
+        }, { passive: true });
+      }
+      if (leftSidebar) {
+        leftSidebar.addEventListener("touchstart", e => {
+          startX = e.touches[0].clientX;
+        }, { passive: true });
+        leftSidebar.addEventListener("touchend", e => {
+          if (startX == null) return;
+          const diff = startX - e.changedTouches[0].clientX;
+          if (diff > 40) closeLeftSidebar();
+          startX = null;
+        }, { passive: true });
+      }
+
+      /* ===== Copy UPI button ===== */
+      const upiCopyBtn = document.getElementById("upiCopyBtn");
+      const upiIdText  = document.getElementById("upiIdText");
+
+      if (upiCopyBtn && upiIdText) {
+        upiCopyBtn.addEventListener("click", async () => {
+          const upi = upiIdText.textContent.trim();
+          try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              await navigator.clipboard.writeText(upi);
+              const old = upiCopyBtn.textContent;
+              upiCopyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+              setTimeout(() => {
+                upiCopyBtn.innerHTML =
+                  '<i class="fa-regular fa-copy"></i> Copy';
+              }, 1500);
+            } else {
+              // fallback
+              alert("UPI ID: " + upi);
+            }
+          } catch {
+            alert("UPI ID: " + upi);
+          }
+        });
+      }
+    })();
+  </script>
+<script>
+  const currentPage = "sponsor"; // is page par ho
+</script>
+<script src="shared.js"></script>
+
+<footer class="simple-footer">
+  <div>Made with ♥️</div>
+  <div>Kunal Sharma • CA Foundation</div>
+</footer>
+</body>
+</html>

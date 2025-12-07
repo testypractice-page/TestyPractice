@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>QuizX – Chatrooms</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Small helper for section title (re-using your style) */
+
+    
+
+    /* ===== CHATROOMS LAYOUT ===== */
+.chatrooms-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  /* 20px padding on left/right so everything has 20px gap from screen edge */
+  padding: 0;
+}
+
+/* hidden by default, full width inside wrapper */
+.chat-window {
+  display: none;              /* really hidden on load */
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 0;           /* no extra side margins, wrapper already has 20px */
+  border-radius: 14px;
+  border: 1px solid #cdd7ff;
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 5px 14px rgba(15,23,42,0.08);
+  flex-direction: column;     /* will apply when JS sets display:flex */
+  height: min(520px, calc(100vh - 120px));
+  overflow: hidden;
+}
+
+    .chatrooms-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .chatroom-card {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid #d2ddff;
+      border-radius: 14px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: 0.22s ease;
+      box-shadow: 0 4px 10px rgba(15,23,42,0.05);
+    }
+
+    .chatroom-card:hover {
+      transform: translateY(-2px);
+      background: #e7f0ff;
+      border-color: #bccaff;
+    }
+
+    .chatroom-title {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .chatroom-desc {
+      font-size: 13px;
+      opacity: 0.8;
+    }
+
+    /* chat window */
+
+    .chat-header {
+      padding: 10px 14px;
+      border-bottom: 1px solid #d5defc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .chat-header span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .back-btn {
+      font-size: 13px;
+      cursor: pointer;
+      color: #2563eb;
+    }
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 12px 14px;
+      overflow-y: auto;
+      background: radial-gradient(circle at top left, #eff4ff 0, #f9fbff 38%, #ffffff 100%);
+    }
+
+    .message-bubble {
+      max-width: 78%;
+      padding: 8px 11px;
+      margin-bottom: 8px;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.4;
+      background: #e4ecff;
+      border: 1px solid #c3d4ff;
+      word-wrap: break-word;
+    }
+
+    .message-bubble.self {
+      max-width: 50%;
+      margin-left: auto;
+      background: #d2f4ff;
+      border-color: #9adfff;
+    }
+
+    .chat-input-area {
+  padding: 8px 10px;
+  border-top: 1px solid #d5defc;
+  display: flex;
+  gap: 8px;
+  background: #f3f6ff;
+  box-sizing: border-box;
+}
+
+.chat-input-area input[type="text"] {
+  flex: 1;
+  padding: 7px 10px;          /* slightly smaller so it fits fully */
+  border-radius: 999px;
+  border: 1px solid #b8c6ff;
+  font-size: 14px;
+  outline: none;
+}
+
+    .chat-input-area input[type="text"]:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 1px rgba(37,99,235,0.3);
+    }
+
+    .chat-input-area button {
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.18s ease;
+      white-space: nowrap;
+    }
+    .chat-input-area button:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+    .chat-input-area button:active {
+      transform: translateY(0);
+    }
+
+    /* ===== DARK MODE ADJUSTMENTS ===== */
+    body.dark .chatroom-card {
+      background: #0f172a;
+      border-color: #1e293b;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+    body.dark .chatroom-card:hover {
+      background: #111827;
+      border-color: #3b82f6;
+    }
+    body.dark .chatroom-title {
+      color: #e5e7eb;
+    }
+    body.dark .chatroom-desc {
+      color: #9ca3af;
+    }
+
+    body.dark .chat-window {
+      background: #020617;
+      border-color: #1e293b;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.85);
+    }
+    body.dark .chat-header {
+      border-bottom-color: #1e293b;
+    }
+    body.dark .chat-messages {
+      background: radial-gradient(circle at top left, #020617 0, #020617 40%, #020617 100%);
+    }
+    body.dark .message-bubble {
+      background: #111827;
+      border-color: #1e293b;
+      color: #e5e7eb;
+    }
+    body.dark .message-bubble.self {
+      background: #0f172a;
+      border-color: #2563eb;
+    }
+    body.dark .chat-input-area {
+      background: #020617;
+      border-top-color: #1e293b;
+    }
+    body.dark .chat-input-area input[type="text"] {
+      background: #020617;
+      border-color: #1f2937;
+      color: #e5e7eb;
+    }
+    body.dark .chat-input-area input[type="text"]:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 1px rgba(37,99,235,0.4);
+    }
+    body.dark .chat-input-area button {
+      background: #3b82f6;
+    }
+    body.dark .chat-input-area button:hover {
+      background: #2563eb;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .chatrooms-wrapper {
+        padding: 14px 12px 24px;
+      }
+
+      .chat-window {
+        margin: 4px 8px 0;
+        height: calc(100vh - 120px);
+        border-radius: 12px;
+      }
+
+      .chatroom-card {
+        padding: 12px 13px;
+      }
+
+      .chat-header {
+        padding: 9px 12px;
+      }
+
+      .chat-messages {
+        padding: 10px 10px;
+      }
+    }
+    @media (max-width: 768px) {
+  .chatrooms-wrapper {
+    padding: 14px 20px 24px;   /* keep 20px side padding on mobile too */
+  }
+
+  .chat-window {
+    margin: 8px 0 0;
+    height: calc(100vh - 120px);
+    border-radius: 12px;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="top-bar">
+    <div class="logo">TESTY</div>
+
+    <nav class="top-nav">
+      <a href="index.html">Home</a>
+      <a href="auth.html">Login</a>
+      <a href="rtp_mtp.html">RTP/MTP</a>
+      <a href="settings.html">Settings</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Drop Suggestion</a>
+      <a href="sponsor.html">Sponsor</a>
+    </nav>
+
+    <div class="right-controls">
+      <button class="top-btn" id="themeToggle">🌙</button>
+      <button class="top-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- ========== LEFT SIDEBAR ========== -->
+  <div class="left-handle" id="leftHandle"></div>
+
+  <aside class="left-sidebar" id="leftSidebar">
+    <ul class="left-list">
+<li>
+  <a href="profile.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-user"></i></span>
+    My Profile
+  </a>
+</li>
+
+<li>
+  <a href="bookmarks.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-bookmark"></i></span>
+    Bookmarks
+  </a>
+</li>
+
+<li>
+  <a href="#" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-trophy"></i></span>
+    Leaderboard
+  </a>
+</li>
+
+<li>
+  <a href="#" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-comments"></i></span>
+    Chatrooms
+  </a>
+</li>
+<li>
+  <a href="articles/How To Overcome Overthinking while exams.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-note-sticky"></i></span>
+    Article
+  </a>
+</li>
+<li>
+  <a href="wrongs.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-pen-to-square"></i></span>
+    Take a Correction Test
+  </a>
+</li>
+    </ul>
+  </aside>
+  <div class="left-overlay" id="leftOverlay"></div>
+
+  <!-- ========== RIGHT SIDEBAR ========== -->
+  <aside class="right-sidebar" id="rightSidebar">
+    <div class="right-header">
+      <span>TESTY Menu</span>
+      <button class="right-close" id="rightClose">✕</button>
+    </div>
+    <ul class="right-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="auth.html">Login / Signup</a></li>
+      <li><a href="rtp_mtp.html">RTP/MTP</a></li>
+      <li><a href="settings.html">Settings</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="sponsor.html">Sponsor</a></li>
+      <li><a href="feedback.html">Drop Suggestion</a></li>
+    </ul>
+  </aside>
+  <div class="right-overlay" id="rightOverlay"></div>
+
+  <!-- ========== MAIN AREA ========== -->
+  <!-- using main.settings-option because your CSS already handles margins/top spacing -->
+  <main class="settings-option">
+    <div class="chatrooms-wrapper">
+
+      <h1>Chatrooms</h1>
+      <h2 class="settings-section-title">Choose a room</h2>
+
+      <!-- Room list -->
+      <div class="chatrooms-list" id="chatroomsList">
+        <div class="chatroom-card" data-room="serious">
+          <div class="chatroom-title">
+            <i class="fa-solid fa-scale-balanced" style="font-size:14px;margin-right:6px;"></i>
+            CA Discussion (Serious)
+          </div>
+          <div class="chatroom-desc">
+            Study focused: doubts, concepts, strategy. No spam, no off-topic.
+          </div>
+        </div>
+
+        <div class="chatroom-card" data-room="timepass">
+          <div class="chatroom-title">
+            <i class="fa-solid fa-mug-hot" style="font-size:14px;margin-right:6px;"></i>
+            Timepass Chat
+          </div>
+          <div class="chatroom-desc">
+            Chill zone for memes, random talks, and stress-buster chats.
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat window -->
+      <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+          <span id="roomTitle"></span>
+          <span class="back-btn" id="backToRooms">← Back to rooms</span>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          <!-- messages will be appended here -->
+        </div>
+
+        <div class="chat-input-area">
+          <input type="text" id="chatInput" placeholder="Type a message..." />
+          <button type="button" id="sendMsgBtn">Send</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========== SCRIPT (theme + sidebars + chat UI only) ========== -->
+  <script>
+  (function () {
+    /* ------- THEME (shared with other pages) ------- */
+    const themeToggle = document.getElementById("themeToggle");
+    const savedTheme  = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark");
+    }
+    if (themeToggle) {
+      themeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    }
+
+
+
+    function setTheme(isDark) {
+      document.body.classList.toggle("dark", isDark);
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      if (themeToggle) {
+        themeToggle.textContent = isDark ? "☀️" : "🌙";
+      }
+    }
+
+    if (themeToggle) {
+      themeToggle.addEventListener("click", () => {
+        setTheme(!document.body.classList.contains("dark"));
+      });
+    }
+
+    // apply left-sidebar hidden setting (from settings page)
+    const hideLS = localStorage.getItem("set_leftSidebarHidden") === "1";
+    document.body.classList.toggle("hide-left-sidebar", hideLS);
+
+    /* ------- RIGHT SIDEBAR ------- */
+    const menuBtn      = document.getElementById("menuBtn");
+    const rightSidebar = document.getElementById("rightSidebar");
+    const rightOverlay = document.getElementById("rightOverlay");
+    const rightClose   = document.getElementById("rightClose");
+
+    function openRightSidebar() {
+      if (!rightSidebar || !rightOverlay) return;
+      rightSidebar.classList.add("open");
+      rightOverlay.classList.add("show");
+    }
+    function closeRightSidebar() {
+      if (!rightSidebar || !rightOverlay) return;
+      rightSidebar.classList.remove("open");
+      rightOverlay.classList.remove("show");
+    }
+
+    if (menuBtn)    menuBtn.addEventListener("click", openRightSidebar);
+    if (rightClose) rightClose.addEventListener("click", closeRightSidebar);
+    if (rightOverlay) rightOverlay.addEventListener("click", closeRightSidebar);
+
+    /* ------- LEFT SIDEBAR + SWIPE ------- */
+    const leftSidebar = document.getElementById("leftSidebar");
+    const leftOverlayEl = document.getElementById("leftOverlay");
+    const leftHandle  = document.getElementById("leftHandle");
+
+    function openLeftSidebar() {
+      if (!leftSidebar || !leftOverlayEl) return;
+      leftSidebar.classList.add("open");
+      leftOverlayEl.classList.add("show");
+    }
+    function closeLeftSidebar() {
+      if (!leftSidebar || !leftOverlayEl) return;
+      leftSidebar.classList.remove("open");
+      leftOverlayEl.classList.remove("show");
+    }
+
+    if (leftHandle)  leftHandle.addEventListener("click", openLeftSidebar);
+    if (leftOverlayEl) leftOverlayEl.addEventListener("click", closeLeftSidebar);
+
+    let startX = null;
+    if (leftHandle) {
+      leftHandle.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+      }, { passive: true });
+
+      leftHandle.addEventListener("touchend", (e) => {
+        if (startX == null) return;
+        const diff = e.changedTouches[0].clientX - startX;
+        if (diff > 40) openLeftSidebar();
+        startX = null;
+      }, { passive: true });
+    }
+
+    if (leftSidebar) {
+      leftSidebar.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+      }, { passive: true });
+
+      leftSidebar.addEventListener("touchend", (e) => {
+        if (startX == null) return;
+        const diff = startX - e.changedTouches[0].clientX;
+        if (diff > 40) closeLeftSidebar();
+        startX = null;
+      }, { passive: true });
+    }
+
+    /* ------- CHATROOM UI (no backend yet) ------- */
+    const chatroomsList = document.getElementById("chatroomsList");
+    const chatWindow    = document.getElementById("chatWindow");
+    const roomTitle     = document.getElementById("roomTitle");
+    const chatMessages  = document.getElementById("chatMessages");
+    const chatInput     = document.getElementById("chatInput");
+    const sendMsgBtn    = document.getElementById("sendMsgBtn");
+    const backBtn       = document.getElementById("backToRooms");
+
+    let activeRoom = null;
+
+    document.querySelectorAll(".chatroom-card").forEach(card => {
+      card.addEventListener("click", () => {
+        activeRoom = card.dataset.room;
+        roomTitle.textContent = activeRoom === "serious"
+          ? "CA Discussion (Serious)"
+          : "Timepass Chat";
+
+        if (chatroomsList) chatroomsList.style.display = "none";
+        if (chatWindow)    chatWindow.style.display    = "flex";
+
+        if (chatMessages) {
+          chatMessages.innerHTML = "";
+        }
+      });
+    });
+
+    if (backBtn) {
+      backBtn.addEventListener("click", () => {
+        if (chatWindow)    chatWindow.style.display    = "none";
+        if (chatroomsList) chatroomsList.style.display = "flex";
+        activeRoom = null;
+      });
+    }
+
+    function appendMessage(text, self = true) {
+      if (!chatMessages) return;
+      const div = document.createElement("div");
+      div.className = "message-bubble" + (self ? " self" : "");
+      div.textContent = text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    if (sendMsgBtn && chatInput) {
+      sendMsgBtn.addEventListener("click", () => {
+        const text = chatInput.value.trim();
+        if (!text) return;
+        appendMessage(text, true);
+        chatInput.value = "";
+        // later: send to Firebase here
+      });
+
+      chatInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          sendMsgBtn.click();
+        }
+      });
+    }
+  })();
+  
+const minimalSwitch = document.getElementById("Minimilist");
+
+const minimalSaved = localStorage.getItem("minimalTheme") === "1";
+if (minimalSaved) document.body.classList.add("minimal-theme");
+if (minimalSwitch) minimalSwitch.checked = minimalSaved;
+  </script>
+<script>
+  const currentPage = "chatrooms"; // is page par ho
+</script>
+<script src="shared.js"></script>
+
+<footer class="simple-footer">
+  <div>Made with ♥️</div>
+  <div>Kunal Sharma • CA Foundation</div>
+</footer>
+</body>
+</html>

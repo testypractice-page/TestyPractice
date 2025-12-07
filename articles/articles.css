@@ -1,0 +1,148 @@
+/* wrapper around your whole article (keep class same as file) */
+.article-page {
+  padding-top: 96px;      /* below fixed header */
+  padding-bottom: 40px;
+}
+
+/* when left sidebar is visible on desktop, shift content */
+@media (min-width: 960px) {
+  body:not(.hide-left-sidebar) .article-page {
+    margin-left: 260px;   /* same as sidebar width */
+  }
+}
+
+/* inner width – simple centered column */
+.article-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* hero – full-width bar, not card */
+.article-hero {
+  margin: 0 0 28px;
+  padding: 28px 20px 32px;
+  border-radius: 0;
+  background: linear-gradient(135deg,#6366f1,#8b5cf6,#ec4899);
+  color: #f9fafb;
+  box-shadow: none;
+}
+
+/* hero heading / subtext */
+.article-hero-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.article-hero-sub {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin-bottom: 16px;
+}
+.article-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #f9fafb;
+  color: #1e293b;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.article-hero-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(15,23,42,.25);
+}
+
+/* normal sections – plain text, no card */
+.article-section {
+  margin-bottom: 26px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+}
+.article-section h2 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+}
+.article-section p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 10px;
+  text-align: justify;
+}
+
+/* lists inside section */
+.article-section ul,
+.article-section ol {
+  padding-left: 1.2rem;
+  margin: 4px 0 10px;
+}
+.article-section li {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+/* highlight quote box – full width but flat */
+.article-quote {
+  margin: 18px 0;
+  padding: 10px 14px;
+  border-left: 3px solid #6366f1;
+  background: rgba(99,102,241,0.06);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* grounding / checklist boxes – simple underline, no card */
+.article-inline-box {
+  margin: 18px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(148,163,184,0.8);
+}
+
+/* mobile tweaks */
+@media (max-width: 640px) {
+  .article-hero {
+    padding: 22px 14px 26px;
+  }
+  .article-hero-title {
+    font-size: 1.4rem;
+  }
+  .article-inner {
+    padding: 0 12px;
+  }
+}
+
+/* ===== Dark theme variant ===== */
+body.dark .article-page {
+  background: radial-gradient(circle at top,#020617 0,#020617 40%,#020617 100%);
+}
+body.dark .article-section h2,
+body.dark .article-section p,
+body.dark .article-section li {
+  color: #e5e7eb;
+}
+body.dark .article-quote {
+  border-left-color: #818cf8;
+  background: rgba(79,70,229,0.16);
+  color: #e5e7eb;
+}
+body.dark .article-inline-box {
+  border-bottom-color: rgba(148,163,184,0.7);
+}
+
+/* ===== Minimal theme variant ===== */
+body.minimal-theme .article-quote {
+  background: #ffffff;
+  border-left: 2px solid #111827;
+}
+body.minimal-theme .article-inline-box {
+  border-bottom: 1px solid #111827;
+}

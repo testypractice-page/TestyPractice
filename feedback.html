@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TESTY – Feedback</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <!-- main site styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* Extra tweaks only for this page */
+
+    .auth-main {
+      /* reused from auth.html; if already in style.css, this is just fallback */
+      padding-top: 80px;
+      padding-inline: 16px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .auth-card.feedback-card {
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .feedback-title {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .feedback-subtitle {
+      font-size: 13px;
+      opacity: 0.8;
+      margin-bottom: 14px;
+    }
+
+    .feedback-form-group {
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .feedback-form-group label {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .feedback-form-group input,
+    .feedback-form-group textarea {
+      border-radius: 10px;
+      border: 1px solid rgba(15, 23, 42, 0.13);
+      padding: 8px 10px;
+      font-size: 14px;
+      outline: none;
+      background: #f9fbff;
+      transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease,
+        transform 0.08s ease;
+    }
+
+    .feedback-form-group textarea {
+      resize: vertical;
+      min-height: 90px;
+      max-height: 220px;
+    }
+
+    .feedback-form-group input:focus,
+    .feedback-form-group textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.12);
+      background: #ffffff;
+    }
+
+    .feedback-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .feedback-btn {
+      flex: 0 0 auto;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      background: #2563eb;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition:
+        background 0.18s ease,
+        transform 0.08s ease,
+        box-shadow 0.18s ease,
+        opacity 0.15s ease;
+    }
+
+    .feedback-btn:disabled {
+      opacity: 0.6;
+      cursor: default;
+      transform: none;
+      box-shadow: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .feedback-btn:not(:disabled):hover {
+        background: #1d4ed8;
+        box-shadow: 0 8px 18px rgba(37, 99, 235, 0.28);
+        transform: translateY(-1px);
+      }
+    }
+
+    .feedback-status {
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    .feedback-status.error {
+      color: #b91c1c;
+    }
+
+    .feedback-status.success {
+      color: #15803d;
+    }
+
+    body.dark .feedback-form-group input,
+    body.dark .feedback-form-group textarea {
+      background: #0b1220;
+      border-color: rgba(148, 163, 184, 0.5);
+      color: #e5e7eb;
+    }
+
+    body.dark .feedback-form-group input:focus,
+    body.dark .feedback-form-group textarea:focus {
+      background: #020617;
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.35);
+    }
+
+    body.dark .feedback-btn {
+      background: #3b82f6;
+    }
+
+    body.dark .feedback-btn:not(:disabled):hover {
+      background: #2563eb;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ========== HEADER ========== -->
+  <header class="top-bar">
+    <div class="logo">TESTY</div>
+
+    <nav class="top-nav">
+      <a href="index.html">Home</a>
+      <a href="auth.html">Login</a>
+      <a href="rtp_mtp.html">RTP/MTP</a>
+      <a href="settings.html">Settings</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Drop Suggestion</a>
+      <a href="sponsor.html">Sponsor</a>
+    </nav>
+
+    <div class="right-controls">
+      <button class="top-btn" id="themeToggle">🌙</button>
+      <button class="top-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- ========== LEFT SIDEBAR ========== -->
+  <div class="left-handle" id="leftHandle"></div>
+
+  <aside class="left-sidebar" id="leftSidebar">
+    <ul class="left-list">
+<li>
+  <a href="profile.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-user"></i></span>
+    My Profile
+  </a>
+</li>
+
+<li>
+  <a href="bookmarks.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-bookmark"></i></span>
+    Bookmarks
+  </a>
+</li>
+
+<li>
+  <a href="#" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-trophy"></i></span>
+    Leaderboard
+  </a>
+</li>
+
+<li>
+  <a href="#" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-comments"></i></span>
+    Chatrooms
+  </a>
+</li>
+<li>
+  <a href="articles/How To Overcome Overthinking while exams.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-note-sticky"></i></span>
+    Article
+  </a>
+</li>
+<li>
+  <a href="wrongs.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-pen-to-square"></i></span>
+    Take a Correction Test
+  </a>
+</li>
+    </ul>
+  </aside>
+  <div class="left-overlay" id="leftOverlay"></div>
+
+  <!-- ========== RIGHT SIDEBAR ========== -->
+  <aside class="right-sidebar" id="rightSidebar">
+    <div class="right-header">
+      <span>TESTY Menu</span>
+      <button class="right-close" id="rightClose">✕</button>
+    </div>
+    <ul class="right-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="auth.html">Login / Signup</a></li>
+      <li><a href="rtp_mtp.html">RTP/MTP</a></li>
+      <li><a href="settings.html">Settings</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="sponsor.html">Sponsor</a></li>
+      <li class="nav-item" data-page="feedback"><a href="feedback.html">Drop Suggestion</a></li>
+    </ul>
+  </aside>
+  <div class="right-overlay" id="rightOverlay"></div>
+
+  <!-- ========== MAIN FEEDBACK CARD ========== -->
+  <main class="auth-main">
+    <section class="auth-card feedback-card">
+      <h1 class="feedback-title">Send Feedback</h1>
+      <p class="feedback-subtitle">
+        Got a suggestion, bug report, or just want to say hi? Drop it here — I read everything.
+      </p>
+
+      <form id="feedbackForm" novalidate>
+        <div class="feedback-form-group">
+          <label for="fbName">Name</label>
+          <input
+            id="fbName"
+            name="name"
+            type="text"
+            autocomplete="name"
+            placeholder="Your name"
+            required
+          />
+        </div>
+
+        <div class="feedback-form-group">
+          <label for="fbEmail">Email</label>
+          <input
+            id="fbEmail"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            required
+          />
+        </div>
+
+        <div class="feedback-form-group">
+          <label for="fbSubject">Subject</label>
+          <input
+            id="fbSubject"
+            name="subject"
+            type="text"
+            placeholder="Suggestion, bug report, etc."
+            required
+          />
+        </div>
+
+        <div class="feedback-form-group">
+          <label for="fbMessage">Message</label>
+          <textarea
+            id="fbMessage"
+            name="message"
+            placeholder="Write your feedback..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="feedback-actions">
+          <button type="submit" class="feedback-btn" id="feedbackSubmitBtn">
+            <i class="fa-regular fa-paper-plane"></i>
+            Send Feedback
+          </button>
+          <span class="feedback-status" id="feedbackStatus"></span>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- ========== SHARED THEME + SIDEBARS SCRIPT (same logic as index/settings) ========== -->
+  <script>
+    (function () {
+      /* ================= THEME ================= */
+      const themeToggle = document.getElementById("themeToggle");
+      const savedTheme = localStorage.getItem("theme");
+
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+      }
+      if (themeToggle) {
+        themeToggle.textContent = document.body.classList.contains("dark")
+          ? "☀️"
+          : "🌙";
+      }
+
+
+
+      function setTheme(isDark) {
+        document.body.classList.toggle("dark", isDark);
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+        if (themeToggle) {
+          themeToggle.textContent = isDark ? "☀️" : "🌙";
+        }
+      }
+
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          setTheme(!document.body.classList.contains("dark"));
+        });
+      }
+
+      // left sidebar visibility (from settings)
+      const hideLS = localStorage.getItem("set_leftSidebarHidden") === "1";
+      document.body.classList.toggle("hide-left-sidebar", hideLS);
+
+      /* ================= RIGHT SIDEBAR (HEADER MENU) ================= */
+      const menuBtn      = document.getElementById("menuBtn");
+      const rightSidebar = document.getElementById("rightSidebar");
+      const rightOverlay = document.getElementById("rightOverlay");
+      const rightClose   = document.getElementById("rightClose");
+
+      function openRightSidebar() {
+        if (!rightSidebar || !rightOverlay) return;
+        rightSidebar.classList.add("open");
+        rightOverlay.classList.add("show");
+      }
+      function closeRightSidebar() {
+        if (!rightSidebar || !rightOverlay) return;
+        rightSidebar.classList.remove("open");
+        rightOverlay.classList.remove("show");
+      }
+      if (menuBtn)    menuBtn.addEventListener("click", openRightSidebar);
+      if (rightClose) rightClose.addEventListener("click", closeRightSidebar);
+      if (rightOverlay) rightOverlay.addEventListener("click", closeRightSidebar);
+
+      /* ================= LEFT SIDEBAR (HANDLE + SWIPE) ================= */
+      const leftSidebar = document.getElementById("leftSidebar");
+      const leftOverlay = document.getElementById("leftOverlay");
+      const leftHandle  = document.getElementById("leftHandle");
+
+      function openLeftSidebar() {
+        if (!leftSidebar || !leftOverlay) return;
+        leftSidebar.classList.add("open");
+        leftOverlay.classList.add("show");
+      }
+      function closeLeftSidebar() {
+        if (!leftSidebar || !leftOverlay) return;
+        leftSidebar.classList.remove("open");
+        leftOverlay.classList.remove("show");
+      }
+
+      if (leftHandle)  leftHandle.addEventListener("click", openLeftSidebar);
+      if (leftOverlay) leftOverlay.addEventListener("click", closeLeftSidebar);
+
+      // swipe in from handle
+      let handleStartX = null;
+      if (leftHandle) {
+        leftHandle.addEventListener("touchstart", e => {
+          handleStartX = e.touches[0].clientX;
+        }, { passive: true });
+
+        leftHandle.addEventListener("touchend", e => {
+          if (handleStartX == null) return;
+          const endX = e.changedTouches[0].clientX;
+          if (endX - handleStartX > 40) openLeftSidebar();
+          handleStartX = null;
+        }, { passive: true });
+      }
+
+      // swipe out from sidebar
+      let sideStartX = null;
+      if (leftSidebar) {
+        leftSidebar.addEventListener("touchstart", e => {
+          sideStartX = e.touches[0].clientX;
+        }, { passive: true });
+
+        leftSidebar.addEventListener("touchend", e => {
+          if (sideStartX == null) return;
+          const endX = e.changedTouches[0].clientX;
+          if (sideStartX - endX > 40) closeLeftSidebar();
+          sideStartX = null;
+        }, { passive: true });
+      }
+    })();
+  </script>
+
+  <!-- ========== SENDPULSE INTEGRATION HOOK ========== -->
+<!-- === SendPulse AJAX integration: paste this at end of feedback.html just before </body> === -->
+<script>
+(async function(){
+  // CONFIG: endpoint path (same folder)
+  const ENDPOINT = 'sendpulse-feedback.php'; // if different, change this to the full URL
+
+  // find the form - if your form doesn't have id, give it id="feedbackForm"
+  const form = document.getElementById('feedbackForm') || document.querySelector('form');
+  if (!form) {
+    console.error('Feedback form not found. Add id="feedbackForm" or ensure a <form> exists.');
+    return;
+  }
+
+  // helper: create a simple toast message
+  function toast(msg, type = 'info') {
+    // simple toast - you can style it later
+    const el = document.createElement('div');
+    el.textContent = msg;
+    el.style.position = 'fixed';
+    el.style.right = '20px';
+    el.style.bottom = '20px';
+    el.style.padding = '10px 14px';
+    el.style.borderRadius = '8px';
+    el.style.boxShadow = '0 6px 18px rgba(0,0,0,0.12)';
+    el.style.zIndex = 9999;
+    el.style.color = '#fff';
+    el.style.background = type === 'error' ? '#e53e3e' : '#2563eb';
+    document.body.appendChild(el);
+    setTimeout(()=> el.remove(), 3500);
+  }
+
+  // attach submit handler
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+
+    // collect values (works for inputs and textarea)
+    const fd = new FormData(form);
+    const payload = {};
+    fd.forEach((v,k)=> payload[k] = v?.toString?.() ?? '');
+
+    // basic client validation
+    if(!payload.name || !payload.email || !payload.subject || !payload.message){
+      toast('Please fill all fields (name, email, subject, message).', 'error');
+      return;
+    }
+    // basic email check
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)){
+      toast('Please enter a valid email.', 'error');
+      return;
+    }
+
+    // disable form -> indicate loading
+    const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.dataset.oldText = submitBtn.textContent; submitBtn.textContent = 'Sending...'; }
+
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const text = await res.text();
+      // try parse JSON
+      let data = null;
+      try { data = JSON.parse(text); } catch(e) { /* not JSON */ }
+
+      if (!res.ok) {
+        console.error('Server error:', text);
+        toast((data && data.error) ? data.error : 'Server error. See console.', 'error');
+      } else {
+        // success
+        toast('Message sent successfully 🤗', 'info');
+        // optional: clear form except email (keep email)
+        const userEmail = payload.email;
+        form.reset();
+        if (form.querySelector('[name="email"]')) form.querySelector('[name="email"]').value = userEmail;
+      }
+    } catch (err) {
+      console.error('Network/JS error:', err);
+      toast('Network error. Check console.', 'error');
+    } finally {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = submitBtn.dataset.oldText || 'Send'; }
+    }
+  });
+})();
+</script>
+<!-- === END integration script === -->
+
+  
+<script>
+  const currentPage = "feedback"; // is page par ho
+const minimalSwitch = document.getElementById("Minimilist");
+
+  const minimalSaved = localStorage.getItem("minimalTheme") === "1";
+if (minimalSaved) document.body.classList.add("minimal-theme");
+if (minimalSwitch) minimalSwitch.checked = minimalSaved;
+</script>
+<script src="shared.js"></script>
+
+  <footer class="simple-footer">
+  <div>Made with ♥️</div>
+  <div>Kunal Sharma • CA Foundation</div>
+</footer>
+</body>
+</html>

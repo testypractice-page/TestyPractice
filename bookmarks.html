@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TESTY</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="questions.js"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+
+<link rel="stylesheet" href="style.css">
+<style>
+  .bookmark-btn{
+    display: none;
+  }
+</style>
+</head>
+<body>
+  <!-- ========== HEADER ========== -->
+  <header class="top-bar">
+    <div class="logo">TESTY</div>
+
+    <!-- Desktop nav -->
+    <nav class="top-nav">
+      <a href="index.html">Home</a>
+      <a href="auth.html">Login</a>
+      <a href="rtp_mtp.html">RTP/MTP</a>
+      <a href="settings.html">Settings</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Drop Suggestion</a>
+      <a href="sponsor.html">Sponsor</a>
+
+    </nav>
+
+    <div class="right-controls">
+      <button class="top-btn" id="themeToggle">🌙</button>
+      <button class="top-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- ========== LEFT SIDEBAR + HANDLE ========== -->
+  <div class="left-handle" id="leftHandle"></div>
+
+  <aside class="left-sidebar" id="leftSidebar">
+    <ul class="left-list">
+<li>
+  <a href="profile.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-user"></i></span>
+    My Profile
+  </a>
+</li>
+
+<li>
+  <a href="bookmarks.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-bookmark"></i></span>
+    Bookmarks
+  </a>
+</li>
+
+<li>
+  <a href="#" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-trophy"></i></span>
+    Leaderboard
+  </a>
+</li>
+
+<li>
+  <a href="#" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-comments"></i></span>
+    Chatrooms
+  </a>
+</li>
+<li>
+  <a href="articles/How To Overcome Overthinking while exams.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-note-sticky"></i></span>
+    Article
+  </a>
+</li>
+<li>
+  <a href="wrongs.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-pen-to-square"></i></span>
+    Take a Correction Test
+  </a>
+</li>
+    </ul>
+  </aside>
+
+  <div class="left-overlay" id="leftOverlay"></div>
+
+  <!-- ========== RIGHT SIDEBAR ========== -->
+  <aside class="right-sidebar" id="rightSidebar">
+    <div class="right-header">
+      <span>TESTY Menu</span>
+      <button class="right-close" id="rightClose">✕</button>
+    </div>
+    <ul class="right-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="auth.html">Login / Signup</a></li>
+      <li><a href="rtp_mtp.html">RTP/MTP</a></li>
+      <li><a href="settings.html">Settings</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="sponsor.html">Sponsor</a></li>
+      <li><a href="feedback.html">Drop Suggestion</a></li>
+    </ul>
+  </aside>
+
+  <div class="right-overlay" id="rightOverlay"></div>
+
+  <!-- ========== MAIN CONTENT ========== -->
+<main>
+  <!-- Chapter selection -->
+<!-- SUBJECT selection -->
+<section class="chapter-bar">
+  <span class="chapter-label">Subject:</span>
+
+  <button class="chapter-select" id="subjectSelectBtn" type="button">
+    <span id="subjectSelectText">None Selected</span>
+  </button>
+
+  <div class="chapter-dropdown" id="subjectDropdown"></div>
+</section>
+<!-- ATTEMPT selection (visible only if attempts exist) -->
+<section class="chapter-bar" id="attemptBar" style="display:none;">
+  <span class="chapter-label">Attempt:</span>
+
+  <button class="chapter-select" id="attemptSelectBtn" type="button">
+    <span id="attemptSelectText">None Selected</span>
+  </button>
+
+  <div class="chapter-dropdown" id="attemptDropdown"></div>
+</section>
+<!-- CHAPTER selection (same design) -->
+<section class="chapter-bar">
+  <span class="chapter-label">Chapter:</span>
+
+  <button class="chapter-select" id="chapterSelectBtn" type="button">
+    <span id="chapterSelectText">None Selected</span>
+  </button>
+
+  <div class="chapter-dropdown" id="chapterDropdown"></div>
+</section>
+
+
+  <!-- Top: Best / Streak, Progress, Timer -->
+<section class="mcq-top">
+  <div class="mcq-progress-info">
+    <div class="streak-row">
+      <span id="bestStreak">Best: 0 | Streak: 0</span>
+
+      <!-- NEW: In-order toggle -->
+      <label class="order-toggle">
+        <input type="checkbox" id="orderToggle">
+        <span>In Order</span>
+      </label>
+    </div>
+
+    <span id="questionCounter">0 / 0</span>
+    <div class="mcq-progress-bar">
+      <div class="mcq-progress-inner" id="mcqProgressInner"></div>
+    </div>
+  </div>
+
+  <div class="mcq-timer">
+    <span>Time:</span>
+    <span id="timerDisplay">00:45</span>
+  </div>
+</section>
+
+  <!-- Question + options (no card frame) -->
+  <section class="mcq-card">
+    <div class="mcq-question" id="mcqQuestionText">
+      Click 'None Selected' to start.
+
+    </div>
+  <button class="bookmark-btn" id="bookmarkBtn" type="button">
+      <i class="fa-regular fa-star"></i>
+    </button>
+    <div class="mcq-options" id="mcqOptionsContainer">
+      <!-- options by JS -->
+    </div>
+  </section>
+
+  <!-- Nav line: 3 equal parts -->
+  <section class="mcq-nav">
+    <button id="prevQuestionBtn" class="nav-btn" disabled>Previous</button>
+    <span id="roundLabel" class="round-label">Round: 1</span>
+    <button id="nextQuestionBtn" class="nav-btn" disabled>Next</button>
+  </section>
+
+  <hr class="marks-separator">
+
+  <!-- Marks line (after quiz finished) -->
+  <div class="marks-line">
+    Marks: <span id="marksValue">--</span>
+  </div>
+
+  <!-- Review + PDF buttons -->
+  <div class="review-actions">
+    <button id="reviewBtn" class="small-btn" disabled>Review Questions</button>
+    <button id="savePdfBtn" class="small-btn" disabled>Save as PDF</button>
+  </div>
+
+  <!-- Scrollable review area -->
+  <section id="reviewSection" class="review-section">
+    <!-- Filled by JS after quiz -->
+  </section>
+</main>
+
+  <!-- ========== SCRIPT ========== -->
+<script>
+(function () {
+  /* ================= THEME ================= */
+  const themeToggle = document.getElementById("themeToggle");
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+  }
+  if (themeToggle) {
+    themeToggle.textContent = document.body.classList.contains("dark")
+      ? "☀️"
+      : "🌙";
+  }
+
+  function setTheme(isDark) {
+    document.body.classList.toggle("dark", isDark);
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    if (themeToggle) {
+      themeToggle.textContent = isDark ? "☀️" : "🌙";
+    }
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      setTheme(!document.body.classList.contains("dark"));
+    });
+  }
+
+  // read left sidebar visibility setting
+  const hideLS = localStorage.getItem("set_leftSidebarHidden") === "1";
+  document.body.classList.toggle("hide-left-sidebar", hideLS);
+
+  /* ================= RIGHT SIDEBAR (HEADER MENU) ================= */
+  const menuBtn      = document.getElementById("menuBtn");
+  const rightSidebar = document.getElementById("rightSidebar");
+  const rightOverlay = document.getElementById("rightOverlay");
+  const rightClose   = document.getElementById("rightClose");
+
+  function openRightSidebar() {
+    if (!rightSidebar || !rightOverlay) return;
+    rightSidebar.classList.add("open");
+    rightOverlay.classList.add("show");
+  }
+  function closeRightSidebar() {
+    if (!rightSidebar || !rightOverlay) return;
+    rightSidebar.classList.remove("open");
+    rightOverlay.classList.remove("show");
+  }
+  if (menuBtn)      menuBtn.addEventListener("click", openRightSidebar);
+  if (rightClose)   rightClose.addEventListener("click", closeRightSidebar);
+  if (rightOverlay) rightOverlay.addEventListener("click", closeRightSidebar);
+
+  /* ================= LEFT SIDEBAR (HANDLE + SWIPE) ================= */
+  const leftSidebar = document.getElementById("leftSidebar");
+  const leftOverlay = document.getElementById("leftOverlay");
+  const leftHandle  = document.getElementById("leftHandle");
+
+  function openLeftSidebar() {
+    if (!leftSidebar || !leftOverlay) return;
+    leftSidebar.classList.add("open");
+    leftOverlay.classList.add("show");
+  }
+  function closeLeftSidebar() {
+    if (!leftSidebar || !leftOverlay) return;
+    leftSidebar.classList.remove("open");
+    leftOverlay.classList.remove("show");
+  }
+
+  if (leftHandle)  leftHandle.addEventListener("click", openLeftSidebar);
+  if (leftOverlay) leftOverlay.addEventListener("click", closeLeftSidebar);
+
+  // swipe in from handle
+  let handleStartX = null;
+  if (leftHandle) {
+    leftHandle.addEventListener("touchstart", e => {
+      handleStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    leftHandle.addEventListener("touchend", e => {
+      if (handleStartX == null) return;
+      const endX = e.changedTouches[0].clientX;
+      if (endX - handleStartX > 40) openLeftSidebar();
+      handleStartX = null;
+    }, { passive: true });
+  }
+
+  // swipe out from sidebar
+  let sideStartX = null;
+  if (leftSidebar) {
+    leftSidebar.addEventListener("touchstart", e => {
+      sideStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    leftSidebar.addEventListener("touchend", e => {
+      if (sideStartX == null) return;
+      const endX = e.changedTouches[0].clientX;
+      if (sideStartX - endX > 40) closeLeftSidebar();
+      sideStartX = null;
+    }, { passive: true });
+  }
+
+  /* ================= MCQ ENGINE (BOOKMARK MODE) ================= */
+
+  // --- bookmarks from localStorage (same as index.html) ---
+  const BOOKMARK_KEY = "quizBookmarks";
+  // each item expected: { chapterId: "eco_ch1", baseIndex: 0, subjectId?: "eco", attemptId?: "mtp1" }
+
+  function loadBookmarks() {
+    try {
+      const raw = localStorage.getItem(BOOKMARK_KEY);
+      if (!raw) return [];
+      const arr = JSON.parse(raw);
+      return Array.isArray(arr) ? arr : [];
+    } catch {
+      return [];
+    }
+  }
+
+  // Build: chapterId → Set(baseIndex)
+  const bookmarkList = loadBookmarks();
+  const bookmarkMap = new Map();
+  bookmarkList.forEach((b) => {
+    if (!b || !b.chapterId || typeof b.baseIndex !== "number") return;
+    if (!bookmarkMap.has(b.chapterId)) {
+      bookmarkMap.set(b.chapterId, new Set());
+    }
+    bookmarkMap.get(b.chapterId).add(b.baseIndex);
+  });
+
+  // ---- constants / helpers ----
+  const QUESTION_TIME_DEFAULT = 45; // fallback
+
+  function getQuestionTime() {
+    const v = parseInt(localStorage.getItem("set_timerSeconds"), 10);
+    if (!isNaN(v) && v >= 30) return v;
+    return QUESTION_TIME_DEFAULT;
+  }
+
+  let QUESTION_TIME = getQuestionTime();
+
+  // ---- state ----
+  let currentSubject    = null;  // { id, name, chapters[] }
+  let currentChapter    = null;  // chapter object from subjects
+  let baseQuestions     = [];    // only BOOKMARKED questions of that chapter
+  let currentQuestions  = [];
+  let currentIndex      = 0;
+  let answers           = [];
+
+  let firstRoundAnswers = [];
+  let attemptedFirstCnt = 0;
+  let mastered          = [];    // baseIndex → true once correct
+
+  let roundNumber       = 1;
+  let quizFinished      = false;
+
+  let marksCorrectFirst = 0;
+  let marksWrongFirst   = 0;
+  let marks             = null;
+
+  let currentStreak     = 0;
+  let bestStreak        = 0;
+
+  let timerInterval     = null;
+  let timeRemaining     = QUESTION_TIME;
+  let autoNextTimeout   = null;
+
+  // ---- user settings from localStorage ----
+  function getBoolSetting(key, def = true) {
+    const v = localStorage.getItem(key);
+    if (v === null) return def;
+    return v === "1";
+  }
+
+  let cfg_randomizeQuestions = getBoolSetting("set_randomizeQuestions", true);
+  let cfg_randomizeOptions   = getBoolSetting("set_randomizeOptions", true);
+  let cfg_showLetters        = getBoolSetting("set_showLetters", true);
+  let cfg_timerOn            = getBoolSetting("set_timerOn", true);
+  let cfg_autoSkip           = getBoolSetting("set_autoSkip", true);
+
+  // ---- DOM references ----
+  const subjectSelectBtn    = document.getElementById("subjectSelectBtn");
+  const subjectSelectText   = document.getElementById("subjectSelectText");
+  const subjectDropdown     = document.getElementById("subjectDropdown");
+
+  const chapterSelectBtn    = document.getElementById("chapterSelectBtn");
+  const chapterSelectText   = document.getElementById("chapterSelectText");
+  const chapterDropdown     = document.getElementById("chapterDropdown");
+
+  const mcqQuestionText     = document.getElementById("mcqQuestionText");
+  const mcqOptionsContainer = document.getElementById("mcqOptionsContainer");
+
+  const questionCounter     = document.getElementById("questionCounter");
+  const progressInner       = document.getElementById("mcqProgressInner");
+  const timerDisplay        = document.getElementById("timerDisplay");
+
+  const prevBtn             = document.getElementById("prevQuestionBtn");
+  const nextBtn             = document.getElementById("nextQuestionBtn");
+  const roundLabel          = document.getElementById("roundLabel");
+  const bestStreakSpan      = document.getElementById("bestStreak");
+  const marksValue          = document.getElementById("marksValue");
+
+  const markSep             = document.querySelector(".marks-separator");
+  const marksLine           = document.querySelector(".marks-line");
+  const reviewActions       = document.querySelector(".review-actions");
+  const reviewBtn           = document.getElementById("reviewBtn");
+  const savePdfBtn          = document.getElementById("savePdfBtn");
+  const reviewSection       = document.getElementById("reviewSection");
+
+  const bookmarkBtn         = document.getElementById("bookmarkBtn");
+
+  // minimal theme switch (may be absent)
+  const minimalSwitch       = document.getElementById("minimalSwitch");
+
+  if (timerDisplay) timerDisplay.textContent = "--";
+
+  // ---- small helpers ----
+  function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  }
+
+  function formatTime(sec) {
+    return `${sec}s`;
+  }
+
+  function clearTimer() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+  }
+
+  function clearAutoNext() {
+    if (autoNextTimeout) {
+      clearTimeout(autoNextTimeout);
+      autoNextTimeout = null;
+    }
+  }
+
+  function setLiveQuestionBorder(color) {
+    if (!mcqOptionsContainer) return;
+    const box = mcqOptionsContainer.closest(".mcq-card") || mcqOptionsContainer.parentElement;
+    if (!box) return;
+
+    if (color) {
+      box.style.border = `1px solid ${color}`;
+      box.style.borderRadius = "12px";
+    } else {
+      box.style.border = "";
+    }
+  }
+
+  function updateProgress() {
+    if (!questionCounter || !progressInner || !baseQuestions.length) {
+      if (questionCounter) questionCounter.textContent = "0 / 0";
+      if (progressInner)   progressInner.style.width = "0%";
+      return;
+    }
+    const total = baseQuestions.length;
+    const attempted = attemptedFirstCnt;
+    questionCounter.textContent = `${attempted} / ${total}`;
+    progressInner.style.width = `${(attempted / total) * 100}%`;
+  }
+
+  function updateStats() {
+    if (bestStreakSpan) {
+      bestStreakSpan.textContent = `Best: ${bestStreak} | Streak: ${currentStreak}`;
+    }
+    if (roundLabel) {
+      roundLabel.textContent = roundNumber === 1 ? "Round 1" : "Retrying round";
+    }
+    if (marksValue) {
+      marksValue.textContent = marks == null ? "--" : `${marks.toFixed(2)} M`;
+    }
+  }
+
+  function computeMarks() {
+    return marksCorrectFirst * 1 + marksWrongFirst * -0.25;
+  }
+
+  function startTimerForCurrentQuestion() {
+    cfg_timerOn = getBoolSetting("set_timerOn", true);
+
+    if (!cfg_timerOn) {
+      clearTimer();
+      if (timerDisplay) timerDisplay.textContent = "--";
+      return;
+    }
+    if (!timerDisplay) return;
+
+    clearTimer();
+    clearAutoNext();
+
+    if (quizFinished || !currentQuestions.length || answers[currentIndex] !== null) {
+      timerDisplay.textContent = "--";
+      return;
+    }
+
+    QUESTION_TIME = getQuestionTime();
+    timeRemaining = QUESTION_TIME;
+    timerDisplay.textContent = formatTime(timeRemaining);
+
+    timerInterval = setInterval(() => {
+      timeRemaining--;
+      timerDisplay.textContent = formatTime(timeRemaining);
+      if (timeRemaining <= 0) {
+        clearTimer();
+        handleTimeUp();
+      }
+    }, 1000);
+  }
+
+  function handleTimeUp() {
+    if (answers[currentIndex] == null && !quizFinished) {
+      currentStreak = 0;
+      updateStats();
+      goToNextQuestion(true);
+    }
+  }
+
+  /* ---------- SUBJECT + CHAPTER DROPDOWNS (BOOKMARK-ONLY) ---------- */
+
+  function populateSubjectDropdown() {
+    if (!subjectDropdown || typeof subjects === "undefined") return;
+
+    subjectDropdown.innerHTML = "";
+
+    // Only subjects that have at least ONE chapter with bookmarks
+    subjects.forEach((subj) => {
+      const hasBookmarkedChapter = subj.chapters.some((ch) =>
+        bookmarkMap.has(ch.id)
+      );
+      if (!hasBookmarkedChapter) return;
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chapter-option";
+      btn.textContent = subj.name;
+
+      btn.addEventListener("click", () => {
+        subjectDropdown.classList.remove("show");
+        currentSubject = subj;
+        if (subjectSelectText) subjectSelectText.textContent = subj.name;
+        // reset chapter display
+        if (chapterSelectText) chapterSelectText.textContent = "None Selected";
+        currentChapter = null;
+        baseQuestions = [];
+        currentQuestions = [];
+        if (mcqQuestionText) mcqQuestionText.textContent = "Select a chapter to start.";
+        if (mcqOptionsContainer) mcqOptionsContainer.innerHTML = "";
+
+        populateChapterDropdownForSubject(subj);
+      });
+
+      subjectDropdown.appendChild(btn);
+    });
+  }
+
+  function populateChapterDropdownForSubject(subj) {
+    if (!chapterDropdown) return;
+    chapterDropdown.innerHTML = "";
+
+    subj.chapters.forEach((ch) => {
+      const set = bookmarkMap.get(ch.id);
+      if (!set || set.size === 0) return; // no bookmarks → skip
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chapter-option";
+      btn.textContent = ch.name;
+
+      btn.addEventListener("click", () => {
+        chapterDropdown.classList.remove("show");
+        loadChapter(subj.id, ch.id);
+      });
+
+      chapterDropdown.appendChild(btn);
+    });
+  }
+
+  // open/close Subject dropdown
+  if (subjectSelectBtn && subjectDropdown) {
+    subjectSelectBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      populateSubjectDropdown();
+      subjectDropdown.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!subjectSelectBtn.contains(e.target) &&
+          !subjectDropdown.contains(e.target)) {
+        subjectDropdown.classList.remove("show");
+      }
+    });
+  }
+
+  // open Chapter dropdown (for current subject)
+  if (chapterSelectBtn && chapterDropdown) {
+    chapterSelectBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (!currentSubject) {
+        // if user didn't pick subject yet, open subject dropdown instead
+        if (subjectDropdown) {
+          populateSubjectDropdown();
+          subjectDropdown.classList.add("show");
+        }
+        return;
+      }
+      populateChapterDropdownForSubject(currentSubject);
+      chapterDropdown.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!chapterSelectBtn.contains(e.target) &&
+          !chapterDropdown.contains(e.target)) {
+        chapterDropdown.classList.remove("show");
+      }
+    });
+  }
+
+  /* ---------- reset summary UI ---------- */
+  function resetSummaryUI() {
+    if (markSep)       markSep.style.display = "none";
+    if (marksLine)     marksLine.style.display = "none";
+    if (reviewActions) reviewActions.style.display = "none";
+    if (reviewBtn)     reviewBtn.disabled = true;
+    if (savePdfBtn)    savePdfBtn.disabled = true;
+
+    if (reviewSection) {
+      reviewSection.style.display = "none";
+      reviewSection.innerHTML = "";
+    }
+  }
+
+  function updateBookmarkVisual(chapterId, baseIndex) {
+    if (!bookmarkBtn) return;
+    const icon = bookmarkBtn.querySelector("i");
+    const active = chapterId && baseIndex != null && isBookmarked(chapterId, baseIndex);
+
+    bookmarkBtn.classList.toggle("active", active);
+
+    if (icon) {
+      if (active) {
+        icon.classList.remove("fa-regular");
+        icon.classList.add("fa-solid");
+      } else {
+        icon.classList.remove("fa-solid");
+        icon.classList.add("fa-regular");
+      }
+    }
+  }
+
+  /* ---------- loadChapter: ONLY BOOKMARKED QUESTIONS ---------- */
+  function loadChapter(subjectId, chapterId) {
+    if (typeof subjects === "undefined") return;
+
+    const subj = subjects.find((s) => s.id === subjectId);
+    if (!subj) return;
+
+    const ch = subj.chapters.find((c) => c.id === chapterId);
+    if (!ch) return;
+
+    const bookmarkedSet = bookmarkMap.get(ch.id);
+    if (!bookmarkedSet || bookmarkedSet.size === 0) {
+      alert("No bookmarks in this chapter.");
+      return;
+    }
+
+    clearTimer();
+    clearAutoNext();
+    if (timerDisplay) timerDisplay.textContent = "--";
+
+    currentSubject = subj;
+    currentChapter = ch;
+
+    // Build baseQuestions from bookmarked indices only
+    const indices = Array.from(bookmarkedSet).sort((a, b) => a - b);
+    baseQuestions = indices.map((idx) => ({
+      ...ch.questions[idx],
+      _baseIndex: idx,
+    }));
+    mastered = Array(baseQuestions.length).fill(false);
+
+    // refresh settings
+    cfg_randomizeQuestions = getBoolSetting("set_randomizeQuestions", true);
+
+    currentQuestions = [...baseQuestions];
+    if (cfg_randomizeQuestions) shuffleArray(currentQuestions);
+
+    currentIndex      = 0;
+    answers           = Array(currentQuestions.length).fill(null);
+    firstRoundAnswers = Array(baseQuestions.length).fill(null);
+    attemptedFirstCnt = 0;
+
+    roundNumber       = 1;
+    quizFinished      = false;
+    marksCorrectFirst = 0;
+    marksWrongFirst   = 0;
+    marks             = null;
+    currentStreak     = 0;
+    bestStreak        = 0;
+
+    if (chapterSelectText) chapterSelectText.textContent = ch.name;
+
+    if (prevBtn) prevBtn.disabled = true;
+    if (nextBtn) nextBtn.disabled = true;
+
+    resetSummaryUI();
+    updateStats();
+    updateProgress();
+    renderQuestion();
+    startTimerForCurrentQuestion();
+  }
+
+  /* ---------- BOOKMARK STAR (allow unbookmark from here) ---------- */
+  function isBookmarked(chapterId, baseIndex) {
+    const set = bookmarkMap.get(chapterId);
+    if (!set) return false;
+    return set.has(baseIndex);
+  }
+
+  function toggleBookmark(chapterId, baseIndex) {
+    let set = bookmarkMap.get(chapterId);
+    if (!set) {
+      set = new Set();
+      bookmarkMap.set(chapterId, set);
+    }
+
+    if (set.has(baseIndex)) {
+      set.delete(baseIndex);
+      // also remove from bookmarkList stored array
+      const arr = loadBookmarks().filter(
+        (b) => !(b.chapterId === chapterId && b.baseIndex === baseIndex)
+      );
+      localStorage.setItem(BOOKMARK_KEY, JSON.stringify(arr));
+    } else {
+      set.add(baseIndex);
+      const arr = loadBookmarks();
+      arr.push({ chapterId, baseIndex });
+      localStorage.setItem(BOOKMARK_KEY, JSON.stringify(arr));
+    }
+  }
+
+  if (bookmarkBtn) {
+    bookmarkBtn.addEventListener("click", () => {
+      if (!currentChapter || !currentQuestions.length) return;
+      const q = currentQuestions[currentIndex];
+      if (!q || q._baseIndex == null) return;
+
+      toggleBookmark(currentChapter.id, q._baseIndex);
+
+      const active = isBookmarked(currentChapter.id, q._baseIndex);
+      bookmarkBtn.classList.toggle("active", active);
+      updateBookmarkVisual(currentChapter.id, q._baseIndex);
+    });
+  }
+
+  /* ---------- renderQuestion ---------- */
+  function renderQuestion() {
+    if (!mcqQuestionText || !mcqOptionsContainer) return;
+
+    const q = currentQuestions[currentIndex];
+    setLiveQuestionBorder(null);
+
+    if (!q) {
+      mcqQuestionText.textContent = "Select a chapter to start.";
+      mcqOptionsContainer.innerHTML = "";
+      if (prevBtn) prevBtn.disabled = true;
+      if (nextBtn) nextBtn.disabled = true;
+
+      if (bookmarkBtn) {
+        bookmarkBtn.style.display = "none";
+        bookmarkBtn.classList.remove("active");
+      }
+      return;
+    }
+
+    mcqQuestionText.textContent = `${currentIndex + 1}. ${q.text}`;
+    mcqOptionsContainer.innerHTML = "";
+
+    if (bookmarkBtn && currentChapter && q._baseIndex != null) {
+      bookmarkBtn.style.display = "inline-flex";
+      updateBookmarkVisual(currentChapter.id, q._baseIndex);
+    }
+
+    const savedAnswer = answers[currentIndex];
+
+    cfg_randomizeOptions = getBoolSetting("set_randomizeOptions", true);
+    cfg_showLetters      = getBoolSetting("set_showLetters", true);
+
+    if (!q._optionOrder) {
+      q._optionOrder = q.options.map((_, i) => i);
+      if (cfg_randomizeOptions) shuffleArray(q._optionOrder);
+    }
+
+    q._optionOrder.forEach((optIndex, pos) => {
+      const optText = q.options[optIndex];
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "mcq-option-btn";
+      btn.dataset.idx = String(optIndex);
+
+      const letter = String.fromCharCode(65 + pos);
+      const letterHTML = cfg_showLetters
+        ? `<span class="opt-letter">${letter}.</span>`
+        : "";
+
+      btn.innerHTML = `
+        ${letterHTML}
+        <span class="opt-text">${optText}</span>
+      `;
+
+      if (savedAnswer !== null) {
+        const isCorrectOpt = optIndex === q.correctIndex;
+        const isSelected   = optIndex === savedAnswer;
+
+        btn.classList.remove("correct", "wrong", "dimmed");
+        if (isCorrectOpt) btn.classList.add("correct");
+        if (isSelected && !isCorrectOpt) btn.classList.add("wrong");
+        if (!isSelected && !isCorrectOpt) btn.classList.add("dimmed");
+
+        btn.disabled = true;
+      } else {
+        btn.addEventListener("click", () => handleOptionClick(optIndex));
+      }
+
+      mcqOptionsContainer.appendChild(btn);
+    });
+
+    if (prevBtn) prevBtn.disabled = (currentIndex === 0);
+    if (nextBtn) {
+      if (!quizFinished) {
+        nextBtn.disabled = (answers[currentIndex] === null);
+      } else {
+        nextBtn.disabled = (currentIndex === currentQuestions.length - 1);
+      }
+    }
+
+    updateProgress();
+    updateStats();
+  }
+
+  /* ---------- handleOptionClick ---------- */
+  function handleOptionClick(selectedIdx) {
+    if (quizFinished) return;
+    if (!currentQuestions.length) return;
+
+    const q = currentQuestions[currentIndex];
+    if (!q) return;
+    if (answers[currentIndex] !== null) return; // no changing answers
+
+    clearTimer();
+    clearAutoNext();
+
+    const isCorrect = selectedIdx === q.correctIndex;
+
+    if (isCorrect && q._baseIndex != null) {
+      mastered[q._baseIndex] = true;
+    }
+    setLiveQuestionBorder(isCorrect ? "#4caf50" : "#e53935");
+
+    answers[currentIndex] = selectedIdx;
+
+    const buttons = mcqOptionsContainer.querySelectorAll(".mcq-option-btn");
+    buttons.forEach((btn) => {
+      const idx = parseInt(btn.dataset.idx, 10);
+      const isCorrectOpt = idx === q.correctIndex;
+      const isSelected   = idx === selectedIdx;
+
+      btn.classList.remove("correct", "wrong", "dimmed");
+
+      if (isCorrectOpt) btn.classList.add("correct");
+      if (isSelected && !isCorrectOpt) btn.classList.add("wrong");
+      if (!isSelected && !isCorrectOpt) btn.classList.add("dimmed");
+
+      btn.disabled = true;
+    });
+
+    if (roundNumber === 1 && q._baseIndex != null && firstRoundAnswers[q._baseIndex] === null) {
+      firstRoundAnswers[q._baseIndex] = selectedIdx;
+      attemptedFirstCnt++;
+
+      if (isCorrect) marksCorrectFirst++;
+      else           marksWrongFirst++;
+    }
+
+    if (isCorrect) {
+      currentStreak++;
+      if (currentStreak > bestStreak) bestStreak = currentStreak;
+    } else {
+      currentStreak = 0;
+    }
+
+    if (nextBtn && !quizFinished) nextBtn.disabled = false;
+
+    updateStats();
+    updateProgress();
+
+    cfg_autoSkip = getBoolSetting("set_autoSkip", true);
+    if (cfg_autoSkip) {
+      const delay = isCorrect ? 600 : 3000;
+      autoNextTimeout = setTimeout(() => {
+        autoNextTimeout = null;
+        if (!quizFinished) {
+          goToNextQuestion(false);
+        }
+      }, delay);
+    }
+  }
+
+  /* ---------- navigation + infinite retry until all mastered ---------- */
+  function goToNextQuestion(fromTimer) {
+    if (!currentQuestions.length) return;
+
+    if (!fromTimer && answers[currentIndex] === null && !quizFinished) {
+      return;
+    }
+
+    if (currentIndex < currentQuestions.length - 1) {
+      currentIndex++;
+      renderQuestion();
+      startTimerForCurrentQuestion();
+      return;
+    }
+
+    finishRound();
+  }
+
+  function goToPrevQuestion() {
+    if (!currentQuestions.length) return;
+    if (currentIndex === 0) return;
+
+    clearTimer();
+    clearAutoNext();
+
+    currentIndex--;
+    renderQuestion();
+    startTimerForCurrentQuestion();
+  }
+
+  function finishRound() {
+    clearTimer();
+    clearAutoNext();
+
+    if (roundNumber === 1) {
+      marks = computeMarks();
+    }
+
+    const wrongBaseIdx = [];
+    baseQuestions.forEach((q, idx) => {
+      if (!mastered[idx]) wrongBaseIdx.push(idx);
+    });
+
+    if (wrongBaseIdx.length > 0) {
+      roundNumber++;
+      currentQuestions = wrongBaseIdx.map((i) => baseQuestions[i]);
+
+      cfg_randomizeQuestions = getBoolSetting("set_randomizeQuestions", true);
+      if (cfg_randomizeQuestions) shuffleArray(currentQuestions);
+
+      answers = Array(currentQuestions.length).fill(null);
+      currentIndex = 0;
+      currentStreak = 0;
+
+      updateStats();
+      renderQuestion();
+      startTimerForCurrentQuestion();
+      return;
+    }
+
+    endQuiz();
+  }
+
+  function endQuiz() {
+    quizFinished = true;
+    clearTimer();
+    clearAutoNext();
+    if (timerDisplay) timerDisplay.textContent = "--";
+
+    if (markSep)       markSep.style.display = "block";
+    if (marksLine)     marksLine.style.display = "block";
+    if (reviewActions) reviewActions.style.display = "flex";
+    if (reviewBtn)     reviewBtn.disabled = false;
+    if (savePdfBtn)    savePdfBtn.disabled = false;
+
+    if (prevBtn) prevBtn.disabled = (currentIndex === 0);
+    if (nextBtn) nextBtn.disabled = (currentIndex === currentQuestions.length - 1);
+
+    updateStats();
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      clearAutoNext();
+      goToNextQuestion(false);
+    });
+  }
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      clearAutoNext();
+      goToPrevQuestion();
+    });
+  }
+
+  /* ---------- Review + PDF ---------- */
+  function buildReviewSection() {
+    if (!reviewSection) return;
+    reviewSection.innerHTML = "";
+
+    if (!baseQuestions.length) {
+      reviewSection.textContent = "No questions to review.";
+      return;
+    }
+
+    baseQuestions.forEach((q, idx) => {
+      const userAns = firstRoundAnswers[idx];
+      const isCorrectFirst = userAns === q.correctIndex;
+
+      const block = document.createElement("div");
+      block.className = "review-question";
+
+      const qText = document.createElement("div");
+      qText.className = "review-q-text";
+      qText.textContent = `${idx + 1}. ${q.text}`;
+      block.appendChild(qText);
+
+      q.options.forEach((opt, optIndex) => {
+        const optDiv = document.createElement("div");
+        optDiv.className = "review-option";
+
+        const letter = String.fromCharCode(65 + optIndex);
+        optDiv.textContent = `${letter}. ${opt}`;
+
+        const isCorrect = optIndex === q.correctIndex;
+        const isSelected = userAns === optIndex;
+
+        if (isSelected && isCorrect) {
+          optDiv.classList.add("correct");
+        } else if (isSelected && !isCorrect) {
+          optDiv.classList.add("wrong");
+        } else if (!isSelected && isCorrect) {
+          optDiv.classList.add("correct");
+        }
+
+        block.appendChild(optDiv);
+      });
+
+      if (userAns == null) {
+        const info = document.createElement("div");
+        info.style.fontSize = "11px";
+        info.style.opacity = "0.7";
+        info.textContent = "Not attempted in first round.";
+        block.appendChild(info);
+      }
+
+      if (userAns == null) {
+        block.style.border = "1px solid #999";
+      } else if (isCorrectFirst) {
+        block.style.border = "1px solid #4caf50";
+      } else {
+        block.style.border = "1px solid #e53935";
+      }
+      block.style.borderRadius = "10px";
+      block.style.padding = "8px";
+      block.style.marginBottom = "8px";
+
+      reviewSection.appendChild(block);
+    });
+  }
+
+  if (reviewBtn) {
+    reviewBtn.addEventListener("click", () => {
+      if (!quizFinished) return;
+      if (reviewSection.style.display === "block") {
+        reviewSection.style.display = "none";
+      } else {
+        buildReviewSection();
+        reviewSection.style.display = "block";
+        reviewSection.scrollTop = 0;
+      }
+    });
+  }
+
+  if (savePdfBtn) {
+    savePdfBtn.addEventListener("click", () => {
+      if (!quizFinished) return;
+      buildReviewSection();
+      reviewSection.style.display = "block";
+      reviewSection.scrollTop = 0;
+      window.print();
+    });
+  }
+
+  // initial UI
+  updateStats();
+  updateProgress();
+
+  const minimalSaved = localStorage.getItem("minimalTheme") === "1";
+  if (minimalSaved) document.body.classList.add("minimal-theme");
+  if (minimalSwitch) minimalSwitch.checked = minimalSaved;
+
+})();
+</script>
+<script>
+  const currentPage = "bookmarks"; // is page par ho
+</script>
+<script src="shared.js"></script>
+<footer class="simple-footer">
+  <div>Made with ♥️</div>
+  <div>Kunal Sharma • CA Foundation</div>
+</footer>
+</body>
+</html>

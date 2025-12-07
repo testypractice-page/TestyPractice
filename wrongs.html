@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TESTY</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="questions.js"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ========== PRELOADER ========== -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-card">
+      <div class="preloader-logo">TESTY</div>
+      <div class="preloader-sub">Loading your questions…</div>
+      <div class="preloader-bar">
+        <div class="preloader-bar-inner"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========== HEADER ========== -->
+  <header class="top-bar">
+    <div class="logo">TESTY</div>
+
+    <!-- Desktop nav -->
+    <nav class="top-nav">
+      <a href="index.html" class="desk-nav-item">Home</a>
+      <a href="auth.html">Login</a>
+      <a href="rtp_mtp.html">RTP/MTP</a>
+      <a href="settings.html">Settings</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Drop Suggestion</a>
+      <a href="sponsor.html">Sponsor</a>
+
+    </nav>
+
+    <div class="right-controls">
+      <button class="top-btn" id="themeToggle">🌙</button>
+      <button class="top-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- ========== LEFT SIDEBAR + HANDLE ========== -->
+  <div class="left-handle" id="leftHandle"></div>
+
+  <aside class="left-sidebar" id="leftSidebar">
+    <ul class="left-list">
+<li>
+  <a href="profile.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-user"></i></span>
+    <span class="left-text">My Profile</span>
+  </a>
+</li>
+
+<li>
+  <a href="bookmarks.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-bookmark"></i></span>
+    Bookmarks
+  </a>
+</li>
+
+<li>
+  <a href="#" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-trophy"></i></span>
+    Leaderboard
+  </a>
+</li>
+
+<li>
+  <a href="chatrooms.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-comments"></i></span>
+    Chatrooms
+  </a>
+</li>
+<li>
+  <a href="articles/How To Overcome Overthinking while exams.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-note-sticky"></i></span>
+    Article
+  </a>
+</li>
+<li>
+  <a href="wrongs.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-pen-to-square"></i></span>
+    Take a Correction Test
+  </a>
+</li>
+    </ul>
+  </aside>
+
+  <div class="left-overlay" id="leftOverlay"></div>
+
+  <!-- ========== RIGHT SIDEBAR ========== -->
+  <aside class="right-sidebar" id="rightSidebar">
+    <div class="right-header">
+      <span>TESTY Menu</span>
+      <button class="right-close" id="rightClose">✕</button>
+    </div>
+    <ul class="right-links">
+      <li class="nav-item" data-page="index"><a href="index.html">Home</a></li>
+      <li><a href="auth.html">Login / Signup</a></li>
+      <li><a href="rtp_mtp.html">RTP/MTP</a></li>
+      <li><a href="settings.html">Settings</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="sponsor.html">Sponsor</a></li>
+      <li><a href="feedback.html">Drop Suggestion</a></li>
+    </ul>
+  </aside>
+
+  <div class="right-overlay" id="rightOverlay"></div>
+
+  <!-- ========== MAIN CONTENT ========== -->
+<main>
+<!-- Subject + Chapter selection -->
+<section class="chapter-bar">
+  <!-- SUBJECT -->
+  <span class="chapter-label">Subject:</span>
+  <button class="chapter-select" id="subjectSelectBtn" type="button">
+    <span id="subjectSelectText">None Selected</span>
+  </button>
+  <div class="chapter-dropdown" id="subjectDropdown"></div>
+  
+  <button id="clearWrongBtn" class="chapter-select" style="margin-left: 6px;">
+  Clear Wrongs
+</button>
+</section>
+
+<section class="chapter-bar">
+  <!-- CHAPTER -->
+  <span class="chapter-label">Chapter:</span>
+  <button class="chapter-select" id="chapterSelectBtn" type="button">
+    <span id="chapterSelectText">None Selected</span>
+  </button>
+  <div class="chapter-dropdown" id="chapterDropdown"></div>
+</section>
+
+  <!-- Top: Best / Streak, Progress, Timer -->
+<section class="mcq-top">
+  <div class="mcq-progress-info">
+    <div class="streak-row">
+      <span id="bestStreak">Best: 0 | Streak: 0</span>
+
+      <!-- NEW: In-order toggle -->
+      <label class="order-toggle">
+        <input type="checkbox" id="orderToggle">
+        <span>In Order</span>
+      </label>
+    </div>
+
+    <span id="questionCounter">0 / 0</span>
+    <div class="mcq-progress-bar">
+      <div class="mcq-progress-inner" id="mcqProgressInner"></div>
+    </div>
+  </div>
+
+  <div class="mcq-timer">
+    <span>Time:</span>
+    <span id="timerDisplay">00:45</span>
+  </div>
+</section>
+
+  <!-- Question + options (no card frame) -->
+  <section class="mcq-card">
+    <div class="mcq-question" id="mcqQuestionText">
+      Click 'None Selected' to start.
+
+    </div>
+  <button class="bookmark-btn" id="bookmarkBtn" type="button">
+      <i class="fa-regular fa-star"></i>
+    </button>
+    <div class="mcq-options" id="mcqOptionsContainer">
+      <!-- options by JS -->
+    </div>
+  </section>
+
+  <!-- Nav line: 3 equal parts -->
+  <section class="mcq-nav">
+    <button id="prevQuestionBtn" class="nav-btn" disabled>Previous</button>
+    <span id="roundLabel" class="round-label">Round: 1</span>
+    <button id="nextQuestionBtn" class="nav-btn" disabled>Next</button>
+  </section>
+
+  <hr class="marks-separator">
+
+  <!-- Marks line (after quiz finished) -->
+  <div class="marks-line">
+    Marks: <span id="marksValue">--</span>
+  </div>
+
+  <!-- Review + PDF buttons -->
+  <div class="review-actions">
+    <button id="reviewBtn" class="small-btn" disabled>Review Questions</button>
+    <button id="savePdfBtn" class="small-btn" disabled>Save as PDF</button>
+  </div>
+
+  <!-- Scrollable review area -->
+  <section id="reviewSection" class="review-section">
+    <!-- Filled by JS after quiz -->
+  </section>
+</main>
+
+  <!-- ========== SCRIPT ========== -->
+<script>
+
+
+(function () {
+  /* ================= THEME ================= */
+  const themeToggle = document.getElementById("themeToggle");
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+  }
+  if (themeToggle) {
+    themeToggle.textContent = document.body.classList.contains("dark")
+      ? "☀️"
+      : "🌙";
+  }
+
+  function setTheme(isDark) {
+    document.body.classList.toggle("dark", isDark);
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    if (themeToggle) {
+      themeToggle.textContent = isDark ? "☀️" : "🌙";
+    }
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      setTheme(!document.body.classList.contains("dark"));
+    });
+  }
+
+  // read left sidebar visibility setting
+  const hideLS = localStorage.getItem("set_leftSidebarHidden") === "1";
+  document.body.classList.toggle("hide-left-sidebar", hideLS);
+
+  /* ================= RIGHT SIDEBAR (HEADER MENU) ================= */
+  const minimalSwitch = document.getElementById("Minimilist");
+  const menuBtn      = document.getElementById("menuBtn");
+  const rightSidebar = document.getElementById("rightSidebar");
+  const rightOverlay = document.getElementById("rightOverlay");
+  const rightClose   = document.getElementById("rightClose");
+
+  function openRightSidebar() {
+    if (!rightSidebar || !rightOverlay) return;
+    rightSidebar.classList.add("open");
+    rightOverlay.classList.add("show");
+  }
+  function closeRightSidebar() {
+    if (!rightSidebar || !rightOverlay) return;
+    rightSidebar.classList.remove("open");
+    rightOverlay.classList.remove("show");
+  }
+  if (menuBtn)    menuBtn.addEventListener("click", openRightSidebar);
+  if (rightClose) rightClose.addEventListener("click", closeRightSidebar);
+  if (rightOverlay) rightOverlay.addEventListener("click", closeRightSidebar);
+
+  /* ================= LEFT SIDEBAR (HANDLE + SWIPE) ================= */
+  const leftSidebar = document.getElementById("leftSidebar");
+  const leftOverlay = document.getElementById("leftOverlay");
+  const leftHandle  = document.getElementById("leftHandle");
+
+  function openLeftSidebar() {
+    if (!leftSidebar || !leftOverlay) return;
+    leftSidebar.classList.add("open");
+    leftOverlay.classList.add("show");
+  }
+  function closeLeftSidebar() {
+    if (!leftSidebar || !leftOverlay) return;
+    leftSidebar.classList.remove("open");
+    leftOverlay.classList.remove("show");
+  }
+
+  if (leftHandle)  leftHandle.addEventListener("click", openLeftSidebar);
+  if (leftOverlay) leftOverlay.addEventListener("click", closeLeftSidebar);
+
+  // swipe in from handle
+  let handleStartX = null;
+  if (leftHandle) {
+    leftHandle.addEventListener("touchstart", e => {
+      handleStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    leftHandle.addEventListener("touchend", e => {
+      if (handleStartX == null) return;
+      const endX = e.changedTouches[0].clientX;
+      if (endX - handleStartX > 40) openLeftSidebar();
+      handleStartX = null;
+    }, { passive: true });
+  }
+
+  // swipe out from sidebar
+  let sideStartX = null;
+  if (leftSidebar) {
+    leftSidebar.addEventListener("touchstart", e => {
+      sideStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    leftSidebar.addEventListener("touchend", e => {
+      if (sideStartX == null) return;
+      const endX = e.changedTouches[0].clientX;
+      if (sideStartX - endX > 40) closeLeftSidebar();
+      sideStartX = null;
+    }, { passive: true });
+  }
+
+  /* ================= BOOKMARK STAR (shared via localStorage) ================= */
+  const bookmarkBtn = document.getElementById("bookmarkBtn");
+  const BOOKMARK_KEY = "quizBookmarks";
+
+  function loadBookmarks() {
+    try {
+      const raw = localStorage.getItem(BOOKMARK_KEY);
+      if (!raw) return [];
+      const arr = JSON.parse(raw);
+      return Array.isArray(arr) ? arr : [];
+    } catch {
+      return [];
+    }
+  }
+  function saveBookmarks(list) {
+    localStorage.setItem(BOOKMARK_KEY, JSON.stringify(list));
+  }
+
+  let bookmarkList = loadBookmarks();
+
+  function isBookmarked(chapterId, baseIndex) {
+    return bookmarkList.some(
+      (b) => b.chapterId === chapterId && b.baseIndex === baseIndex
+    );
+  }
+
+  function toggleBookmark(chapterId, baseIndex) {
+    const idx = bookmarkList.findIndex(
+      (b) => b.chapterId === chapterId && b.baseIndex === baseIndex
+    );
+    if (idx >= 0) {
+      bookmarkList.splice(idx, 1);
+    } else {
+      bookmarkList.push({ chapterId, baseIndex });
+    }
+    saveBookmarks(bookmarkList);
+  }
+
+  /* ================= MCQ ENGINE ================= */
+
+  // ===== timer helpers (uses settings from localStorage) =====
+  const QUESTION_TIME_DEFAULT = 45;
+  function getQuestionTime() {
+    // key aligned with settings.html: set_questionTimeSeconds
+    const v = parseInt(localStorage.getItem("set_questionTimeSeconds"), 10);
+    if (!isNaN(v) && v >= 30) return v;
+    return QUESTION_TIME_DEFAULT;
+  }
+  let QUESTION_TIME = getQuestionTime();
+
+  // ---- Subject / Chapter state ----
+  let currentSubject = null;     // { id, name, chapters }
+  let chapters       = [];       // currentSubject.chapters
+
+  // ---- question state ----
+  let currentChapter    = null;  // { id, name, questions }
+  let baseQuestions     = [];    // all questions for chapter ({ text, options, correctIndex, _baseIndex })
+  let currentQuestions  = [];    // questions of current round
+  let currentIndex      = 0;     // index in currentQuestions
+  let answers           = [];    // option index or null per currentQuestions index
+
+  let firstRoundAnswers = [];    // aligned with baseQuestions
+  let attemptedFirstCnt = 0;
+  let mastered          = [];    // baseIndex -> true once answered correctly
+
+  let roundNumber       = 1;
+  let quizFinished      = false;
+
+  let marksCorrectFirst = 0;
+  let marksWrongFirst   = 0;
+  let marks             = null;
+
+  let currentStreak     = 0;
+  let bestStreak        = 0;
+
+  let timerInterval     = null;
+  let timeRemaining     = QUESTION_TIME;
+  let autoNextTimeout   = null;
+
+  // ---- user settings ----
+  function getBoolSetting(key, def = true) {
+    const v = localStorage.getItem(key);
+    if (v === null) return def;
+    return v === "1";
+  }
+
+  let cfg_randomizeQuestions = getBoolSetting("set_randomizeQuestions", true);
+  let cfg_randomizeOptions   = getBoolSetting("set_randomizeOptions", true);
+  let cfg_showLetters        = getBoolSetting("set_showLetters", true);
+  let cfg_timerOn            = getBoolSetting("set_timerOn", true);
+  let cfg_autoSkip           = getBoolSetting("set_autoSkip", true);
+
+  // ---- DOM refs ----
+  const subjectSelectBtn   = document.getElementById("subjectSelectBtn");
+  const subjectSelectText  = document.getElementById("subjectSelectText");
+  const subjectDropdown    = document.getElementById("subjectDropdown");
+
+
+
+  const chapterSelectBtn   = document.getElementById("chapterSelectBtn");
+  const chapterSelectText  = document.getElementById("chapterSelectText");
+  const chapterDropdown    = document.getElementById("chapterDropdown");
+
+  const orderToggle        = document.getElementById("orderToggle");
+
+  const mcqQuestionText    = document.getElementById("mcqQuestionText");
+  const mcqOptionsContainer= document.getElementById("mcqOptionsContainer");
+
+  const questionCounter    = document.getElementById("questionCounter");
+  const progressInner      = document.getElementById("mcqProgressInner");
+  const timerDisplay       = document.getElementById("timerDisplay");
+
+  const prevBtn            = document.getElementById("prevQuestionBtn");
+  const nextBtn            = document.getElementById("nextQuestionBtn");
+  const roundLabel         = document.getElementById("roundLabel");
+  const bestStreakSpan     = document.getElementById("bestStreak");
+  const marksValue         = document.getElementById("marksValue");
+
+  const markSep            = document.querySelector(".marks-separator");
+  const marksLine          = document.querySelector(".marks-line");
+  const reviewActions      = document.querySelector(".review-actions");
+  const reviewBtn          = document.getElementById("reviewBtn");
+  const savePdfBtn         = document.getElementById("savePdfBtn");
+  const reviewSection      = document.getElementById("reviewSection");
+
+  if (timerDisplay) timerDisplay.textContent = "--";
+
+  // ====== BOOKMARK BUTTON HANDLER (NOW USING CURRENT QUESTION) ======
+  if (bookmarkBtn) {
+    bookmarkBtn.addEventListener("click", () => {
+      // need a chapter + question loaded
+      if (!currentChapter || !currentQuestions.length) return;
+      const q = currentQuestions[currentIndex];
+      if (!q || q._baseIndex == null) return;
+
+      const chapterId = currentChapter.id;
+      const baseIndex = q._baseIndex;
+
+      // toggle in localStorage
+      toggleBookmark(chapterId, baseIndex);
+updateBookmarkVisual(chapterId, baseIndex);
+    });
+  }
+
+// Close other dropdown when opening one
+subjectSelectBtn.addEventListener("click", () => {
+  chapterDropdown.classList.remove("show");
+});
+
+chapterSelectBtn.addEventListener("click", () => {
+  subjectDropdown.classList.remove("show");
+});
+
+/* ----- Wrong attempts storage ----- */
+// ================= WRONG ATTEMPTS STORAGE (same key as index.html) =================
+const WRONG_KEY = "quizWrongAttempts";
+
+function loadWrongList() {
+  try {
+    const raw = localStorage.getItem(WRONG_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveWrongList(list) {
+  localStorage.setItem(WRONG_KEY, JSON.stringify(list));
+}
+// quizWrongAttempts se ek particular question remove karne ke liye
+function removeWrongAttempt(subjectId, chapterId, baseIndex) {
+  const list = loadWrongList();
+  const filtered = list.filter(
+    (w) =>
+      !(
+        w.subjectId === subjectId &&
+        w.chapterId === chapterId &&
+        w.baseIndex === baseIndex
+      )
+  );
+  saveWrongList(filtered);
+}
+
+
+function getWrongIndicesForChapter(subjectId, chapterId) {
+  return loadWrongList()
+    .filter(w => w.subjectId === subjectId && w.chapterId === chapterId)
+    .map(w => w.baseIndex);
+}
+
+// ================= SUBJECT / CHAPTER STATE (wrongs page) =================
+// NOTE: yeh vars MCQ engine ke baaki parcurrentSubject.chapters
+
+// currentChapter, baseQuestions, currentQuestions, answers, etc.
+// already declared upar MCQ engine me honge – unko reuse kar rahe hain.
+
+// ================= SUBJECT DROPDOWN (select which subject's wrongs to see) =================
+function populateSubjectDropdown() {
+  if (!subjectDropdown || typeof subjects === "undefined") return;
+  subjectDropdown.innerHTML = "";
+
+  subjects.forEach(sub => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "chapter-option";
+    btn.textContent = sub.name;
+
+    btn.addEventListener("click", () => {
+      subjectDropdown.classList.remove("show");
+      loadSubject(sub.id);
+    });
+
+    subjectDropdown.appendChild(btn);
+  });
+}
+
+// user ne subject click kiya
+function loadSubject(subjectId) {
+  if (typeof subjects === "undefined") return;
+
+  const subj = subjects.find(s => s.id === subjectId);
+  if (!subj) return;
+
+  currentSubject = subj;
+  chapters = Array.isArray(subj.chapters) ? subj.chapters : [];
+
+  if (subjectSelectText) subjectSelectText.textContent = subj.name;
+  if (chapterSelectText) chapterSelectText.textContent = "None Selected";
+
+  // reset chapter + quiz state
+  currentChapter    = null;
+  baseQuestions     = [];
+  currentQuestions  = [];
+  currentIndex      = 0;
+  answers           = [];
+  firstRoundAnswers = [];
+  attemptedFirstCnt = 0;
+  mastered          = [];
+  roundNumber       = 1;
+  quizFinished      = false;
+  marksCorrectFirst = 0;
+  marksWrongFirst   = 0;
+  marks             = null;
+  currentStreak     = 0;
+  bestStreak        = 0;
+
+  clearTimer && clearTimer();
+  clearAutoNext && clearAutoNext();
+  if (timerDisplay) timerDisplay.textContent = "--";
+
+  resetSummaryUI && resetSummaryUI();
+  updateStats && updateStats();
+  updateProgress && updateProgress();
+
+  // text: ask user to select chapter
+  if (mcqQuestionText) {
+    mcqQuestionText.textContent = "Choose a chapter to load your wrong questions.";
+  }
+  if (mcqOptionsContainer) {
+    mcqOptionsContainer.innerHTML = "";
+  }
+  if (prevBtn) prevBtn.disabled = true;
+  if (nextBtn) nextBtn.disabled = true;
+
+  populateChapterDropdown();
+}
+
+// ================= CHAPTER DROPDOWN (only shows wrong questions of that chapter) =================
+function populateChapterDropdown() {
+  if (!chapterDropdown) return;
+  chapterDropdown.innerHTML = "";
+
+  if (!chapters || !chapters.length) return;
+
+  chapters.forEach(ch => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "chapter-option";
+    btn.textContent = ch.name;
+
+    btn.addEventListener("click", () => {
+      chapterDropdown.classList.remove("show");
+      if (!currentSubject) return;
+      // IMPORTANT: yahan se sirf wrong questions load honge
+      loadChapter(currentSubject.id, ch.id);
+    });
+
+    chapterDropdown.appendChild(btn);
+  });
+}
+
+// ================= LOAD CHAPTER (wrongs only) =================
+// yahan pe full chapter nahi, sirf woh questions aayenge jo index.html me wrong huye the
+function loadChapter(subjectId, chapterId) {
+  if (typeof subjects === "undefined") return;
+
+  const subj = subjects.find(s => s.id === subjectId);
+  if (!subj) return;
+
+  const ch = subj.chapters.find(c => c.id === chapterId);
+  if (!ch) return;
+
+  // sirf iss subject+chapter ke wrong questions ke indices lao
+  const wrongIdx = getWrongIndicesForChapter(subjectId, chapterId).sort((a, b) => a - b);
+
+  if (!wrongIdx.length) {
+    showSettingToast("कुछ भी save नहीं 🙂");
+    return;
+   }
+
+  clearTimer && clearTimer();
+  clearAutoNext && clearAutoNext();
+  if (timerDisplay) timerDisplay.textContent = "--";
+
+  currentSubject = subj;
+  currentChapter = ch;
+
+  // baseQuestions ko sirf wrong questions se banao
+  baseQuestions = wrongIdx.map(idx => ({
+    ...ch.questions[idx],
+    _baseIndex: idx
+  }));
+
+/* ================= CLEAR WRONGS FOR CURRENT CHAPTER ================= */
+
+const clearWrongBtn = document.getElementById("clearWrongBtn");
+
+if (clearWrongBtn) {
+  clearWrongBtn.addEventListener("click", () => {
+    if (!currentSubject || !currentChapter) {
+    showSettingToast("Pehle Subject aur Chapter select karo.");
+    return;
+  }
+
+    const subId = currentSubject.id;
+    const chId  = currentChapter.id;
+
+    // Load wrong list
+    const list = loadWrongList();
+
+    // Filter out all wrong entries for current subject+chapter
+    const newList = list.filter(w => !(w.subjectId === subId && w.chapterId === chId));
+
+    // Save back
+    saveWrongList(newList);
+
+    showSettingToast("सब clear कर दिया गया");
+
+    // Reload chapter view (this will empty the view if nothing left)
+    loadChapter(currentSubject.id, currentChapter.id);
+  });
+}
+
+  mastered = Array(baseQuestions.length).fill(false);
+
+  cfg_randomizeQuestions = getBoolSetting
+    ? getBoolSetting("set_randomizeQuestions", true)
+    : true;
+
+  currentQuestions = [...baseQuestions];
+  if (cfg_randomizeQuestions) {
+    shuffleArray(currentQuestions);
+  }
+
+  currentIndex      = 0;
+  answers           = Array(currentQuestions.length).fill(null);
+  firstRoundAnswers = Array(baseQuestions.length).fill(null);
+  attemptedFirstCnt = 0;
+
+  roundNumber       = 1;
+  quizFinished      = false;
+  marksCorrectFirst = 0;
+  marksWrongFirst   = 0;
+  marks             = null;
+  currentStreak     = 0;
+  bestStreak        = 0;
+
+  if (chapterSelectText) chapterSelectText.textContent = ch.name;
+
+  if (prevBtn) prevBtn.disabled = true;
+  if (nextBtn) nextBtn.disabled = true;
+
+  resetSummaryUI && resetSummaryUI();
+  updateStats && updateStats();
+  updateProgress && updateProgress();
+  renderQuestion && renderQuestion();
+  startTimerForCurrentQuestion && startTimerForCurrentQuestion();
+}
+
+// ================= DROPDOWN OPEN/CLOSE HANDLERS =================
+
+// subject dropdown toggle
+if (subjectSelectBtn && subjectDropdown) {
+  subjectSelectBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    subjectDropdown.classList.toggle("show");
+    // open subject => close chapter
+    if (chapterDropdown) chapterDropdown.classList.remove("show");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!subjectSelectBtn.contains(e.target) &&
+        !subjectDropdown.contains(e.target)) {
+      subjectDropdown.classList.remove("show");
+    }
+  });
+}
+
+// chapter dropdown toggle
+if (chapterSelectBtn && chapterDropdown) {
+  chapterSelectBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    chapterDropdown.classList.toggle("show");
+    // open chapter => close subject
+    if (subjectDropdown) subjectDropdown.classList.remove("show");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!chapterSelectBtn.contains(e.target) &&
+        !chapterDropdown.contains(e.target)) {
+      chapterDropdown.classList.remove("show");
+    }
+  });
+}
+
+// orderToggle change par bhi same chapter ko reload kar sakte ho agar chaho
+if (orderToggle) {
+  orderToggle.addEventListener("change", () => {
+    if (currentSubject && currentChapter) {
+      loadChapter(currentSubject.id, currentChapter.id);
+    }
+  });
+}
+
+// ================= INITIALISE (default subject pre-select, same as index) =================
+if (typeof subjects !== "undefined" && Array.isArray(subjects) && subjects.length > 0) {
+  currentSubject = subjects[0];
+  chapters = currentSubject.chapters || [];
+  if (subjectSelectText) subjectSelectText.textContent = currentSubject.name;
+}
+
+populateSubjectDropdown();
+populateChapterDropdown();
+
+
+
+
+
+
+
+  // ---- helpers ----
+  function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  }
+
+// Decide final option order for a question,
+  // respecting rules like "All of the above", "None", "Both (a) and (b)", etc.
+  function computeOptionOrder(options, allowRandom) {
+    const count = options.length;
+    const indices = Array.from({ length: count }, (_, i) => i);
+
+    // If global option randomisation is OFF, keep default order
+    if (!allowRandom) return indices;
+
+    // Normalise text for matching
+    function norm(s) {
+      return s.toLowerCase().replace(/\s+/g, " ").trim();
+    }
+
+    const info = options.map(text => {
+      const t = norm(text);
+      const allAbove   = t.includes("all of the above");
+      const noneAbove  = t.startsWith("none") || t.includes("none of the above");
+      const bothAB     = t.includes("both (a) and (b)") || t.includes("both a and b");
+      const onlyAB     = t.includes("only (a) and (b)") || t.includes("only a and b");
+      const both12     = t.includes("both (1) and (2)") || t.includes("both 1 and 2");
+
+      return { allAbove, noneAbove, bothAB, onlyAB, both12 };
+    });
+
+    const hasBothAB  = info.some(i => i.bothAB);
+    const hasOnlyAB  = info.some(i => i.onlyAB);
+    const hasBoth12  = info.some(i => i.both12);
+
+    // RULES 6, 7, 8, 9:
+    // - if question has "only (a) and (b)"
+    // - OR has "both (a) and (b)"
+    // - OR has "both (1) and (2)"
+    // then we DO NOT randomise this question at all.
+    // (Author keeps the default order in questions.js)
+    if (hasBothAB || hasOnlyAB || hasBoth12) {
+      return indices;
+    }
+
+    // RULES 1, 4, 5:
+    // - "All of the above" must always be last
+    // - "None..." (e.g. "None of the above") must always be last
+    const specialsLast = indices.filter(i => info[i].allAbove || info[i].noneAbove);
+    const normal = indices.filter(i => !specialsLast.includes(i));
+
+    // Randomise only the "normal" options
+    shuffleArray(normal);
+
+    // Normal options first, then the special ones at the end
+    return [...normal, ...specialsLast];
+  }
+
+  function formatTime(sec) {
+    return `${sec}s`;
+  }
+
+  function clearTimer() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+  }
+
+  function clearAutoNext() {
+    if (autoNextTimeout) {
+      clearTimeout(autoNextTimeout);
+      autoNextTimeout = null;
+    }
+  }
+
+  function setLiveQuestionBorder(color) {
+    if (!mcqOptionsContainer) return;
+    const box = mcqOptionsContainer.closest(".mcq-card") || mcqOptionsContainer.parentElement;
+    if (!box) return;
+
+    if (color) {
+      box.style.border = `1px solid ${color}`;
+      box.style.borderRadius = "12px";
+      box.style.padding = "10px";
+    } else {
+      box.style.border = "";
+    }
+  }
+
+  function startTimerForCurrentQuestion() {
+    cfg_timerOn = getBoolSetting("set_timerOn", true);
+
+    if (!cfg_timerOn) {
+      clearTimer();
+      if (timerDisplay) timerDisplay.textContent = "--";
+      return;
+    }
+    if (!timerDisplay) return;
+
+    clearTimer();
+    clearAutoNext();
+
+    if (quizFinished || !currentQuestions.length || answers[currentIndex] !== null) {
+      timerDisplay.textContent = "--";
+      return;
+    }
+
+    QUESTION_TIME = getQuestionTime();
+    timeRemaining = QUESTION_TIME;
+    timerDisplay.textContent = formatTime(timeRemaining);
+
+    timerInterval = setInterval(() => {
+      timeRemaining--;
+      timerDisplay.textContent = formatTime(timeRemaining);
+      if (timeRemaining <= 0) {
+        clearTimer();
+        handleTimeUp();
+      }
+    }, 1000);
+  }
+
+  function handleTimeUp() {
+    if (answers[currentIndex] == null && !quizFinished) {
+      currentStreak = 0;
+      updateStats();
+      goToNextQuestion(true);
+    }
+  }
+
+  function updateProgress() {
+    if (!questionCounter || !progressInner || !baseQuestions.length) {
+      if (questionCounter) questionCounter.textContent = "0 / 0";
+      if (progressInner)   progressInner.style.width = "0%";
+      return;
+    }
+    const total = baseQuestions.length;
+    const attempted = attemptedFirstCnt;
+    questionCounter.textContent = `${attempted} / ${total}`;
+    const pct = (attempted / total) * 100;
+    progressInner.style.width = `${pct}%`;
+  }
+
+  function updateStats() {
+    if (bestStreakSpan) {
+      bestStreakSpan.textContent = `Best: ${bestStreak} | Streak: ${currentStreak}`;
+    }
+    if (roundLabel) {
+      roundLabel.textContent = (roundNumber === 1) ? "Round 1" : "Retrying round";
+    }
+    if (marksValue) {
+      marksValue.textContent = marks == null ? "--" : `${marks.toFixed(2)} M`;
+    }
+  }
+
+  function computeMarks() {
+    return marksCorrectFirst * 1 + marksWrongFirst * -0.25;
+  }
+
+  /* ---------- SUBJECT DROPDOWN ---------- */
+
+
+function updateBookmarkVisual(chapterId, baseIndex) {
+  if (!bookmarkBtn) return;
+  const icon = bookmarkBtn.querySelector("i");
+  const active = chapterId && baseIndex != null && isBookmarked(chapterId, baseIndex);
+
+  bookmarkBtn.classList.toggle("active", active);
+
+  if (icon) {
+    if (active) {
+      icon.classList.remove("fa-regular");
+      icon.classList.add("fa-solid");
+    } else {
+      icon.classList.remove("fa-solid");
+      icon.classList.add("fa-regular");
+    }
+  }
+}
+
+
+
+
+  /* ---------- CHAPTER DROPDOWN (depends on currentSubject) ---------- */
+
+  /* ---------- reset summary UI ---------- */
+  function resetSummaryUI() {
+    if (markSep)       markSep.style.display = "none";
+    if (marksLine)     marksLine.style.display = "none";
+    if (reviewActions) reviewActions.style.display = "none";
+    if (reviewBtn)     reviewBtn.disabled = true;
+    if (savePdfBtn)    savePdfBtn.disabled = true;
+
+    if (reviewSection) {
+      reviewSection.style.display = "none";
+      reviewSection.innerHTML = "";
+    }
+  }
+
+  /* ---------- loadChapter (uses chapters from currentSubject) ---------- */
+
+// WRONGS PAGE – sirf galat wale questions load karne ke liye
+// Purane loadChapter ko hata ke ye wala use karo
+
+
+  /* ---------- renderQuestion ---------- */
+  function renderQuestion() {
+    if (!mcqQuestionText || !mcqOptionsContainer) return;
+
+    const q = currentQuestions[currentIndex];
+
+    setLiveQuestionBorder(null);
+
+    if (!q) {
+      mcqQuestionText.textContent = "Choose a chapter to load your wrong questions.";
+      mcqOptionsContainer.innerHTML = "";
+      if (prevBtn) prevBtn.disabled = true;
+      if (nextBtn) nextBtn.disabled = true;
+
+      if (bookmarkBtn) {
+        bookmarkBtn.style.display = "none";
+        bookmarkBtn.classList.remove("active");
+      }
+      return;
+    }
+
+    mcqQuestionText.textContent = `${currentIndex + 1}. ${q.text}`;
+    mcqOptionsContainer.innerHTML = "";
+
+    // update star state from localStorage
+    if (bookmarkBtn && currentChapter && q._baseIndex != null) {
+  bookmarkBtn.style.display = "inline-flex";
+  updateBookmarkVisual(currentChapter.id, q._baseIndex);
+}
+
+    const savedAnswer = answers[currentIndex];
+
+    cfg_randomizeOptions = getBoolSetting("set_randomizeOptions", true);
+    cfg_showLetters      = getBoolSetting("set_showLetters", true);
+
+    // Decide order once per question, with special-case rules
+    if (!q._optionOrder) {
+      q._optionOrder = computeOptionOrder(q.options, cfg_randomizeOptions);
+    }
+
+    q._optionOrder.forEach((optIndex, pos) => {
+      const optText = q.options[optIndex];
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "mcq-option-btn";
+      btn.dataset.idx = String(optIndex);
+
+      const letter = String.fromCharCode(65 + pos);
+      const letterHTML = cfg_showLetters
+        ? `<span class="opt-letter">${letter}.</span>`
+        : "";
+
+      btn.innerHTML = `
+        ${letterHTML}
+        <span class="opt-text">${optText}</span>
+      `;
+
+      if (savedAnswer !== null) {
+        const isCorrectOpt = optIndex === q.correctIndex;
+        const isSelected   = optIndex === savedAnswer;
+
+        btn.classList.remove("correct", "wrong", "dimmed");
+
+        if (isCorrectOpt) btn.classList.add("correct");
+        if (isSelected && !isCorrectOpt) btn.classList.add("wrong");
+        if (!isSelected && !isCorrectOpt) btn.classList.add("dimmed");
+
+        btn.disabled = true;
+      } else {
+        btn.addEventListener("click", () => handleOptionClick(optIndex));
+      }
+
+      mcqOptionsContainer.appendChild(btn);
+    });
+
+    if (prevBtn) prevBtn.disabled = (currentIndex === 0);
+    if (nextBtn) {
+      if (!quizFinished) {
+        nextBtn.disabled = (answers[currentIndex] === null);
+      } else {
+        nextBtn.disabled = (currentIndex === currentQuestions.length - 1);
+      }
+    }
+
+    updateProgress();
+    updateStats();
+  }
+
+  /* ---------- handleOptionClick ---------- */
+  function handleOptionClick(selectedIdx) {
+    if (quizFinished) return;
+    if (!currentQuestions.length) return;
+
+    const q = currentQuestions[currentIndex];
+    if (!q) return;
+
+    if (answers[currentIndex] !== null) return;
+
+    clearTimer();
+    clearAutoNext();
+
+    const isCorrect = selectedIdx === q.correctIndex;
+
+    if (isCorrect && q._baseIndex != null) {
+      mastered[q._baseIndex] = true;
+    }
+
+if (
+    isCorrect &&
+    q._baseIndex != null &&
+    currentSubject &&
+    currentChapter
+  ) {
+    removeWrongAttempt(currentSubject.id, currentChapter.id, q._baseIndex);
+  }
+
+    setLiveQuestionBorder(isCorrect ? "#4caf50" : "#e53935");
+    answers[currentIndex] = selectedIdx;
+
+    const buttons = mcqOptionsContainer.querySelectorAll(".mcq-option-btn");
+    buttons.forEach(btn => {
+      const idx = parseInt(btn.dataset.idx, 10);
+      const isCorrectOpt = idx === q.correctIndex;
+      const isSelected   = idx === selectedIdx;
+
+      btn.classList.remove("correct", "wrong", "dimmed");
+
+      if (isCorrectOpt) btn.classList.add("correct");
+      if (isSelected && !isCorrectOpt) btn.classList.add("wrong");
+      if (!isSelected && !isCorrectOpt) btn.classList.add("dimmed");
+
+      btn.disabled = true;
+    });
+
+    if (roundNumber === 1 && q._baseIndex != null && firstRoundAnswers[q._baseIndex] === null) {
+      firstRoundAnswers[q._baseIndex] = selectedIdx;
+      attemptedFirstCnt++;
+
+      if (isCorrect) {
+        marksCorrectFirst++;
+      } else {
+        marksWrongFirst++;
+      }
+    }
+
+    if (isCorrect) {
+      currentStreak++;
+      if (currentStreak > bestStreak) bestStreak = currentStreak;
+    } else {
+      currentStreak = 0;
+    }
+
+    if (nextBtn && !quizFinished) nextBtn.disabled = false;
+
+    updateStats();
+    updateProgress();
+
+    cfg_autoSkip = getBoolSetting("set_autoSkip", true);
+
+    if (cfg_autoSkip) {
+      const delay = isCorrect ? 1200 : 3000;
+      autoNextTimeout = setTimeout(() => {
+        autoNextTimeout = null;
+        if (!quizFinished) {
+          goToNextQuestion(false);
+        }
+      }, delay);
+    }
+  }
+
+  /* ---------- navigation + infinite retry rounds ---------- */
+  function goToNextQuestion(fromTimer) {
+    if (!currentQuestions.length) return;
+
+    if (!fromTimer && answers[currentIndex] === null && !quizFinished) {
+      return;
+    }
+
+    if (currentIndex < currentQuestions.length - 1) {
+      currentIndex++;
+      renderQuestion();
+      startTimerForCurrentQuestion();
+      return;
+    }
+
+    finishRound();
+  }
+
+  function goToPrevQuestion() {
+    if (!currentQuestions.length) return;
+    if (currentIndex === 0) return;
+
+    clearTimer();
+    clearAutoNext();
+
+    currentIndex--;
+    renderQuestion();
+    startTimerForCurrentQuestion();
+  }
+
+  function finishRound() {
+    clearTimer();
+    clearAutoNext();
+
+    if (roundNumber === 1 && marks === null) {
+      marks = computeMarks();
+    }
+
+    const wrongBaseIdx = [];
+    baseQuestions.forEach((q, idx) => {
+      if (!mastered[idx]) wrongBaseIdx.push(idx);
+    });
+
+    if (wrongBaseIdx.length > 0) {
+      roundNumber++;
+      currentQuestions = wrongBaseIdx.map(i => baseQuestions[i]);
+
+      cfg_randomizeQuestions = getBoolSetting("set_randomizeQuestions", true);
+      if (cfg_randomizeQuestions) shuffleArray(currentQuestions);
+
+      answers = Array(currentQuestions.length).fill(null);
+      currentIndex = 0;
+      currentStreak = 0;
+
+      updateStats();
+      renderQuestion();
+      startTimerForCurrentQuestion();
+      return;
+    }
+
+    endQuiz();
+  }
+
+  function endQuiz() {
+    quizFinished = true;
+    clearTimer();
+    clearAutoNext();
+    if (timerDisplay) timerDisplay.textContent = "--";
+
+    if (markSep)       markSep.style.display = "block";
+    if (marksLine)     marksLine.style.display = "block";
+    if (reviewActions) reviewActions.style.display = "flex";
+    if (reviewBtn)     reviewBtn.disabled = false;
+    if (savePdfBtn)    savePdfBtn.disabled = false;
+
+    if (prevBtn) prevBtn.disabled = (currentIndex === 0);
+    if (nextBtn) nextBtn.disabled = (currentIndex === currentQuestions.length - 1);
+
+    updateStats();
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      clearAutoNext();
+      goToNextQuestion(false);
+    });
+  }
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      clearAutoNext();
+      goToPrevQuestion();
+    });
+  }
+
+function buildReviewSection() {
+  if (!reviewSection) return;
+  reviewSection.innerHTML = "";
+
+  if (!baseQuestions.length) {
+    reviewSection.textContent = "No questions to review.";
+    return;
+  }
+
+  // ---------- 1st PAGE: COVER / GREETING ----------
+  const cover = document.createElement("div");
+  cover.className = "review-cover";
+
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  const dateStr = now.toLocaleDateString();
+
+  cover.innerHTML = `
+    <div class="review-cover-time">
+      <div>Time: ${timeStr}</div>
+      <div>Date: ${dateStr}</div>
+    </div>
+
+    <h1 class="review-cover-title">TESTY – Your Practice Report 📘</h1>
+
+    <p class="review-cover-text">
+      You're working hard, and that already puts you far ahead. Stay consistent, stay
+      disciplined, stay hungry. You are going to crack this. I believe you will, seriously.
+      Best of LUCK! ♥️ Mujhe Pata Hai Tum Kar Loge.
+    </p>
+
+    <p class="review-cover-sign">
+      Made with Love ♥️ Kunal
+    </p>
+  `;
+  // cover ko direct reviewSection ke andar daal rahe hain
+  reviewSection.appendChild(cover);
+
+  // ---------- QUESTIONS LIST (RTP/MTP jaisa hi) ----------
+  baseQuestions.forEach((q, idx) => {
+    const userAns = firstRoundAnswers[idx];
+    const isCorrectFirst = userAns === q.correctIndex;
+
+    const block = document.createElement("div");
+    block.className = "review-question";
+
+    const qText = document.createElement("div");
+    qText.className = "review-q-text";
+    qText.textContent = `Q${idx + 1}. ${q.text}`;
+    block.appendChild(qText);
+
+    q.options.forEach((opt, optIndex) => {
+      const optDiv = document.createElement("div");
+      optDiv.className = "review-option";
+
+      const letter = String.fromCharCode(65 + optIndex);
+      optDiv.textContent = `${letter}. ${opt}`;
+
+      const isCorrect = optIndex === q.correctIndex;
+      const isSelected = userAns === optIndex;
+
+      if (isSelected && isCorrect) {
+        optDiv.classList.add("correct");
+      } else if (isSelected && !isCorrect) {
+        optDiv.classList.add("wrong");
+      } else if (!isSelected && isCorrect) {
+        optDiv.classList.add("correct");
+      }
+
+      block.appendChild(optDiv);
+    });
+
+    if (userAns == null) {
+      const info = document.createElement("div");
+      info.className = "review-not-attempted";
+      info.textContent = "Not attempted in first round.";
+      block.appendChild(info);
+    }
+
+    // Border colour RTP/MTP style jaisa
+    if (userAns == null) {
+      block.classList.add("review-border-neutral");
+    } else if (isCorrectFirst) {
+      block.classList.add("review-border-correct");
+    } else {
+      block.classList.add("review-border-wrong");
+    }
+
+    reviewSection.appendChild(block);
+  });
+}
+
+  // Review button – screen pe bhi same content dikhayega
+  if (reviewBtn) {
+    reviewBtn.addEventListener("click", () => {
+      if (!quizFinished) return;
+      if (reviewSection.style.display === "block") {
+        reviewSection.style.display = "none";
+      } else {
+        buildReviewSection();
+        reviewSection.style.display = "block";
+        reviewSection.scrollTop = 0;
+      }
+    });
+  }
+
+  // PDF button – cover + questions print karega
+  if (savePdfBtn) {
+    savePdfBtn.addEventListener("click", () => {
+      if (!quizFinished) return;
+      buildReviewSection();
+      reviewSection.style.display = "block";
+      reviewSection.scrollTop = 0;
+      window.print();
+    });
+  }
+  
+  
+
+  /* ---------- INITIALISE SUBJECT & DROPDOWNS ---------- */
+  if (typeof subjects !== "undefined" && Array.isArray(subjects) && subjects.length > 0) {
+    currentSubject = subjects[0];
+    chapters = currentSubject.chapters || [];
+    if (subjectSelectText) subjectSelectText.textContent = currentSubject.name;
+  }
+
+  populateSubjectDropdown();
+  populateChapterDropdown();
+
+  updateStats();
+  updateProgress();
+  renderQuestion();
+  
+  const minimalSaved = localStorage.getItem("minimalTheme") === "1";
+if (minimalSaved) document.body.classList.add("minimal-theme");
+if (minimalSwitch) minimalSwitch.checked = minimalSaved;
+
+
+  const toast    = document.getElementById("settingToast");
+  const toastTxt = document.getElementById("settingToastText");
+  const toastBar = document.getElementById("settingToastBar");
+  let toastTimer = null;
+
+  window.showSettingToast = function (message) {
+    if (!toast || !toastTxt) return;
+
+    // reset state
+    toast.classList.remove("show");
+    void toast.offsetWidth; // force reflow
+
+    toastTxt.textContent = message;
+    toast.classList.add("show");
+
+    if (toastBar) {
+      toastBar.style.transition = "none";
+      toastBar.style.width = "0%";
+
+      requestAnimationFrame(() => {
+        toastBar.style.transition = "width 1.0s linear";
+        toastBar.style.width = "100%";
+      });
+    }
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 1200);
+  };
+
+})();
+</script>
+<!-- Tiny toast like settings page -->
+
+<div id="settingToast" class="setting-toast">
+  <div class="setting-toast-bar" id="settingToastBar"></div>
+  <span id="settingToastText"></span>
+</div>
+<footer class="simple-footer">
+  <div>Made with ♥️</div>
+  <div>Kunal Sharma • CA Foundation</div>
+</footer>
+<script>
+  // Hide preloader once page is ready
+  window.addEventListener("load", function () {
+    const pre = document.getElementById("preloader");
+    if (!pre) return;
+
+    pre.classList.add("hidden");
+
+    // optional: remove from DOM after transition
+    setTimeout(() => {
+      if (pre && pre.parentNode) {
+        pre.parentNode.removeChild(pre);
+      }
+    }, 300);
+  });
+
+// ensure each left-list <li> behaves like a link when whole LI clicke
+</script>
+<script>
+// Toast setup for wrongs.html (same as settings)
+document.addEventListener("DOMContentLoaded", function () {
+  const toast     = document.getElementById("settingToast");
+  const toastText = document.getElementById("settingToastText");
+  const toastBar  = document.getElementById("settingToastBar");
+  let toastTimer  = null;
+
+  // make it GLOBAL so loadChapter / clearWrongBtn se call ho sake
+  window.showSettingToast = function (message) {
+    if (!toast || !toastText) return;
+
+    // reset animation state
+    toast.classList.remove("show");
+    void toast.offsetWidth; // reflow force
+
+    toastText.textContent = message;
+    toast.classList.add("show");
+
+    if (toastBar) {
+      toastBar.style.transition = "none";
+      toastBar.style.width = "0%";
+
+      requestAnimationFrame(() => {
+        toastBar.style.transition = "width 1.0s linear";
+        toastBar.style.width = "100%";
+      });
+    }
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 1200);
+  };
+});
+</script>
+<script src="shared.js"></script>
+</body>
+</html>

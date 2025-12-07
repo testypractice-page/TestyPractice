@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TESTY – Settings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="style.css">
+  <style>
+    /* =============== MAIN CONTENT =============== */
+.settings-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7280;
+  margin: 18px 0 6px;
+}
+
+/* little tighter for the first heading after H1 if needed */
+.settings-option > h2.settings-section-title:first-of-type {
+  margin-top: 12px;
+}
+
+/* description under each setting */
+/* description text style */
+
+
+
+
+body.dark .settings-section-title {
+  color: #9ca3af;
+}
+body.dark .setting-description {
+  color: #9ca3af;
+}
+    
+    
+
+
+
+
+  </style>
+</head>
+
+<body>
+  <!-- ========== PRELOADER ========== -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-card">
+      <div class="preloader-logo">TESTY</div>
+      <div class="preloader-sub">Loading your questions…</div>
+      <div class="preloader-bar">
+        <div class="preloader-bar-inner"></div>
+      </div>
+    </div>
+  </div>
+  <!-- ========== HEADER ========== -->
+  <header class="top-bar">
+    <div class="logo">TESTY</div>
+
+    <nav class="top-nav">
+      <a href="index.html">Home</a>
+      <a href="auth.html">Login</a>
+      <a href="rtp_mtp.html">RTP/MTP</a>
+      <a href="settings.html">Settings</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Drop Suggestion</a>
+      <a href="sponsor.html">Sponsor</a>
+
+    </nav>
+
+    <div class="right-controls">
+      <button class="top-btn" id="themeToggle">🌙</button>
+      <button class="top-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- ========== LEFT SIDEBAR ========== -->
+  <div class="left-handle" id="leftHandle"></div>
+
+  <aside class="left-sidebar" id="leftSidebar">
+    <ul class="left-list">
+<li>
+  <a href="profile.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-user"></i></span>
+    My Profile
+  </a>
+</li>
+
+<li>
+  <a href="bookmarks.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-bookmark"></i></span>
+    Bookmarks
+  </a>
+</li>
+
+<li>
+  <a href="#" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-trophy"></i></span>
+    Leaderboard
+  </a>
+</li>
+
+<li>
+  <a href="#" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-comments"></i></span>
+    Chatrooms
+  </a>
+</li>
+<li>
+  <a href="articles/How To Overcome Overthinking while exams.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-note-sticky"></i></span>
+    Article
+  </a>
+</li>
+<li>
+  <a href="wrongs.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-pen-to-square"></i></span>
+    Take a Correction Test
+  </a>
+</li>
+    </ul>
+  </aside>
+  <div class="left-overlay" id="leftOverlay"></div>
+
+  <!-- ========== RIGHT SIDEBAR ========== -->
+  <aside class="right-sidebar" id="rightSidebar">
+    <div class="right-header">
+      <span>TESTY Menu</span>
+      <button class="right-close" id="rightClose">✕</button>
+    </div>
+    <ul class="right-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="auth.html">Login / Signup</a></li>
+      <li><a href="rtp_mtp.html">RTP/MTP</a></li>
+      <li class="nav-item" data-page="settings"><a href="settings.html">Settings</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html">Chapters</a></li>
+      <li><a href="sponsor.html">Sponsor</a></li>
+      <li><a href="feedback.html">Drop Suggestion</a></li>
+    </ul>
+  </aside>
+  <div class="right-overlay" id="rightOverlay"></div>
+
+  <!-- ========== MAIN AREA ========== -->
+  <div class="settings-option">
+    <h1>Settings</h1>
+    <h2 class="settings-section-title">Personalization</h2>
+    <div class="setting-box">
+      <div class="switch-row">
+        <span>Randomize Questions</span>
+
+        <label class="switch">
+          <input type="checkbox" id="randomizeQuestionsSwitch">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Randomize Options -->
+    <div class="setting-box">
+      <div class="switch-row">
+        <span>Randomize Options</span>
+
+        <label class="switch">
+          <input type="checkbox" id="randomizeOptionsSwitch">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Show A/B/C/D labels -->
+    <div class="setting-box">
+      <div class="switch-row">
+        <span>Show A / B / C / D</span>
+
+        <label class="switch">
+          <input type="checkbox" id="showLettersSwitch">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+<div class="setting-box setting-timer" id="timerSettingBox">
+  <div class="switch-row">
+    <div class="switch-text">
+      <span>Question Timer</span>
+      <div class="setting-caption" id="timerCurrentLabel">(Current: 45s)</div>
+    </div>
+
+    <label class="switch">
+      <input type="checkbox" id="timerSwitch">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- Hidden extra controls, opened by tapping the box (not the slider) -->
+  <div class="timer-extra" id="timerExtra">
+    <label for="timerSecondsInput" class="timer-label">Seconds per question</label>
+<div class="timer-extra-row">
+  <div class="tap-area">
+    <input
+      type="number"
+      id="timerSecondsInput"
+      min="30"
+      max="600"
+      step="5"
+    />
+  </div>
+
+  <button type="button" id="timerSaveBtn" class="timer-save-btn">
+    Save
+  </button>
+</div>
+    <p class="timer-hint">
+      Minimum 30 seconds. This time will apply to all quizzes.
+    </p>
+  </div>
+</div>
+
+
+<!-- RTP/MTP Exam Mode (100Q = 120 mins) -->
+    <div class="setting-box">
+      <div class="switch-row">
+        <div class="switch-text">
+          <span>RTP/MTP Exam Mode<br>
+          100 Q = 120 mins</span>
+          <p class="setting-description">
+            Applies only on RTP/MTP page.
+          </p>
+        </div>
+
+        <label class="switch">
+          <input type="checkbox" id="rtpMtpExamModeSwitch">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+
+    <!-- Auto-Skip -->
+    <div class="setting-box">
+      <div class="switch-row">
+        <span>Auto-Skip to Next</span>
+
+        <label class="switch">
+          <input type="checkbox" id="autoSkipSwitch">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+    <hr class="dashed">
+    <h2 class="settings-section-title">THEME</h2>
+        <div class="setting-box">
+      <div class="switch-row">
+        <span>Dark Mode</span>
+
+        <label class="switch">
+          <input type="checkbox" id="themeSwitch">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+<div class="setting-box" id="minimalThemeSettingBox">
+  <div class="switch-row">
+    <span>Minimilist Theme</span>
+
+    <label class="switch">
+      <input type="checkbox" id="Minimilist">
+      <span class="slider"></span>
+    </label>
+  </div>
+  <p class="setting-description">
+    Turn this ON to get a Minimal Colors theme.<br>Warning: Don't use in dark mode.
+  </p>
+</div>
+
+
+<!-- Timer ON/OFF + expandable seconds control -->
+
+        <!-- Left Sidebar section heading --><hr class="dashed">
+    <h2 class="settings-section-title">Left Sidebar</h2>
+        <!-- Hide Left Sidebar -->
+    <div class="setting-box" id="leftSidebarSettingBox">
+      <div class="switch-row">
+        <span>Hide Left Sidebar</span>
+
+        <label class="switch">
+          <input type="checkbox" id="hideLeftSidebarSwitch">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <p class="setting-description">
+        Turn this ON to get a Wide Area content
+      </p>
+    </div>
+  </main>
+
+
+<!-- Tiny toast for settings -->
+<div id="settingToast" class="setting-toast">
+  <div class="setting-toast-bar" id="settingToastBar"></div>
+  <span id="settingToastText"></span>
+</div>
+
+<!-- ========== SCRIPT (same system as index.html) ========== -->
+  <!-- ========== SCRIPT (same system as index.html) ========== -->
+  <script>
+    /* ------- THEME (shared with index.html) ------- */
+    const themeToggle = document.getElementById("themeToggle");
+    const themeSwitch = document.getElementById("themeSwitch");
+
+    const savedTheme = localStorage.getItem("theme");
+    const isDark = savedTheme === "dark";
+
+    if (isDark) document.body.classList.add("dark");
+    if (themeSwitch) themeSwitch.checked = isDark;
+    themeToggle.textContent = isDark ? "☀️" : "🌙";
+
+    function applyTheme(dark) {
+      document.body.classList.toggle("dark", dark);
+      themeToggle.textContent = dark ? "☀️" : "🌙";
+      if (themeSwitch) themeSwitch.checked = dark;
+      localStorage.setItem("theme", dark ? "dark" : "light");
+    }
+
+    // header button
+    themeToggle.addEventListener("click", () => {
+      applyTheme(!document.body.classList.contains("dark"));
+    });
+
+    // slider
+    themeSwitch.addEventListener("change", (e) => {
+      applyTheme(e.target.checked);
+    });
+
+    /* ------- RIGHT SIDEBAR ------- */
+    const menuBtn = document.getElementById("menuBtn");
+    const rightSidebar = document.getElementById("rightSidebar");
+    const rightOverlay = document.getElementById("rightOverlay");
+    const rightClose = document.getElementById("rightClose");
+
+    if (menuBtn) menuBtn.addEventListener("click", () => {
+      rightSidebar.classList.add("open");
+      rightOverlay.classList.add("show");
+    });
+
+    function closeRightSidebar() {
+      rightSidebar.classList.remove("open");
+      rightOverlay.classList.remove("show");
+    }
+
+    if (rightClose) rightClose.addEventListener("click", closeRightSidebar);
+    if (rightOverlay) rightOverlay.addEventListener("click", closeRightSidebar);
+
+    /* ------- LEFT SIDEBAR + SWIPE ------- */
+    const leftSidebar = document.getElementById("leftSidebar");
+    const leftOverlay = document.getElementById("leftOverlay");
+    const leftHandle = document.getElementById("leftHandle");
+
+    function openLeftSidebar() {
+      leftSidebar.classList.add("open");
+      leftOverlay.classList.add("show");
+    }
+    function closeLeftSidebar() {
+      leftSidebar.classList.remove("open");
+      leftOverlay.classList.remove("show");
+    }
+
+    leftHandle.addEventListener("click", openLeftSidebar);
+    leftOverlay.addEventListener("click", closeLeftSidebar);
+
+    let startX = null;
+
+    leftHandle.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+    leftHandle.addEventListener("touchend", (e) => {
+      const diff = e.changedTouches[0].clientX - startX;
+      if (diff > 40) openLeftSidebar();
+    });
+
+    leftSidebar.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+    leftSidebar.addEventListener("touchend", (e) => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (diff > 40) closeLeftSidebar();
+    });
+    
+    
+
+  </script>
+<script>
+// ===== QUIZ SETTINGS – SAVE TO localStorage =====
+document.addEventListener("DOMContentLoaded", () => {
+  const SETTINGS_KEYS = {
+    leftSidebarHidden:  "set_leftSidebarHidden",
+    randomizeQuestions: "set_randomizeQuestions",
+    randomizeOptions:   "set_randomizeOptions",
+    showLetters:        "set_showLetters",
+    timerOn:            "set_timerOn",
+    autoSkip:           "set_autoSkip",
+    // this key is what index.html already reads:
+    questionTime:       "set_questionTimeSeconds",
+    // NEW: exam mode only for RTP/MTP
+    rtpMtpExamMode:     "set_rtpMtpExamMode"
+  };
+  
+    // ------- TOAST SETUP -------
+  const toast      = document.getElementById("settingToast");
+  const toastText  = document.getElementById("settingToastText");
+  const toastBar   = document.getElementById("settingToastBar");
+  let toastTimer   = null;
+
+  function showSettingToast(message) {
+    if (!toast || !toastText) return;
+
+    // reset state
+    toast.classList.remove("show");
+    void toast.offsetWidth; // force reflow
+
+    toastText.textContent = message;
+    toast.classList.add("show");
+
+    if (toastBar) {
+      toastBar.style.transition = "none";
+      toastBar.style.width = "0%";
+
+      requestAnimationFrame(() => {
+        toastBar.style.transition = "width 1.0s linear";
+        toastBar.style.width = "100%";
+      });
+    }
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 1200);
+  }
+// extra: expand/collapse description for "Hide Left Sidebar"
+  // ----- Expand/collapse descriptions for all boxes that have .setting-description -----
+  const descriptionBoxes = document.querySelectorAll(".setting-box");
+
+  descriptionBoxes.forEach((box) => {
+    // Only apply if this box actually has a description paragraph
+    const hasDescription = box.querySelector(".setting-description");
+    if (!hasDescription) return;
+
+    box.addEventListener("click", (e) => {
+      // ignore clicks directly on the switch/slider so toggle still works normally
+      if (e.target.closest(".switch")) return;
+      box.classList.toggle("open");
+    });
+  });
+  
+const hideLeftSidebarSwitch = document.getElementById("hideLeftSidebarSwitch");
+  const randomizeQuestionsSwitch = document.getElementById("randomizeQuestionsSwitch");
+  const randomizeOptionsSwitch   = document.getElementById("randomizeOptionsSwitch");
+  const showLettersSwitch        = document.getElementById("showLettersSwitch");
+  const timerSwitch              = document.getElementById("timerSwitch");
+  const autoSkipSwitch           = document.getElementById("autoSkipSwitch");
+const rtpMtpExamModeSwitch     = document.getElementById("rtpMtpExamModeSwitch");
+
+  const controls = [
+    { el: randomizeQuestionsSwitch, key: SETTINGS_KEYS.randomizeQuestions, def: true },
+    { el: randomizeOptionsSwitch,   key: SETTINGS_KEYS.randomizeOptions,   def: true },
+    { el: showLettersSwitch,        key: SETTINGS_KEYS.showLetters,        def: true },
+    { el: timerSwitch,              key: SETTINGS_KEYS.timerOn,            def: true },
+    { el: autoSkipSwitch,           key: SETTINGS_KEYS.autoSkip,           def: true },
+    { el: rtpMtpExamModeSwitch,     key: SETTINGS_KEYS.rtpMtpExamMode,     def: false }
+  ];
+
+  function loadBool(key, defVal) {
+    const v = localStorage.getItem(key);
+    if (v === null) return defVal;
+    return v === "1";
+  }
+
+  function saveBool(key, val) {
+    localStorage.setItem(key, val ? "1" : "0");
+  }
+
+controls.forEach(({ el, key, def }) => {
+    if (!el) return;
+    el.checked = loadBool(key, def);
+
+    el.addEventListener("change", () => {
+      saveBool(key, el.checked);
+
+      // try to auto-read the label text from the same box
+      const box   = el.closest(".setting-box");
+      const label = box?.querySelector(".switch-row span")?.textContent?.trim() || "Setting";
+
+      showSettingToast(
+        `${label} ${el.checked ? "Enabled" : "Disabled"}`
+      );
+    });
+  });
+
+  // ===== TIMER EXTRA CONTROLS =====
+  const timerSettingBox   = document.getElementById("timerSettingBox");
+  const timerExtra        = document.getElementById("timerExtra");
+  const timerInput        = document.getElementById("timerSecondsInput");
+  const timerSaveBtn      = document.getElementById("timerSaveBtn");
+  const timerCurrentLabel = document.getElementById("timerCurrentLabel");
+
+  const DEFAULT_TIME = 45;
+
+  function loadNumber(key, defVal) {
+    const v = localStorage.getItem(key);
+    const n = Number(v);
+    if (!v || Number.isNaN(n)) return defVal;
+    return n;
+  }
+
+  function clampTimer(sec) {
+    return Math.max(30, Math.min(sec, 600));
+  }
+
+  // init seconds
+  let currentTime = clampTimer(loadNumber(SETTINGS_KEYS.questionTime, DEFAULT_TIME));
+  if (timerInput) timerInput.value = currentTime;
+  if (timerCurrentLabel) timerCurrentLabel.textContent = `(Current: ${currentTime}s)`;
+
+  // expand/collapse by clicking the box (but NOT the switch)
+  if (timerSettingBox) {
+    timerSettingBox.addEventListener("click", (e) => {
+      if (e.target.closest(".switch")) return;  // ignore clicks on toggle
+      timerSettingBox.classList.toggle("open");
+    });
+  }
+// ---- Left Sidebar visibility ----
+  function applyLeftSidebarVisibility(hidden) {
+    document.body.classList.toggle("hide-left-sidebar", hidden);
+  }
+
+  const leftHiddenInit = loadBool(SETTINGS_KEYS.leftSidebarHidden, false);
+  applyLeftSidebarVisibility(leftHiddenInit);
+
+  if (hideLeftSidebarSwitch) {
+    hideLeftSidebarSwitch.checked = leftHiddenInit;
+    hideLeftSidebarSwitch.addEventListener("change", () => {
+      const val = hideLeftSidebarSwitch.checked;
+      saveBool(SETTINGS_KEYS.leftSidebarHidden, val);
+      applyLeftSidebarVisibility(val);
+      
+      showSettingToast(
+        `Left Sidebar ${val ? "Hidden" : "Visible"}`
+      );
+    });
+  }
+  // Save button
+  if (timerSaveBtn && timerInput) {
+    timerSaveBtn.addEventListener("click", () => {
+      let val = parseInt(timerInput.value, 10);
+      if (Number.isNaN(val)) val = DEFAULT_TIME;
+      val = clampTimer(val);
+      timerInput.value = val;
+      currentTime = val;
+      localStorage.setItem(SETTINGS_KEYS.questionTime, String(val));
+      if (timerCurrentLabel) timerCurrentLabel.textContent = `(Current: ${val}s)`;
+    });
+  }
+});
+// ---------- Animate setting descriptions (accordion) ----------
+// ---------------- MINIMAL THEME ----------------
+const minimalSwitch = document.getElementById("Minimilist");
+
+// Load saved mode
+const minimalSaved = localStorage.getItem("minimalTheme") === "1";
+if (minimalSaved) document.body.classList.add("minimal-theme");
+if (minimalSwitch) minimalSwitch.checked = minimalSaved;
+
+// Apply on toggle
+if (minimalSwitch) {
+  minimalSwitch.addEventListener("change", () => {
+    const ON = minimalSwitch.checked;
+    localStorage.setItem("minimalTheme", ON ? "1" : "0");
+    document.body.classList.toggle("minimal-theme", ON);
+    
+  });
+}
+</script>
+<script>
+  // Hide preloader once page is ready
+  window.addEventListener("load", function () {
+    const pre = document.getElementById("preloader");
+    if (!pre) return;
+
+    pre.classList.add("hidden");
+
+    // optional: remove from DOM after transition
+    setTimeout(() => {
+      if (pre && pre.parentNode) {
+        pre.parentNode.removeChild(pre);
+      }
+    }, 300);
+  });
+
+// ensure each left-list <li> behaves like a link when whole LI clicked
+document.querySelectorAll(".left-sidebar .left-list li").forEach(li => {
+  // if it already contains an <a>, use its href. else fallback to data-href
+  const anchor = li.querySelector("a");
+  if (anchor) {
+    li.style.cursor = "pointer";
+    li.addEventListener("click", (e) => {
+      // avoid double-running when actual anchor clicked
+      if (e.target.closest("a")) return;
+      window.location = anchor.getAttribute("href");
+    });
+  } else {
+    const dh = li.dataset.href;
+    if (dh) {
+      li.style.cursor = "pointer";
+      li.addEventListener("click", () => { window.location = dh; });
+    }
+  }
+});
+</script>
+<script>
+  const currentPage = "settings"; // is page par ho
+</script>
+<script src="shared.js"></script>
+
+ <footer class="simple-footer">
+  <div>Made with ♥️</div>
+  <div>Kunal Sharma • CA Foundation</div>
+</footer>
+<script>
+/* optional: ensure footer is last in the main content if some script injected it earlier */
+(function() {
+  const footer = document.querySelector('.simple-footer');
+  if (!footer) return;
+  // prefer a main wrapper
+  const main = document.querySelector('main') || document.querySelector('.page-wrapper') || document.body;
+  if (!main) return;
+  if (footer.parentElement !== main) {
+    main.appendChild(footer); // move footer to end of main
+  }
+})();
+</script>
+</body>
+</html>

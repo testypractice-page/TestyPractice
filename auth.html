@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TESTY – Shell</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="top-bar">
+    <div class="logo">TESTY</div>
+
+    <nav class="top-nav">
+      <a href="index.html">Home</a>
+      <a href="auth.html">Login</a>
+      <a href="rtp_mtp.html">RTP/MTP</a>
+      <a href="settings.html">Settings</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Drop Suggestion</a>
+      <a href="sponsor.html">Sponsor</a>
+    </nav>
+
+    <div class="right-controls">
+      <button class="top-btn" id="themeToggle">🌙</button>
+      <button class="top-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- ========== LEFT SIDEBAR ========== -->
+  <div class="left-handle" id="leftHandle"></div>
+
+  <aside class="left-sidebar" id="leftSidebar">
+    <ul class="left-list">
+<li>
+  <a href="profile.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-user"></i></span>
+    My Profile
+  </a>
+</li>
+
+<li>
+  <a href="bookmarks.html" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-bookmark"></i></span>
+    Bookmarks
+  </a>
+</li>
+
+<li>
+  <a href="#" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-trophy"></i></span>
+    Leaderboard
+  </a>
+</li>
+
+<li>
+  <a href="#" class="left-link">
+    <span class="left-icon-box"><i class="fa-solid fa-comments"></i></span>
+    Chatrooms
+  </a>
+</li>
+    </ul>
+  </aside>
+  <div class="left-overlay" id="leftOverlay"></div>
+
+  <!-- ========== RIGHT SIDEBAR ========== -->
+  <aside class="right-sidebar" id="rightSidebar">
+    <div class="right-header">
+      <span>TESTY Menu</span>
+      <button class="right-close" id="rightClose">✕</button>
+    </div>
+    <ul class="right-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="nav-item" data-page="auth"><a href="auth.html">Login / Signup</a></li>
+      <li><a href="rtp_mtp.html">RTP/MTP</a></li>
+      <li><a href="settings.html">Settings</a></li>
+      <li><a href="about.html">About</a></li>
+      
+      <li><a href="sponsor.html">Sponsor</a></li>
+      <li><a href="feedback.html">Drop Suggestion</a></li>
+    </ul>
+  </aside>
+  <div class="right-overlay" id="rightOverlay"></div>
+
+  <!-- ========== MAIN CONTENT SHELL (EMPTY) ========== -->
+<main class="main-shell">
+
+  <div class="auth-container">
+
+    <!-- LOGIN BOX -->
+    <div class="auth-box" id="loginBox">
+
+      <h2 class="auth-title">Login</h2>
+
+      <button class="google-btn">
+        <i class="fa-brands fa-google"></i> Sign in with Google
+      </button>
+
+      <div class="auth-divider">
+        <span>OR</span>
+      </div>
+
+      <div class="auth-input">
+        <label>Email</label>
+        <input type="email" placeholder="Enter your email">
+      </div>
+
+      <div class="auth-input">
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password">
+      </div>
+
+      <button class="auth-submit">Login</button>
+
+      <p class="auth-switch">
+        Don't have an account?
+        <span onclick="showSignup()">Sign up</span>
+      </p>
+
+    </div>
+
+    <!-- SIGNUP BOX -->
+    <div class="auth-box hidden" id="signupBox">
+
+      <h2 class="auth-title">Create Account</h2>
+
+      <button class="google-btn">
+        <i class="fa-brands fa-google"></i> Sign up with Google
+      </button>
+
+      <div class="auth-divider">
+        <span>OR</span>
+      </div>
+
+      <div class="auth-input">
+        <label>Username</label>
+        <input type="text" placeholder="Choose a username">
+      </div>
+
+      <div class="auth-input">
+        <label>Email</label>
+        <input type="email" placeholder="Enter your email">
+      </div>
+
+      <div class="auth-input">
+        <label>Password</label>
+        <input type="password" placeholder="Create a password">
+      </div>
+
+      <button class="auth-submit">Sign Up</button>
+
+      <p class="auth-switch">
+        Already have an account?
+        <span onclick="showLogin()">Login</span>
+      </p>
+
+    </div>
+
+  </div>
+
+</main>
+
+  <!-- ========== SCRIPT ========== -->
+  <script>
+ 
+    /* ------- THEME ------- */
+    const themeToggle = document.getElementById("themeToggle");
+    const themeSwitch = document.getElementById("themeSwitch"); // may not exist
+
+    const savedTheme = localStorage.getItem("theme");
+    const isDark = savedTheme === "dark";
+
+    if (isDark) document.body.classList.add("dark");
+    if (themeSwitch) themeSwitch.checked = isDark;
+    themeToggle.textContent = isDark ? "☀️" : "🌙";
+
+    function applyTheme(dark) {
+      document.body.classList.toggle("dark", dark);
+      themeToggle.textContent = dark ? "☀️" : "🌙";
+      if (themeSwitch) themeSwitch.checked = dark;
+      localStorage.setItem("theme", dark ? "dark" : "light");
+    }
+
+    themeToggle.addEventListener("click", () => {
+      applyTheme(!document.body.classList.contains("dark"));
+    });
+
+    if (themeSwitch) {
+      themeSwitch.addEventListener("change", (e) => {
+        applyTheme(e.target.checked);
+      });
+    }
+
+// ---- Minimal theme from Settings ----
+
+
+
+    /* ------- RIGHT SIDEBAR ------- */
+    const menuBtn = document.getElementById("menuBtn");
+    const rightSidebar = document.getElementById("rightSidebar");
+    const rightOverlay = document.getElementById("rightOverlay");
+    const rightClose = document.getElementById("rightClose");
+
+    if (menuBtn) menuBtn.addEventListener("click", () => {
+      rightSidebar.classList.add("open");
+      rightOverlay.classList.add("show");
+    });
+
+    function closeRightSidebar() {
+      rightSidebar.classList.remove("open");
+      rightOverlay.classList.remove("show");
+    }
+
+    if (rightClose) rightClose.addEventListener("click", closeRightSidebar);
+    if (rightOverlay) rightOverlay.addEventListener("click", closeRightSidebar);
+
+    /* ------- LEFT SIDEBAR + SWIPE ------- */
+    const leftSidebar = document.getElementById("leftSidebar");
+    const leftOverlay = document.getElementById("leftOverlay");
+    const leftHandle = document.getElementById("leftHandle");
+
+// apply hide/show based on setting
+  function applyLeftSidebarVisibility(hidden) {
+  if (!leftSidebar || !leftHandle) return;
+
+  if (hidden) {
+    leftSidebar.style.display = "none";
+    leftHandle.style.display  = "none";
+    document.body.classList.add("hide-left-sidebar");   // ⬅️ match CSS
+  } else {
+    leftSidebar.style.display = "";
+    leftHandle.style.display  = "";
+    document.body.classList.remove("hide-left-sidebar");
+  }
+}
+
+// read stored value from settings page
+const hideLeftSidebarSetting =
+  localStorage.getItem("set_leftSidebarHidden") === "1";
+
+// apply once on load
+applyLeftSidebarVisibility(hideLeftSidebarSetting);
+
+    function openLeftSidebar() {
+      leftSidebar.classList.add("open");
+      leftOverlay.classList.add("show");
+    }
+    function closeLeftSidebar() {
+      leftSidebar.classList.remove("open");
+      leftOverlay.classList.remove("show");
+    }
+
+    leftHandle.addEventListener("click", openLeftSidebar);
+    leftOverlay.addEventListener("click", closeLeftSidebar);
+
+    let startX = null;
+
+    leftHandle.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+    leftHandle.addEventListener("touchend", (e) => {
+      const diff = e.changedTouches[0].clientX - startX;
+      if (diff > 40) openLeftSidebar();
+    });
+
+    leftSidebar.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+    leftSidebar.addEventListener("touchend", (e) => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (diff > 40) closeLeftSidebar();
+    });
+  </script>
+<script>
+function showSignup() {
+  document.getElementById("loginBox").classList.add("hidden");
+  document.getElementById("signupBox").classList.remove("hidden");
+}
+
+function showLogin() {
+  document.getElementById("signupBox").classList.add("hidden");
+  document.getElementById("loginBox").classList.remove("hidden");
+}
+
+const minimalSwitch = document.getElementById("Minimilist");
+
+const minimalSaved = localStorage.getItem("minimalTheme") === "1";
+if (minimalSaved) document.body.classList.add("minimal-theme");
+if (minimalSwitch) minimalSwitch.checked = minimalSaved;
+</script>
+<script>
+  const currentPage = "auth"; // is page par ho
+</script>
+<script src="shared.js"></script>
+ <footer class="simple-footer">
+  <div>Made with ♥️</div>
+  <div>Kunal Sharma • CA Foundation</div>
+</footer>
+</body>
+</html>
