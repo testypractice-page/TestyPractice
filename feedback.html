@@ -11,6 +11,15 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
   />
 
+
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="manifest" href="favicon/site.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon/android-chrome-512x512.png">
+<link rel="shortcut icon" href="favicon/favicon.ico">
+
   <!-- main site styles -->
   <link rel="stylesheet" href="style.css" />
 
@@ -259,7 +268,19 @@
         Got a suggestion, bug report, or just want to say hi? Drop it here — I read everything.
       </p>
 
-      <form id="feedbackForm" novalidate>
+<form
+  id="feedbackForm"
+  name="feedback"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+>
+  <!-- Netlify hidden form-name field (required) -->
+  <input type="hidden" name="form-name" value="feedback" />
+  <!-- Optional honeypot for spam -->
+  <input type="text" name="bot-field" style="display:none" />
+
+  <!-- baaki tumhare Name / Email / Subject / Message fields yahi ke andar rahenge -->
         <div class="feedback-form-group">
           <label for="fbName">Name</label>
           <input
@@ -423,97 +444,92 @@
     })();
   </script>
 
-  <!-- ========== SENDPULSE INTEGRATION HOOK ========== -->
-<!-- === SendPulse AJAX integration: paste this at end of feedback.html just before </body> === -->
+
+<!-- FEEDBACK TOAST (same as settings page) -->
+<div id="fbToast" class="setting-toast">
+  <div id="fbToastBar" class="setting-toast-bar"></div>
+  <span id="fbToastText"></span>
+</div>
+
 <script>
-(async function(){
-  // CONFIG: endpoint path (same folder)
-  const ENDPOINT = 'sendpulse-feedback.php'; // if different, change this to the full URL
+document.addEventListener("DOMContentLoaded", () => {
 
-  // find the form - if your form doesn't have id, give it id="feedbackForm"
-  const form = document.getElementById('feedbackForm') || document.querySelector('form');
-  if (!form) {
-    console.error('Feedback form not found. Add id="feedbackForm" or ensure a <form> exists.');
-    return;
+  const form = document.querySelector("form");
+  const submitBtn = form.querySelector("button[type='submit']");
+  const toast = document.getElementById("fbToast");
+  const toastText = document.getElementById("fbToastText");
+  const toastBar = document.getElementById("fbToastBar");
+  let toastTimer = null;
+  let isSubmitting = false; // <--- prevents double submit
+
+  function showFbToast(message) {
+    if (!toast) return;
+
+    toast.classList.remove("show");
+    void toast.offsetWidth;
+
+    toastText.textContent = message;
+    toast.classList.add("show");
+
+    if (toastBar) {
+      toastBar.style.transition = "none";
+      toastBar.style.width = "0%";
+
+      requestAnimationFrame(() => {
+        toastBar.style.transition = "width 1s linear";
+        toastBar.style.width = "100%";
+      });
+    }
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 1200);
   }
 
-  // helper: create a simple toast message
-  function toast(msg, type = 'info') {
-    // simple toast - you can style it later
-    const el = document.createElement('div');
-    el.textContent = msg;
-    el.style.position = 'fixed';
-    el.style.right = '20px';
-    el.style.bottom = '20px';
-    el.style.padding = '10px 14px';
-    el.style.borderRadius = '8px';
-    el.style.boxShadow = '0 6px 18px rgba(0,0,0,0.12)';
-    el.style.zIndex = 9999;
-    el.style.color = '#fff';
-    el.style.background = type === 'error' ? '#e53e3e' : '#2563eb';
-    document.body.appendChild(el);
-    setTimeout(()=> el.remove(), 3500);
-  }
-
-  // attach submit handler
-  form.addEventListener('submit', async function(e){
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (isSubmitting) return; // <--- blocks second click instantly
 
-    // collect values (works for inputs and textarea)
-    const fd = new FormData(form);
-    const payload = {};
-    fd.forEach((v,k)=> payload[k] = v?.toString?.() ?? '');
+    isSubmitting = true;
+    submitBtn.disabled = true;       // freeze user action
+    submitBtn.style.opacity = "0.6"; // visual indication
 
-    // basic client validation
-    if(!payload.name || !payload.email || !payload.subject || !payload.message){
-      toast('Please fill all fields (name, email, subject, message).', 'error');
-      return;
-    }
-    // basic email check
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)){
-      toast('Please enter a valid email.', 'error');
-      return;
-    }
-
-    // disable form -> indicate loading
-    const submitBtn = form.querySelector('button[type="submit"], input[type="submit"]');
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.dataset.oldText = submitBtn.textContent; submitBtn.textContent = 'Sending...'; }
+    const formData = new FormData(form);
 
     try {
-      const res = await fetch(ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+      const res = await fetch("/", {
+        method: "POST",
+        body: formData
       });
 
-      const text = await res.text();
-      // try parse JSON
-      let data = null;
-      try { data = JSON.parse(text); } catch(e) { /* not JSON */ }
-
-      if (!res.ok) {
-        console.error('Server error:', text);
-        toast((data && data.error) ? data.error : 'Server error. See console.', 'error');
-      } else {
-        // success
-        toast('Message sent successfully 🤗', 'info');
-        // optional: clear form except email (keep email)
-        const userEmail = payload.email;
+      if (res.ok) {
+        showFbToast("Suggestion sent successfully!");
         form.reset();
-        if (form.querySelector('[name="email"]')) form.querySelector('[name="email"]').value = userEmail;
+      } else {
+        showFbToast("Error! Please try again.");
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = "1";
+        isSubmitting = false;
       }
     } catch (err) {
-      console.error('Network/JS error:', err);
-      toast('Network error. Check console.', 'error');
-    } finally {
-      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = submitBtn.dataset.oldText || 'Send'; }
+      showFbToast("Network error!");
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = "1";
+      isSubmitting = false;
     }
-  });
-})();
-</script>
-<!-- === END integration script === -->
 
-  
+    // If success → stay disabled & reset flag after toast hides
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = "1";
+      isSubmitting = false;
+    }, 1500);
+  });
+
+});
+</script>
+
 <script>
   const currentPage = "feedback"; // is page par ho
 const minimalSwitch = document.getElementById("Minimilist");

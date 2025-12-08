@@ -5,6 +5,25 @@
 /* Google font */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
+/* Cheque Regular */
+@font-face {
+    font-family: 'Cheque';
+    src: url('/fonts/Cheque-Regular.woff2') format('woff2'),
+         url('/fonts/Cheque-Regular.woff') format('woff'),
+         url('/fonts/Cheque-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Cheque Black */
+@font-face {
+    font-family: 'Cheque';
+    src: url('/fonts/Cheque-Black.woff2') format('woff2'),
+         url('/fonts/Cheque-Black.otf') format('opentype');
+    font-weight: 900;
+    font-style: normal;
+}
+
 /* ---------------- BASIC RESET ---------------- */
 * {
   margin: 0;
@@ -71,12 +90,15 @@ body.dark .top-bar {
 }
 
 .logo {
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: 2px;
+  font-family: 'Cheque', sans-serif;
+  font-size: 29px;
+  font-weight: 900;
+  letter-spacing: 4px;
   white-space: nowrap;
 }
-
+.break{
+  font-size: 20px;
+}
 /* Inline nav (desktop only) */
 .top-nav {
   display: none;
@@ -625,6 +647,8 @@ body.dark .order-toggle{
 .mcq-card {
   margin-top: 4px;
   padding: 4px 5px;
+  user-select: none;
+  --webkit-user-select: none;
 }
 
 .mcq-question {
@@ -3124,8 +3148,9 @@ body.minimal-theme .setting-toast {
 }
 
 .preloader-logo {
+  font-family: 'cheque';
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 6px;
@@ -3147,7 +3172,7 @@ body.minimal-theme .setting-toast {
 
 .preloader-bar-inner {
   height: 100%;
-  width: 40%;
+  width: 50%;
   border-radius: 999px;
   background: linear-gradient(90deg, #2563eb, #38bdf8);
   animation: preloaderBarSlide 0.9s infinite ease-in-out;
@@ -3722,4 +3747,23 @@ body.minimal-theme .article-read-btn {
   .article-date{
     margin-top: 8px;
   }
+}
+
+/* LEFT SIDEBAR ACTIVE STATE */
+.left-sidebar .left-list li.active .left-link {
+  background: rgba(37, 99, 235, 0.15);  /* same as .nav-item.active */
+  color: #2563eb;
+  font-weight: 00;
+}
+
+/* Dark theme */
+body.dark .left-sidebar .left-list li.active .left-link {
+  background: rgba(96,165,250,0.16);
+  color: #93c5fd;
+}
+
+/* Minimal theme */
+body.minimal-theme .left-sidebar .left-list li.active .left-link {
+  background: #A2A3AC;
+  color: #000;
 }
