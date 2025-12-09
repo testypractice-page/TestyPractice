@@ -1,517 +1,500 @@
-<!doctype html>
-<html lang="hi">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Profile — TESTY</title>
-<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-<link rel="manifest" href="favicon/site.webmanifest">
-<link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="favicon/android-chrome-512x512.png">
-<link rel="shortcut icon" href="favicon/favicon.ico">
+  <meta charset="UTF-8" />
+  <title>TESTY – Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-  :root{
-    --primary: #2c7be5; /* auth.html के रंग के अनुसार बदल देना */
-    --muted: #666;
-    --border: #dcdcdc;
-    --card-bg: #fff;
-  }
-  html,body{height:100%;margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Helvetica,Arial;}
-  /* layout: left sidebar, header, content, right sidebar (lightweight) */
-  .app {
-    display: grid;
-    grid-template-columns: 220px 1fr 220px;
-    grid-template-rows: 64px 1fr;
-    min-height:100vh;
-    gap:16px;
-    background:#f6f7fb;
-  }
-  header {
-    grid-column: 1 / -1;
-    height:64px;
-    display:flex;
-    align-items:center;
-    padding:0 18px;
-    border-bottom:1px solid var(--border);
-    background: #fff;
-  }
-  .sidebar-left, .sidebar-right {
-    background: #fff;
-    padding:12px;
-    border-right:1px solid var(--border);
-  }
-  .sidebar-right { border-right:0; border-left:1px solid var(--border); }
-  main.content {
-    padding:20px;
-    background: #fff;
-    margin: 12px 0;
-    border:1px solid var(--border);
-    border-radius:8px;
-  }
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  /* Profile card */
-  .profile-card{
-    max-width:900px;
-    margin:0 auto;
-  }
-  .profile-top {
-    display:flex;
-    align-items:center;
-    gap:18px;
-    position:relative;
-  }
-  .avatar-wrap{
-    width:120px;
-    height:120px;
-    border-radius:50%;
-    overflow:hidden;
-    border:3px solid var(--border);
-    flex:0 0 120px;
-    position:relative;
-    background: #f0f0f0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-  .avatar-wrap img{
-    display:block;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-  }
-  .pencil-btn{
-    position:absolute;
-    right:-6px;
-    top:66px;
-    background:transparent;
-    border:1px solid var(--border);
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-  }
-  .pencil-btn svg{ width:16px; height:16px; fill:var(--muted); }
+  <!-- Favicons (same as other pages) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon/android-chrome-512x512.png">
+  <link rel="shortcut icon" href="favicon/favicon.ico">
 
-  .profile-info {
-    flex:1;
-  }
-  .profile-title{ font-size:20px; margin:0 0 6px 0; color:#222; }
-  .profile-sub{ color:var(--muted); font-size:14px; margin:0; }
-
-  .form-row{ margin-top:18px; display:flex; gap:12px; flex-wrap:wrap; }
-  .field {
-    flex: 1 1 280px;
-    display:flex;
-    flex-direction:column;
-  }
-  label{ font-size:13px; color:var(--muted); margin-bottom:6px; }
-  input[type="text"], input[type="email"], .dob-display {
-    padding:10px 12px;
-    font-size:15px;
-    border:1px solid var(--border);
-    border-radius:6px;
-    background: #fff;
-  }
-  input[disabled], .dob-display[disabled]{
-    background:#f5f6f8;
-    color:#333;
-  }
-
-  /* Save/Edit buttons: border-only */
-  .btn {
-    padding:8px 14px;
-    border-radius:6px;
-    border:1px solid var(--primary);
-    background:transparent;
-    color:var(--primary);
-    cursor:pointer;
-    font-weight:600;
-  }
-
-  .top-edit {
-    position:absolute;
-    right:12px;
-    top:12px;
-  }
-
-  /* small helper text & error */
-  .hint { font-size:13px;color:var(--muted); margin-top:8px; }
-  .err { color:crimson; font-size:13px; margin-top:8px; }
-
-  /* responsive */
-  @media (max-width:900px){
-    .app { grid-template-columns: 1fr; grid-template-rows:64px auto auto; }
-    .sidebar-left, .sidebar-right { display:none; }
-    header{ position:sticky; top:0; z-index:10; }
-  }
-</style>
+  <!-- Main shared styles -->
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div class="app">
-  <header>
-    <!-- replicate header from auth.html; change as required -->
-    <div style="font-weight:700;color:var(--primary)">Quizta</div>
+  <!-- ========== PRELOADER ========== -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-card">
+      <div class="preloader-logo">TESTY</div>
+      <div class="preloader-sub">Loading your questions…</div>
+      <div class="preloader-bar">
+        <div class="preloader-bar-inner"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== HEADER ========== -->
+  <header class="top-bar">
+    <div class="logo">TESTY</div>
+
+    <nav class="top-nav">
+      <a href="index.html">Home</a>
+      <a href="auth.html">Login</a>
+      <a href="rtp_mtp.html">RTP/MTP</a>
+      <a href="settings.html">Settings</a>
+      <a href="about.html">About</a>
+      <a href="feedback.html">Drop Suggestion</a>
+      <a href="sponsor.html">Sponsor</a>
+    </nav>
+
+    <div class="right-controls">
+      <button class="top-btn" id="themeToggle">🌙</button>
+      <button class="top-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+    </div>
   </header>
 
-  <aside class="sidebar-left">
-    <!-- left sidebar placeholder (replicate from auth.html) -->
-    <div style="font-weight:600;margin-bottom:8px">Menu</div>
-    <div style="color:var(--muted);font-size:14px">Dashboard</div>
+  <!-- ========== LEFT SIDEBAR ========== -->
+  <div class="left-handle" id="leftHandle"></div>
+
+  <aside class="left-sidebar" id="leftSidebar">
+    <ul class="left-list">
+      <li data-page="profile">
+        <a href="profile.html" class="left-link">
+          <span class="left-icon-box"><i class="fa-solid fa-user"></i></span>
+          My Profile
+        </a>
+      </li>
+
+      <li>
+        <a href="bookmarks.html" class="left-link">
+          <span class="left-icon-box"><i class="fa-solid fa-bookmark"></i></span>
+          Bookmarks
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="left-link">
+          <span class="left-icon-box"><i class="fa-solid fa-trophy"></i></span>
+          Leaderboard
+        </a>
+      </li>
+
+      <li>
+        <a href="#" class="left-link">
+          <span class="left-icon-box"><i class="fa-solid fa-comments"></i></span>
+          Chatrooms
+        </a>
+      </li>
+
+      <li>
+        <a href="articles/How To Overcome Overthinking while exams.html" class="left-link">
+          <span class="left-icon-box"><i class="fa-solid fa-note-sticky"></i></span>
+          Article
+        </a>
+      </li>
+
+      <li>
+        <a href="wrongs.html" class="left-link">
+          <span class="left-icon-box"><i class="fa-solid fa-pen-to-square"></i></span>
+          Take a Correction Test
+        </a>
+      </li>
+    </ul>
   </aside>
+  <div class="left-overlay" id="leftOverlay"></div>
 
-  <main class="content">
-    <div class="profile-card">
-      <div class="profile-top">
-        <div style="position:relative;">
-          <div class="avatar-wrap" id="avatarWrap" title="Profile Photo">
-            <img id="avatarImg" alt="Profile" src="" />
-          </div>
-
-          <!-- pencil icon -->
-          <button id="pencilBtn" class="pencil-btn" title="Change photo" aria-label="Change photo">
-            <!-- simple pencil svg -->
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"/></svg>
-          </button>
-          <!-- hidden file input -->
-          <input id="photoInput" type="file" accept="image/*" style="display:none" />
-        </div>
-
-        <div class="profile-info">
-          <h3 class="profile-title">Your Profile</h3>
-          <p class="profile-sub">यहाँ आप अपनी प्रोफ़ाइल की जानकारी अपडेट कर सकते हैं।</p>
-        </div>
-
-        <!-- Edit button top-right (visible when logged and not editing) -->
-        <div class="top-edit">
-          <button id="editToggle" class="btn" style="display:none;">Edit</button>
-        </div>
-      </div>
-
-      <div class="form-row" style="margin-top:22px;">
-        <div class="field">
-          <label>Email (fixed)</label>
-          <input type="email" id="emailField" disabled />
-        </div>
-
-        <div class="field">
-          <label>Name</label>
-          <input type="text" id="nameField" placeholder="Enter your name" />
-        </div>
-
-        <div class="field">
-          <label>Date of Birth</label>
-          <div style="display:flex;gap:8px;align-items:center;">
-            <input type="text" id="dobDisplay" class="dob-display" placeholder="DD-MM-YYYY" readonly />
-            <input type="date" id="dobPicker" style="display:none" />
-            <button id="dobBtn" class="btn" type="button">Pick DOB</button>
-          </div>
-          <div id="dobErr" class="err" style="display:none"></div>
-        </div>
-      </div>
-
-      <div style="margin-top:20px; display:flex; gap:12px;">
-        <button id="saveBtn" class="btn">Save</button>
-        <div id="statusMsg" style="align-self:center;color:var(--muted)"></div>
-      </div>
-
+  <!-- ========== RIGHT SIDEBAR ========== -->
+  <aside class="right-sidebar" id="rightSidebar">
+    <div class="right-header">
+      <span>TESTY Menu</span>
+      <button class="right-close" id="rightClose">✕</button>
     </div>
-  </main>
-
-  <aside class="sidebar-right">
-    <!-- right sidebar placeholder -->
-    <div style="font-weight:600;margin-bottom:8px">Help</div>
-    <div style="color:var(--muted);font-size:14px">Profile settings</div>
+    <ul class="right-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="auth.html">Login / Signup</a></li>
+      <li><a href="rtp_mtp.html">RTP/MTP</a></li>
+      <li><a href="settings.html">Settings</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html">Chapters</a></li>
+      <li><a href="sponsor.html">Sponsor</a></li>
+      <li><a href="feedback.html">Drop Suggestion</a></li>
+    </ul>
   </aside>
-</div>
+  <div class="right-overlay" id="rightOverlay"></div>
 
-<!-- canvas for cropping (hidden) -->
-<canvas id="cropCanvas" style="display:none"></canvas>
+  <!-- ========== MAIN AREA (EMPTY CENTER) ========== -->
+<!-- === PROFILE MAIN UI (put inside <body> after header + sidebars) === -->
+<main class="profile-main">
+  <!-- Top profile header bar -->
+  <div class="profile-header-bar">
+    <h1 class="profile-title">My Profile</h1>
 
+    <button type="button" class="profile-back-btn" id="profileBackBtn">
+      <!-- optional Font Awesome icon -->
+      <i class="fa-solid fa-arrow-left"></i>
+      Back
+    </button>
+  </div>
+
+  <!-- Horizontal stat cards -->
+  <section class="profile-metrics-row">
+    <div class="profile-metric-card">
+      <div class="profile-metric-value" id="profileStreakValue">0</div>
+      <div class="profile-metric-label">Streak</div>
+    </div>
+
+    <div class="profile-metric-card">
+      <div class="profile-metric-value" id="profileMostXpValue">0</div>
+      <div class="profile-metric-label">Most XP</div>
+    </div>
+
+    <div class="profile-metric-card">
+      <div class="profile-metric-value">—</div>
+      <div class="profile-metric-label">In Future</div>
+    </div>
+
+    <div class="profile-metric-card">
+      <div class="profile-metric-value">—</div>
+      <div class="profile-metric-label">In Future</div>
+    </div>
+  </section>
+<section class="profile-graph-card">
+  <div class="profile-graph-header">
+    <div class="profile-graph-title">XP This Week</div>
+    <div class="profile-graph-subtitle">Mon – Sun</div>
+  </div>
+
+  <!-- Chart.js line graph lives INSIDE this card now -->
+  <div class="profile-graph-body">
+    <canvas id="xpWeekChart"></canvas>
+  </div>
+<hr class="dashed">
+  <div class="profile-graph-footer">
+    XP this Week: <span id="profileWeekXpValue">0</span>
+  </div>
+</section>
+</main>
+
+<!-- Simple back button behaviour -->
 <script>
-/* profile.html script
-   - relies on localStorage keys:
-     - TESTY_current -> email (string)
-     - TESTY_users -> JSON array of {username,email,password,dob,photo}
-*/
+  (function () {
+    const backBtn = document.getElementById("profileBackBtn");
+    if (!backBtn) return;
 
-(function(){
-  const usersKey = "TESTY_users";
-  const currentKey = "TESTY_current";
-
-  // DOM
-  const avatarImg = document.getElementById('avatarImg');
-  const avatarWrap = document.getElementById('avatarWrap');
-  const pencilBtn = document.getElementById('pencilBtn');
-  const photoInput = document.getElementById('photoInput');
-
-  const emailField = document.getElementById('emailField');
-  const nameField = document.getElementById('nameField');
-  const dobDisplay = document.getElementById('dobDisplay');
-  const dobPicker = document.getElementById('dobPicker');
-  const dobBtn = document.getElementById('dobBtn');
-  const dobErr = document.getElementById('dobErr');
-
-  const saveBtn = document.getElementById('saveBtn');
-  const statusMsg = document.getElementById('statusMsg');
-
-  const editToggle = document.getElementById('editToggle');
-
-  const cropCanvas = document.getElementById('cropCanvas');
-
-  function readUsers(){
-    try { return JSON.parse(localStorage.getItem(usersKey) || '[]'); }
-    catch(e){ console.error(e); return []; }
-  }
-  function saveUsers(arr){ localStorage.setItem(usersKey, JSON.stringify(arr)); }
-  function getCurrent(){ return localStorage.getItem(currentKey); }
-
-  // helper: find user by email
-  function findUser(email){
-    const users = readUsers();
-    return users.find(u=> u.email === email);
-  }
-  function updateUser(email, patch){
-    const users = readUsers();
-    const idx = users.findIndex(u=> u.email === email);
-    if (idx === -1) return false;
-    users[idx] = Object.assign({}, users[idx], patch);
-    saveUsers(users);
-    return true;
-  }
-
-  // ensure logged in
-  const cur = getCurrent();
-  if (!cur) {
-    // not logged in -> redirect to auth page (or show message)
-    alert("आप logged in नहीं हैं — पहले login/signup करें।");
-    window.location.href = "auth.html";
-    return;
-  }
-
-  // load user data
-  const user = findUser(cur) || { email: cur, username: '', dob:'', photo:'' };
-
-  // initialize UI values
-  emailField.value = user.email || '';
-  nameField.value = user.username || '';
-  dobDisplay.value = user.dob ? formatDDMMYYYY(user.dob) : '';
-  if (user.photo) {
-    avatarImg.src = user.photo;
-  } else {
-    // default avatar (initials fallback)
-    avatarImg.src = generateDefaultAvatar(user.username || '');
-  }
-
-  // initial mode: locked (frozen) if user exists (i.e., logged)
-  let editing = false;
-  setEditing(false);
-
-  // show Edit button at top-right (only when logged and not editing)
-  editToggle.style.display = 'inline-block';
-  editToggle.addEventListener('click', ()=>{
-    editing = true;
-    setEditing(true);
-    // show pencil
-  });
-
-  // pencil/open upload (only active when editing)
-  pencilBtn.addEventListener('click', (ev)=>{
-    if (!editing) return;
-    photoInput.click();
-  });
-
-  // file selection handler (only 1 file)
-  photoInput.addEventListener('change', async (ev)=>{
-    const f = ev.target.files && ev.target.files[0];
-    if (!f) return;
-    if (!f.type.startsWith('image/')) { alert("कृपया केवल फोटो चुनें।"); return; }
-
-    // read file as image
-    const dataURL = await readFileAsDataURL(f);
-    // create image
-    const img = await loadImage(dataURL);
-
-    // crop center square
-    const size = Math.min(img.width, img.height);
-    const sx = Math.round((img.width - size)/2);
-    const sy = Math.round((img.height - size)/2);
-
-    // draw to canvas as square then export as dataURL
-    cropCanvas.width = size;
-    cropCanvas.height = size;
-    const ctx = cropCanvas.getContext('2d');
-    ctx.clearRect(0,0,size,size);
-    // draw image piece
-    ctx.drawImage(img, sx, sy, size, size, 0, 0, size, size);
-
-    // optional: resize to 400x400 for storage (keeps size reasonable)
-    const outSize = 400;
-    const tmp = document.createElement('canvas');
-    tmp.width = outSize;
-    tmp.height = outSize;
-    tmp.getContext('2d').drawImage(cropCanvas, 0, 0, outSize, outSize);
-
-    const outData = tmp.toDataURL('image/jpeg', 0.85);
-    // set avatar
-    avatarImg.src = outData;
-    // save to local user object immediately (not persisted until Save pressed)
-    user.photo = outData;
-  });
-
-  // DOB picker logic
-  dobBtn.addEventListener('click', ()=>{
-    // set max allowed date to ensure minimum 18 years
-    const maxDate = computeMaxDOBForAge(18); // YYYY-MM-DD
-    dobPicker.max = maxDate;
-    dobPicker.value = dobDisplay.dataset.raw || ''; // keep previously selected if any
-    dobPicker.click();
-  });
-
-  dobPicker.addEventListener('change', ()=>{
-    const v = dobPicker.value; // format YYYY-MM-DD
-    if (!v) return;
-    // validate age >= 18
-    if (!isAgeAtLeast(v, 18)) {
-      dobErr.style.display = 'block';
-      dobErr.textContent = "आपकी उम्र कम से कम 18 वर्ष होनी चाहिए।";
-      dobDisplay.value = '';
-      dobDisplay.dataset.raw = '';
-      return;
-    }
-    dobErr.style.display = 'none';
-    dobDisplay.value = formatDDMMYYYY(v);
-    dobDisplay.dataset.raw = v;
-    // store in user (not persisted until Save)
-    user.dob = v;
-  });
-
-  // Save handler
-  saveBtn.addEventListener('click', ()=>{
-    // if not editing then nothing? but still call save
-    // validation: name required, dob required and >=18
-    const name = (nameField.value || '').trim();
-    const dobRaw = dobDisplay.dataset.raw || user.dob || '';
-    if (!name) { statusMsg.style.color='crimson'; statusMsg.textContent = "कृपया नाम दर्ज करें।"; return; }
-    if (!dobRaw) { statusMsg.style.color='crimson'; statusMsg.textContent = "कृपया वैध DOB चुनें।"; return; }
-    if (!isAgeAtLeast(dobRaw,18)) { statusMsg.style.color='crimson'; statusMsg.textContent = "उम्र कम से 18 वर्ष होनी चाहिए।"; return; }
-
-    // update user object
-    user.username = name;
-    user.dob = dobRaw;
-    // photo already set in user.photo from selection if any
-    // persist into localStorage users array
-    const ok = updateUser(user.email, { username: user.username, dob: user.dob, photo: user.photo || '' });
-    if (!ok) {
-      // if user not found in users array (edge case), add it
-      const users = readUsers();
-      users.push({ username:user.username, email:user.email, password:'', dob:user.dob, photo:user.photo||'' });
-      saveUsers(users);
-    }
-    statusMsg.style.color='green';
-    statusMsg.textContent = "Saved. Redirecting to Home...";
-    // redirect to index.html after small pause
-    setTimeout(()=> window.location.href = "index.html", 600);
-  });
-
-  // disable/enable fields according to editing mode
-  function setEditing(v){
-    editing = v;
-    nameField.disabled = !v;
-    // dob should appear read-only except via DOB picker when editing
-    dobBtn.style.display = v ? 'inline-block' : 'none';
-    // show/hide pencil for photo
-    pencilBtn.style.display = v ? 'inline-flex' : 'none';
-    // hide editToggle if already editing
-    editToggle.style.display = v ? 'none' : 'inline-block';
-    // Save button always visible (but disabled when not editing? user might still want to save)
-    saveBtn.disabled = !v;
-    if (saveBtn.disabled) saveBtn.style.opacity = 0.6; else saveBtn.style.opacity = 1;
-  }
-
-  // initial state: fields locked (editToggle visible). But if user has no profile (first-time), enable editing.
-  if (!user.username && !user.dob && !user.photo) {
-    setEditing(true);
-  }
-
-  // utilities
-  function readFileAsDataURL(file){
-    return new Promise((res,rej)=>{
-      const r = new FileReader();
-      r.onload = ()=> res(r.result);
-      r.onerror = ()=> rej(r.error);
-      r.readAsDataURL(file);
+    backBtn.addEventListener("click", () => {
+      // Try to go back to previous page, otherwise fallback to home
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "index.html";
+      }
     });
-  }
-  function loadImage(dataURL){
-    return new Promise((res,rej)=>{
-      const img = new Image();
-      img.onload = ()=> res(img);
-      img.onerror = (e)=> rej(e);
-      img.src = dataURL;
-    });
-  }
-
-  function computeMaxDOBForAge(age){
-    // compute YYYY-MM-DD which is today's date minus `age` years
-    const dt = new Date();
-    dt.setFullYear(dt.getFullYear() - age);
-    const y = dt.getFullYear();
-    const m = String(dt.getMonth()+1).padStart(2,'0');
-    const d = String(dt.getDate()).padStart(2,'0');
-    return `${y}-${m}-${d}`;
-  }
-
-  function isAgeAtLeast(dobYYYYMMDD, age){
-    const dob = new Date(dobYYYYMMDD);
-    if (isNaN(dob)) return false;
-    const now = new Date();
-    let years = now.getFullYear() - dob.getFullYear();
-    const m = now.getMonth() - dob.getMonth();
-    if (m < 0 || (m === 0 && now.getDate() < dob.getDate())) years--;
-    return years >= age;
-  }
-
-  function formatDDMMYYYY(yyyy_mm_dd_orYYYY){
-    // accepts either YYYY-MM-DD or if passed in Date string
-    const v = String(yyyy_mm_dd_orYYYY);
-    if (/^\d{4}-\d{2}-\d{2}$/.test(v)) {
-      const [y,m,d] = v.split('-'); return `${d}-${m}-${y}`;
-    }
-    // fallback: try Date parse
-    const dt = new Date(v);
-    if (isNaN(dt)) return '';
-    const dd = String(dt.getDate()).padStart(2,'0');
-    const mm = String(dt.getMonth()+1).padStart(2,'0');
-    const yy = dt.getFullYear();
-    return `${dd}-${mm}-${yy}`;
-  }
-
-  function generateDefaultAvatar(name){
-    // create simple SVG with initials and return dataURL
-    const initials = (name||'').split(' ').filter(Boolean).map(s=>s[0].toUpperCase()).slice(0,2).join('') || 'U';
-    const size = 400;
-    const bg = '#e9eef9';
-    const fg = '#2b5fb8';
-    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='${size}' height='${size}'><rect width='100%' height='100%' rx='0' fill='${bg}'/><text x='50%' y='50%' text-anchor='middle' dy='.35em' font-family='Arial' font-size='160' fill='${fg}'>${initials}</text></svg>`;
-    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
-  }
-
-  // show/hide pencil depending on edit mode
-  pencilBtn.style.display = 'none';
-  // ensure save button initially disabled for locked mode
-  saveBtn.disabled = true;
-  saveBtn.style.opacity = 0.6;
-
-  // clean status on input
-  [nameField].forEach(inp=> inp.addEventListener('input', ()=> statusMsg.textContent = ''));
-
-})();
+  })();
 </script>
+
+  <!-- ========== SCRIPT: THEME + SIDEBARS ========== -->
+  <script>
+    /* ------- THEME (shared with other pages) ------- */
+    const themeToggle = document.getElementById("themeToggle");
+    const savedTheme  = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark");
+    }
+    if (themeToggle) {
+      themeToggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    }
+
+    function setTheme(isDark) {
+      document.body.classList.toggle("dark", isDark);
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      if (themeToggle) themeToggle.textContent = isDark ? "☀️" : "🌙";
+    }
+
+    if (themeToggle) {
+      themeToggle.addEventListener("click", () => {
+        setTheme(!document.body.classList.contains("dark"));
+      });
+    }
+
+    // apply left-sidebar hidden setting (from settings page)
+    const hideLS = localStorage.getItem("set_leftSidebarHidden") === "1";
+    document.body.classList.toggle("hide-left-sidebar", hideLS);
+
+    /* ------- RIGHT SIDEBAR ------- */
+    const menuBtn      = document.getElementById("menuBtn");
+    const rightSidebar = document.getElementById("rightSidebar");
+    const rightOverlay = document.getElementById("rightOverlay");
+    const rightClose   = document.getElementById("rightClose");
+
+    function openRightSidebar() {
+      if (!rightSidebar || !rightOverlay) return;
+      rightSidebar.classList.add("open");
+      rightOverlay.classList.add("show");
+    }
+    function closeRightSidebar() {
+      if (!rightSidebar || !rightOverlay) return;
+      rightSidebar.classList.remove("open");
+      rightOverlay.classList.remove("show");
+    }
+
+    if (menuBtn)    menuBtn.addEventListener("click", openRightSidebar);
+    if (rightClose) rightClose.addEventListener("click", closeRightSidebar);
+    if (rightOverlay) rightOverlay.addEventListener("click", closeRightSidebar);
+
+    /* ------- LEFT SIDEBAR + SWIPE ------- */
+    const leftSidebar = document.getElementById("leftSidebar");
+    const leftOverlayEl = document.getElementById("leftOverlay");
+    const leftHandle  = document.getElementById("leftHandle");
+
+    function openLeftSidebar() {
+      if (!leftSidebar || !leftOverlayEl) return;
+      leftSidebar.classList.add("open");
+      leftOverlayEl.classList.add("show");
+    }
+    function closeLeftSidebar() {
+      if (!leftSidebar || !leftOverlayEl) return;
+      leftSidebar.classList.remove("open");
+      leftOverlayEl.classList.remove("show");
+    }
+
+    if (leftHandle)  leftHandle.addEventListener("click", openLeftSidebar);
+    if (leftOverlayEl) leftOverlayEl.addEventListener("click", closeLeftSidebar);
+
+    let startX = null;
+    if (leftHandle) {
+      leftHandle.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+      }, { passive: true });
+
+      leftHandle.addEventListener("touchend", (e) => {
+        if (startX == null) return;
+        const diff = e.changedTouches[0].clientX - startX;
+        if (diff > 40) openLeftSidebar();
+        startX = null;
+      }, { passive: true });
+    }
+
+    if (leftSidebar) {
+      leftSidebar.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+      }, { passive: true });
+
+      leftSidebar.addEventListener("touchend", (e) => {
+        if (startX == null) return;
+        const diff = startX - e.changedTouches[0].clientX;
+        if (diff > 40) closeLeftSidebar();
+        startX = null;
+      }, { passive: true });
+    }
+  </script>
+
+  <!-- ========== SCRIPT: MINIMAL THEME + LEFT-SIDEBAR HIDE SETTING (SAFE IF MISSING CONTROLS) ========== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const SETTINGS_KEYS = {
+        leftSidebarHidden:  "set_leftSidebarHidden",
+        randomizeQuestions: "set_randomizeQuestions",
+        randomizeOptions:   "set_randomizeOptions",
+        showLetters:        "set_showLetters",
+        timerOn:            "set_timerOn",
+        autoSkip:           "set_autoSkip",
+        questionTime:       "set_questionTimeSeconds",
+        rtpMtpExamMode:     "set_rtpMtpExamMode"
+      };
+
+      // minimal theme
+      const minimalSwitch = document.getElementById("Minimilist");
+      const minimalSaved  = localStorage.getItem("minimalTheme") === "1";
+      if (minimalSaved) document.body.classList.add("minimal-theme");
+      if (minimalSwitch) minimalSwitch.checked = minimalSaved;
+      if (minimalSwitch) {
+        minimalSwitch.addEventListener("change", () => {
+          const ON = minimalSwitch.checked;
+          localStorage.setItem("minimalTheme", ON ? "1" : "0");
+          document.body.classList.toggle("minimal-theme", ON);
+        });
+      }
+
+      // apply leftSidebarHidden if some control exists on other pages
+      function applyLeftSidebarVisibility(hidden) {
+        document.body.classList.toggle("hide-left-sidebar", hidden);
+      }
+      const leftHiddenInit = localStorage.getItem(SETTINGS_KEYS.leftSidebarHidden) === "1";
+      applyLeftSidebarVisibility(leftHiddenInit);
+    });
+  </script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // === XP weekly line graph INSIDE profile-graph-card ===
+  (function () {
+    const DAILY_XP_KEY = "quizDailyXp";
+    const weekLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+    function loadDailyXp() {
+      try {
+        const raw = localStorage.getItem(DAILY_XP_KEY);
+        const obj = raw ? JSON.parse(raw) : {};
+        return obj && typeof obj === "object" ? obj : {};
+      } catch {
+        return {};
+      }
+    }
+
+    // Returns { values: [7 numbers], totalWeek }
+    function getWeekData() {
+      const today = new Date();
+
+      // convert JS day (0=Sun) to our index (0=Mon..6=Sun)
+      const jsDay = today.getDay();          // 0..6
+      const monOffset = (jsDay + 6) % 7;     // how many days since Monday
+
+      const monday = new Date(today);
+      monday.setDate(today.getDate() - monOffset);
+
+      const daily = loadDailyXp();
+      const values = [];
+      let total = 0;
+
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        const key = `${y}-${m}-${day}`;
+
+        const xp = daily[key] || 0;
+        values.push(xp);
+        total += xp;
+      }
+      return { values, totalWeek: total };
+    }
+
+    function initWeekChart() {
+      const canvas = document.getElementById("xpWeekChart");
+      if (!canvas || typeof Chart === "undefined") return;
+
+      const { values, totalWeek } = getWeekData();
+
+      const totalSpan = document.getElementById("profileWeekXpValue");
+      if (totalSpan) totalSpan.textContent = totalWeek;
+
+      new Chart(canvas, {
+        type: "line",
+        data: {
+          labels: weekLabels,
+          datasets: [{
+            data: values,
+            tension: 0.35,
+            borderWidth: 2,
+            pointRadius: 4,
+            pointHitRadius: 8,
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { enabled: true }
+          },
+          scales: {
+            x: {
+              grid: { display: false }
+            },
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 5 },
+              grid: { display: true }
+            }
+          }
+        }
+      });
+    }
+
+    // run after DOM is ready
+    document.addEventListener("DOMContentLoaded", initWeekChart);
+  })();
+</script>
+  <!-- ========== SCRIPT: PRELOADER + MAKE LEFT ROWS CLICKABLE ========== -->
+  <script>
+    // Hide preloader once page is ready
+    window.addEventListener("load", function () {
+      const pre = document.getElementById("preloader");
+      if (!pre) return;
+      pre.classList.add("hidden");
+      setTimeout(() => {
+        if (pre && pre.parentNode) {
+          pre.parentNode.removeChild(pre);
+        }
+      }, 300);
+    });
+
+    // Make full <li> clickable in left sidebar
+    document.querySelectorAll(".left-sidebar .left-list li").forEach(li => {
+      const anchor = li.querySelector("a");
+      if (anchor) {
+        li.style.cursor = "pointer";
+        li.addEventListener("click", (e) => {
+          if (e.target.closest("a")) return;
+          window.location = anchor.getAttribute("href");
+        });
+      } else {
+        const dh = li.dataset.href;
+        if (dh) {
+          li.style.cursor = "pointer";
+          li.addEventListener("click", () => { window.location = dh; });
+        }
+      }
+    });
+  </script>
+<script>
+  (function () {
+    const STREAK_KEY        = "quizDayStreak";
+    const MOST_DAILY_XP_KEY = "quizMostDailyXp";
+
+    const streakEl = document.getElementById("profileStreakValue");
+    const mostEl   = document.getElementById("profileMostXpValue");
+
+    let streak = parseInt(localStorage.getItem(STREAK_KEY), 10);
+    if (isNaN(streak) || streak < 0) streak = 0;
+
+    let most = parseInt(localStorage.getItem(MOST_DAILY_XP_KEY), 10);
+    if (isNaN(most) || most < 0) most = 0;
+
+    if (streakEl) streakEl.textContent = String(streak);
+    if (mostEl)   mostEl.textContent   = String(most);
+  })();
+</script>
+  <!-- ========== PAGE ID FOR shared.js (for active highlight) ========== -->
+  <script>
+    const currentPage = "profile";
+  </script>
+  <script src="shared.js"></script>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="simple-footer">
+    <div>Made with ♥️</div>
+    <div>Kunal Sharma • CA Foundation</div>
+  </footer>
+  <script>
+    // ensure footer is at bottom of main content wrapper
+    (function() {
+      const footer = document.querySelector('.simple-footer');
+      if (!footer) return;
+      const main = document.querySelector('main') ||
+                   document.querySelector('.page-wrapper') ||
+                   document.body;
+      if (!main) return;
+      if (footer.parentElement !== main) {
+        main.appendChild(footer);
+      }
+    })();
+  </script>
 </body>
 </html>

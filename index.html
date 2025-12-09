@@ -11,6 +11,14 @@
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
 
+
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="manifest" href="favicon/site.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon/android-chrome-512x512.png">
+<link rel="shortcut icon" href="favicon/favicon.ico">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -126,6 +134,9 @@
     <span id="subjectSelectText">None Selected</span>
   </button>
   <div class="chapter-dropdown" id="subjectDropdown"></div>
+    <span class="chapter-xp-label">
+    XP: <span id="xpValue">00</span>
+  </span>
 </section>
 
 <section class="chapter-bar">
@@ -135,6 +146,9 @@
     <span id="chapterSelectText">None Selected</span>
   </button>
   <div class="chapter-dropdown" id="chapterDropdown"></div>
+
+  <!-- NEW: XP DISPLAY -->
+
 </section>
 
   <!-- Top: Best / Streak, Progress, Timer -->
@@ -144,10 +158,7 @@
       <span id="bestStreak">Best: 0 | Streak: 0</span>
 
       <!-- NEW: In-order toggle -->
-      <label class="order-toggle">
-        <input type="checkbox" id="orderToggle">
-        <span>In Order</span>
-      </label>
+
     </div>
 
     <span id="questionCounter">0 / 0</span>
@@ -345,6 +356,186 @@
     saveBookmarks(bookmarkList);
   }
 
+/* ================= XP SYSTEM ================= */
+  const XP_KEY = "quizXP";
+  const XP_AWARDED_KEY = "quizXpAwarded";
+const DAILY_XP_KEY      = "quizDailyXp";
+  const STREAK_KEY        = "quizDayStreak";
+  const LAST_DAY_KEY      = "quizLastXpDate";
+  const MOST_DAILY_XP_KEY = "quizMostDailyXp";
+
+  // load daily XP map { "YYYY-MM-DD": number }
+  function loadDailyXp() {
+    try {
+      const raw = localStorage.getItem(DAILY_XP_KEY);
+      const obj = raw ? JSON.parse(raw) : {};
+      return obj && typeof obj === "object" ? obj : {};
+    } catch {
+      return {};
+    }
+  }
+
+  let dailyXp = loadDailyXp();
+
+  let dayStreak = parseInt(localStorage.getItem(STREAK_KEY), 10);
+  if (isNaN(dayStreak) || dayStreak < 0) dayStreak = 0;
+
+  let lastXpDate = localStorage.getItem(LAST_DAY_KEY) || null;
+
+  let mostDailyXp = parseInt(localStorage.getItem(MOST_DAILY_XP_KEY), 10);
+  if (isNaN(mostDailyXp) || mostDailyXp < 0) mostDailyXp = 0;
+
+  function getTodayKey() {
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`; // YYYY-MM-DD
+  }
+
+  function saveDailyXp() {
+    try {
+      localStorage.setItem(DAILY_XP_KEY, JSON.stringify(dailyXp));
+    } catch (e) {
+      // ignore quota errors
+    }
+  }
+
+  // Jab bhi XP increase ho, yahan se call karo (delta = +5 ya +3 etc.)
+  function updateDailyXpAndStreak(delta) {
+    if (!delta || delta <= 0) return;
+
+    const today = getTodayKey();
+    const prev  = dailyXp[today] || 0;
+    const next  = prev + delta;
+    dailyXp[today] = next;
+    saveDailyXp();
+
+    // 🔥 FIRST XP of the day => streak logic
+    if (prev === 0 && next > 0) {
+      if (!lastXpDate) {
+        // bilkul first time ever
+        dayStreak = 1;
+      } else {
+        if (lastXpDate !== today) {
+          const last = new Date(lastXpDate);
+          const cur  = new Date(today);
+          const diffMs   = cur - last;
+          const diffDays = Math.round(diffMs / 86400000);
+
+          if (diffDays === 1) {
+            // kal bhi XP mila tha → streak continue
+            dayStreak += 1;
+          } else {
+            // gap aa gaya → streak reset
+            dayStreak = 1;
+          }
+        }
+        // agar lastXpDate === today aur prev===0 case practically nahi aayega,
+        // par safety ke liye streak change nahi karenge.
+      }
+
+      lastXpDate = today;
+      localStorage.setItem(LAST_DAY_KEY, lastXpDate);
+      localStorage.setItem(STREAK_KEY, String(dayStreak));
+    }
+
+    // ⭐ Most daily XP update
+    if (next > mostDailyXp) {
+      mostDailyXp = next;
+      localStorage.setItem(MOST_DAILY_XP_KEY, String(mostDailyXp));
+    }
+  }
+
+  const xpDisplay = document.getElementById("xpValue");
+
+  function loadXP() {
+    const v = parseInt(localStorage.getItem(XP_KEY), 10);
+    return isNaN(v) ? 0 : v;
+  }
+
+  let xp = loadXP();
+
+  function updateXpUI() {
+    if (!xpDisplay) return;
+    // 2 digit styling: 5 -> "05"
+    xpDisplay.textContent = String(xp).padStart(2, "0");
+  }
+
+  function saveXP() {
+    localStorage.setItem(XP_KEY, String(xp));
+    updateXpUI();
+  }
+  // ---------- XP toast (Transferred!) ----------
+function showXpTransferredToast() {
+  const el = document.getElementById("xpToast");
+  if (!el) return;
+  el.classList.add("show");
+  setTimeout(() => {
+    el.classList.remove("show");
+  }, 2200);
+}
+
+// ---------- main XP grant helper ----------
+function grantXP(delta) {
+  if (!delta || delta <= 0) return;
+
+  // screen XP (0–99)
+  xp += delta;
+  let transferred = false;
+
+  // if went over/equals 100 → wrap down and mark transferred
+  while (xp >= 100) {
+    xp -= 100;
+    transferred = true;
+  }
+
+  // save wrapped XP for the header
+  saveXP();
+
+  // but stats/profile should get FULL delta
+  updateDailyXpAndStreak(delta);
+
+  if (transferred) {
+    showXpTransferredToast();
+  }
+}
+
+  // per-question XP guard so same question se bar-bar XP na mile
+  function loadXpAwarded() {
+    try {
+      const raw = localStorage.getItem(XP_AWARDED_KEY);
+      const arr = raw ? JSON.parse(raw) : [];
+      return Array.isArray(arr) ? arr : [];
+    } catch {
+      return [];
+    }
+  }
+
+  let xpAwardedList = loadXpAwarded();
+
+  function saveXpAwarded() {
+    localStorage.setItem(XP_AWARDED_KEY, JSON.stringify(xpAwardedList));
+  }
+
+  function hasXpAward(subjectId, chapterId, baseIndex) {
+    return xpAwardedList.some(
+      e =>
+        e.subjectId === subjectId &&
+        e.chapterId === chapterId &&
+        e.baseIndex === baseIndex
+    );
+  }
+
+  function markXpAward(subjectId, chapterId, baseIndex) {
+    if (hasXpAward(subjectId, chapterId, baseIndex)) return;
+    xpAwardedList.push({ subjectId, chapterId, baseIndex });
+    saveXpAwarded();
+  }
+
+  // first paint of XP on load
+  updateXpUI();
+
   /* ================= MCQ ENGINE ================= */
 
   // ===== timer helpers (uses settings from localStorage) =====
@@ -483,57 +674,173 @@ function getWrongIndicesForChapter(subjectId, chapterId) {
   }
 
 // Decide final option order for a question,
-  // respecting rules like "All of the above", "None", "Both (a) and (b)", etc.
-  function computeOptionOrder(options, allowRandom) {
-    const count = options.length;
-    const indices = Array.from({ length: count }, (_, i) => i);
+// following the custom rules for "All of the above", "None of the above",
+// "Both (a) and (b)", "Neither (a) nor (b)", "Both 1 and 2", etc.
+function computeOptionOrder(options, allowRandom) {
+  const count   = options.length;
+  const indices = Array.from({ length: count }, (_, i) => i);
 
-    // If global option randomisation is OFF, keep default order
-    if (!allowRandom) return indices;
+  // If global option randomisation is OFF, keep default order
+  if (!allowRandom) return indices;
 
-    // Normalise text for matching
-    function norm(s) {
-      return s.toLowerCase().replace(/\s+/g, " ").trim();
-    }
-
-    const info = options.map(text => {
-      const t = norm(text);
-      const allAbove   = t.includes("all of the above");
-      const noneAbove  = t.startsWith("none") || t.includes("none of the above");
-      const bothAB     = t.includes("both (a) and (b)") || t.includes("both a and b");
-      const onlyAB     = t.includes("only (a) and (b)") || t.includes("only a and b");
-      const both12     = t.includes("both (1) and (2)") || t.includes("both 1 and 2");
-
-      return { allAbove, noneAbove, bothAB, onlyAB, both12 };
-    });
-
-    const hasBothAB  = info.some(i => i.bothAB);
-    const hasOnlyAB  = info.some(i => i.onlyAB);
-    const hasBoth12  = info.some(i => i.both12);
-
-    // RULES 6, 7, 8, 9:
-    // - if question has "only (a) and (b)"
-    // - OR has "both (a) and (b)"
-    // - OR has "both (1) and (2)"
-    // then we DO NOT randomise this question at all.
-    // (Author keeps the default order in questions.js)
-    if (hasBothAB || hasOnlyAB || hasBoth12) {
-      return indices;
-    }
-
-    // RULES 1, 4, 5:
-    // - "All of the above" must always be last
-    // - "None..." (e.g. "None of the above") must always be last
-    const specialsLast = indices.filter(i => info[i].allAbove || info[i].noneAbove);
-    const normal = indices.filter(i => !specialsLast.includes(i));
-
-    // Randomise only the "normal" options
-    shuffleArray(normal);
-
-    // Normal options first, then the special ones at the end
-    return [...normal, ...specialsLast];
+  // Normalise helper
+  function norm(s) {
+    return s.toLowerCase().replace(/\s+/g, " ").trim();
   }
 
+  // Classify each option
+  const allAboveIdx   = [];
+  const noneAboveIdx  = [];
+  const bothABIdx     = []; // "both (a) and (b)" or "both a and b"
+  const onlyABIdx     = []; // "only (a) and (b)" or "only a and b"
+  const both12Idx     = []; // "both (1) and (2)" or "both 1 and 2"
+  const neitherABIdx  = []; // "neither (a) nor (b)" / "neither a nor b"
+
+  options.forEach((text, i) => {
+    const t = norm(text);
+
+    // All / None
+    if (t.includes("all of the above") || t.includes("all the above")) {
+      allAboveIdx.push(i);
+    }
+    if (t.includes("none of the above") || t.startsWith("none of the")) {
+      noneAboveIdx.push(i);
+    }
+
+    // Both / Only (a) and (b)
+    if (t.includes("both (a) and (b)") || t.includes("both a and b")) {
+      bothABIdx.push(i);
+    }
+    if (t.includes("only (a) and (b)") || t.includes("only a and b")) {
+      onlyABIdx.push(i);
+    }
+
+    // Both 1 and 2
+    if (t.includes("both (1) and (2)") || t.includes("both 1 and 2")) {
+      both12Idx.push(i);
+    }
+
+    // Neither (a) nor (b)
+    if (t.includes("neither (a) nor (b)") || t.includes("neither a nor b")) {
+      neitherABIdx.push(i);
+    }
+  });
+
+  const total = indices.length;
+
+  // Helper to shuffle an array copy
+  function shuffled(arr) {
+    const copy = arr.slice();
+    shuffleArray(copy);
+    return copy;
+  }
+
+  // ---------------- RULE 3 ----------------
+  // 3rd when question has 2 options as Both (a) and (b) and neither (a) and (b),
+  // Then The neither one should be at 4th, both one will be at 3rd place.
+  if (total === 4 && bothABIdx.length === 1 && neitherABIdx.length === 1) {
+    const normal = indices.filter(i => i !== bothABIdx[0] && i !== neitherABIdx[0]);
+    const normalShuffled = shuffled(normal); // first 2 positions
+    return [...normalShuffled, bothABIdx[0], neitherABIdx[0]];
+  }
+
+  // ---------------- RULE 4 + RULE 6 ----------------
+  // 4th if the question has 2 options as" Both (a) and (b) or both (1) or (2), None of the Above"
+  // then the None one should be at 4th, and both one should be at 3rd.
+  // 6th If questions both 1 and 2, and None of the Above. Then the None one should be at 4th, and Both one at 3rd.
+  if (
+    total === 4 &&
+    noneAboveIdx.length === 1 &&
+    (bothABIdx.length === 1 || both12Idx.length === 1)
+  ) {
+    const bothIdx = bothABIdx[0] != null ? bothABIdx[0] : both12Idx[0];
+    const noneIdx = noneAboveIdx[0];
+
+    const normal = indices.filter(i => i !== bothIdx && i !== noneIdx);
+    const normalShuffled = shuffled(normal); // first 2 positions
+    return [...normalShuffled, bothIdx, noneIdx];
+  }
+
+  // ---------------- RULE 1 ----------------
+  // 1st when question include All the Above as options and other 3 are normal
+  // than All the above should always be at 4th place.
+  if (
+    total === 4 &&
+    allAboveIdx.length === 1 &&
+    noneAboveIdx.length === 0 &&
+    bothABIdx.length === 0 &&
+    both12Idx.length === 0 &&
+    onlyABIdx.length === 0 &&
+    neitherABIdx.length === 0
+  ) {
+    const allIdx = allAboveIdx[0];
+    const normal = indices.filter(i => i !== allIdx);
+    const normalShuffled = shuffled(normal); // first 3 positions
+    return [...normalShuffled, allIdx];
+  }
+
+  // ---------------- RULE 2 ----------------
+  // 2nd when Question has none Of the above only and other 3 are normals
+  // then None of the Above should always be at 4th place.
+  if (
+    total === 4 &&
+    noneAboveIdx.length === 1 &&
+    allAboveIdx.length === 0 &&
+    bothABIdx.length === 0 &&
+    both12Idx.length === 0 &&
+    onlyABIdx.length === 0 &&
+    neitherABIdx.length === 0
+  ) {
+    const noneIdx = noneAboveIdx[0];
+    const normal = indices.filter(i => i !== noneIdx);
+    const normalShuffled = shuffled(normal); // first 3 positions
+    return [...normalShuffled, noneIdx];
+  }
+
+  // ---------------- RULE 5 ----------------
+  // 5th if the question include Both 'a' and 'b', And others are normal
+  // then keep the both option at 4th place.
+  if (
+    total === 4 &&
+    bothABIdx.length === 1 &&
+    allAboveIdx.length === 0 &&
+    noneAboveIdx.length === 0 &&
+    both12Idx.length === 0 &&
+    onlyABIdx.length === 0 &&
+    neitherABIdx.length === 0
+  ) {
+    const bothIdx = bothABIdx[0];
+    const normal = indices.filter(i => i !== bothIdx);
+    const normalShuffled = shuffled(normal); // first 3 positions
+    return [...normalShuffled, bothIdx];
+  }
+
+  // ---------------- RULE 7 ----------------
+  // 7th If questions only include option as "only (a) and (b)" and others normal
+  // keep it as it is don't shuffle that question's options.
+  if (
+    total === 4 &&
+    onlyABIdx.length === 1 &&
+    allAboveIdx.length === 0 &&
+    noneAboveIdx.length === 0 &&
+    bothABIdx.length === 0 &&
+    both12Idx.length === 0 &&
+    neitherABIdx.length === 0
+  ) {
+    // No shuffle, keep author order
+    return indices;
+  }
+
+  // ---------------- DEFAULT / FALLBACK ----------------
+  // For all other cases:
+  // - "All of the above" and "None of the above" go to the end (in original relative order)
+  // - The rest are shuffled normally.
+  const specialsLast = indices.filter(i => allAboveIdx.includes(i) || noneAboveIdx.includes(i));
+  const normal = indices.filter(i => !specialsLast.includes(i));
+  const normalShuffled = shuffled(normal);
+
+  return [...normalShuffled, ...specialsLast];
+}
   function formatTime(sec) {
     return `${sec}s`;
   }
@@ -976,6 +1283,15 @@ function removeWrongAttempt(subjectId, chapterId, baseIndex) {
 
     const isCorrect = selectedIdx === q.correctIndex;
 
+// --- XP: +5 only first correct time for this question ---
+// --- XP: +5 only first correct time for this question ---
+    
+
+// XP: +5 EVERY time user answers correctly
+if (isCorrect) {
+  grantXP(5);
+}
+
     if (isCorrect && q._baseIndex != null) {
       mastered[q._baseIndex] = true;
     }
@@ -1291,6 +1607,8 @@ if (minimalSaved) document.body.classList.add("minimal-theme");
 if (minimalSwitch) minimalSwitch.checked = minimalSaved;
 })();
 </script>
+<!-- XP transferred toast -->
+<div id="xpToast" class="xp-toast">Transferred!</div>
 <footer class="simple-footer">
   <div>Made with ♥️</div>
   <div>Kunal Sharma • CA Foundation</div>

@@ -11,6 +11,14 @@
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
 
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="manifest" href="favicon/site.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon/android-chrome-512x512.png">
+<link rel="shortcut icon" href="favicon/favicon.ico">
+
 <link rel="stylesheet" href="style.css">
 <style>
   .bookmark-btn{
@@ -117,6 +125,10 @@
     <span id="subjectSelectText">None Selected</span>
   </button>
   <div class="chapter-dropdown" id="subjectDropdown"></div>
+  
+      <span class="chapter-xp-label">
+    XP: <span id="xpValue">00</span>
+  </span>
 </section>
   <!-- Chapter selection -->
   <section class="chapter-bar">
@@ -341,12 +353,181 @@ function toggleBookmark(attemptId, baseIndex) {
   saveBookmarks(list);
 }
 
-  /* ========== SETTINGS HELPERS (timer etc.) ========== */
-  const QUESTION_TIME_DEFAULT = 45;
-  function getQuestionTime() {
-    const v = parseInt(localStorage.getItem("set_timerSeconds"), 10);
-    return !isNaN(v) && v >= 30 ? v : QUESTION_TIME_DEFAULT;
+/* ================= XP SYSTEM (shared with index.html) ================= */
+const XP_KEY = "quizXP";
+const XP_AWARDED_KEY = "quizXpAwarded";
+const DAILY_XP_KEY      = "quizDailyXp";
+const STREAK_KEY        = "quizDayStreak";
+const LAST_DAY_KEY      = "quizLastXpDate";
+const MOST_DAILY_XP_KEY = "quizMostDailyXp";
+
+function loadDailyXp() {
+  try {
+    const raw = localStorage.getItem(DAILY_XP_KEY);
+    const obj = raw ? JSON.parse(raw) : {};
+    return obj && typeof obj === "object" ? obj : {};
+  } catch {
+    return {};
   }
+}
+
+let dailyXp = loadDailyXp();
+
+let dayStreak = parseInt(localStorage.getItem(STREAK_KEY), 10);
+if (isNaN(dayStreak) || dayStreak < 0) dayStreak = 0;
+
+let lastXpDate = localStorage.getItem(LAST_DAY_KEY) || null;
+
+let mostDailyXp = parseInt(localStorage.getItem(MOST_DAILY_XP_KEY), 10);
+if (isNaN(mostDailyXp) || mostDailyXp < 0) mostDailyXp = 0;
+
+function getTodayKey() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+function saveDailyXp() {
+  try {
+    localStorage.setItem(DAILY_XP_KEY, JSON.stringify(dailyXp));
+  } catch (e) {
+    // ignore quota errors
+  }
+}
+
+function updateDailyXpAndStreak(delta) {
+  if (!delta || delta <= 0) return;
+
+  const today = getTodayKey();
+  const prev  = dailyXp[today] || 0;
+  const next  = prev + delta;
+  dailyXp[today] = next;
+  saveDailyXp();
+
+  if (prev === 0 && next > 0) {
+    if (!lastXpDate) {
+      dayStreak = 1;
+    } else {
+      if (lastXpDate !== today) {
+        const last = new Date(lastXpDate);
+        const cur  = new Date(today);
+        const diffMs   = cur - last;
+        const diffDays = Math.round(diffMs / 86400000);
+        if (diffDays === 1) {
+          dayStreak += 1;
+        } else {
+          dayStreak = 1;
+        }
+      }
+    }
+    lastXpDate = today;
+    localStorage.setItem(LAST_DAY_KEY, lastXpDate);
+    localStorage.setItem(STREAK_KEY, String(dayStreak));
+  }
+
+  if (next > mostDailyXp) {
+    mostDailyXp = next;
+    localStorage.setItem(MOST_DAILY_XP_KEY, String(mostDailyXp));
+  }
+}
+const xpDisplay = document.getElementById("xpValue");
+
+function loadXP() {
+  const v = parseInt(localStorage.getItem(XP_KEY), 10);
+  return isNaN(v) ? 0 : v;
+}
+
+let xp = loadXP();
+
+function updateXpUI() {
+  if (!xpDisplay) return;
+  xpDisplay.textContent = String(xp).padStart(2, "0");
+}
+
+function saveXP() {
+  localStorage.setItem(XP_KEY, String(xp));
+  updateXpUI();
+}
+// ---------- XP toast (Transferred!) ----------
+function showXpTransferredToast() {
+  const el = document.getElementById("xpToast");
+  if (!el) return;
+  el.classList.add("show");
+  setTimeout(() => {
+    el.classList.remove("show");
+  }, 2200);
+}
+
+// ---------- main XP grant helper ----------
+function grantXP(delta) {
+  if (!delta || delta <= 0) return;
+  
+  // screen XP (0–99)
+  xp += delta;
+  let transferred = false;
+  
+  // if went over/equals 100 → wrap down and mark transferred
+  while (xp >= 100) {
+    xp -= 100;
+    transferred = true;
+  }
+  
+  // save wrapped XP for the header
+  saveXP();
+  
+  // but stats/profile should get FULL delta
+  updateDailyXpAndStreak(delta);
+  
+  if (transferred) {
+    showXpTransferredToast();
+  }
+}
+// per-question XP guard (same question se bar-bar XP na mile)
+function loadXpAwarded() {
+  try {
+    const raw = localStorage.getItem(XP_AWARDED_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr : [];
+  } catch {
+    return [];
+  }
+}
+
+let xpAwardedList = loadXpAwarded();
+
+function saveXpAwarded() {
+  localStorage.setItem(XP_AWARDED_KEY, JSON.stringify(xpAwardedList));
+}
+
+function hasXpAward(subjectId, chapterId, baseIndex) {
+  return xpAwardedList.some(
+    e =>
+      e.subjectId === subjectId &&
+      e.chapterId === chapterId &&
+      e.baseIndex === baseIndex
+  );
+}
+
+function markXpAward(subjectId, chapterId, baseIndex) {
+  if (hasXpAward(subjectId, chapterId, baseIndex)) return;
+  xpAwardedList.push({ subjectId, chapterId, baseIndex });
+  saveXpAwarded();
+}
+
+// first paint of XP
+updateXpUI();
+
+  /* ========== SETTINGS HELPERS (timer etc.) ========== */
+  /* ========== SETTINGS HELPERS (timer etc.) ========== */
+const QUESTION_TIME_DEFAULT = 45;
+function getQuestionTime() {
+  // key aligned with settings.html: set_questionTimeSeconds
+  const v = parseInt(localStorage.getItem("set_questionTimeSeconds"), 10);
+  if (!isNaN(v) && v >= 30) return v;
+  return QUESTION_TIME_DEFAULT;
+}
   function getBoolSetting(key, def = true) {
     const v = localStorage.getItem(key);
     if (v === null) return def;
@@ -427,57 +608,144 @@ function toggleBookmark(attemptId, baseIndex) {
   }
   
 // Decide final option order for a question,
-  // respecting rules like "All of the above", "None", "Both (a) and (b)", etc.
-  function computeOptionOrder(options, allowRandom) {
-    const count = options.length;
-    const indices = Array.from({ length: count }, (_, i) => i);
+// with special rules for All / None / Any / Both / Either / Neither
+function computeOptionOrder(options, allowRandom) {
+  const count = options.length;
+  const indices = Array.from({ length: count }, (_, i) => i);
 
-    // If global option randomisation is OFF, keep default order
-    if (!allowRandom) return indices;
+  // If randomisation is globally OFF, keep the original order
+  if (!allowRandom) return indices;
 
-    // Normalise text for matching
-    function norm(s) {
-      return s.toLowerCase().replace(/\s+/g, " ").trim();
-    }
-
-    const info = options.map(text => {
-      const t = norm(text);
-      const allAbove   = t.includes("all of the above");
-      const noneAbove  = t.startsWith("none") || t.includes("none of the above");
-      const bothAB     = t.includes("both (a) and (b)") || t.includes("both a and b");
-      const onlyAB     = t.includes("only (a) and (b)") || t.includes("only a and b");
-      const both12     = t.includes("both (1) and (2)") || t.includes("both 1 and 2");
-
-      return { allAbove, noneAbove, bothAB, onlyAB, both12 };
-    });
-
-    const hasBothAB  = info.some(i => i.bothAB);
-    const hasOnlyAB  = info.some(i => i.onlyAB);
-    const hasBoth12  = info.some(i => i.both12);
-
-    // RULES 6, 7, 8, 9:
-    // - if question has "only (a) and (b)"
-    // - OR has "both (a) and (b)"
-    // - OR has "both (1) and (2)"
-    // then we DO NOT randomise this question at all.
-    // (Author keeps the default order in questions.js)
-    if (hasBothAB || hasOnlyAB || hasBoth12) {
-      return indices;
-    }
-
-    // RULES 1, 4, 5:
-    // - "All of the above" must always be last
-    // - "None..." (e.g. "None of the above") must always be last
-    const specialsLast = indices.filter(i => info[i].allAbove || info[i].noneAbove);
-    const normal = indices.filter(i => !specialsLast.includes(i));
-
-    // Randomise only the "normal" options
-    shuffleArray(normal);
-
-    // Normal options first, then the special ones at the end
-    return [...normal, ...specialsLast];
+  // Classify option by its starting word
+  function classify(text) {
+    const t = text.trim().toLowerCase();
+    if (t.startsWith("all")) return "all";
+    if (t.startsWith("none")) return "none";
+    if (t.startsWith("any")) return "any";
+    if (t.startsWith("both")) return "both";
+    if (t.startsWith("either")) return "either";
+    if (t.startsWith("neither")) return "neither";
+    return "normal";
   }
 
+  const allIdx = [];
+  const noneIdx = [];
+  const anyIdx = [];
+  const bothIdx = [];
+  const eitherIdx = [];
+  const neitherIdx = [];
+  const normalIdx = [];
+
+  indices.forEach(i => {
+    const type = classify(options[i]);
+    switch (type) {
+      case "all":     allIdx.push(i);     break;
+      case "none":    noneIdx.push(i);    break;
+      case "any":     anyIdx.push(i);     break;
+      case "both":    bothIdx.push(i);    break;
+      case "either":  eitherIdx.push(i);  break;
+      case "neither": neitherIdx.push(i); break;
+      default:        normalIdx.push(i);  break;
+    }
+  });
+
+  // Helper: single special option must always be last (4th)
+  function placeSingleAtEnd(specialIdx) {
+    const others = indices.filter(i => i !== specialIdx);
+    shuffleArray(others);          // uses your existing helper
+    others.push(specialIdx);       // special goes to last position
+    return others;
+  }
+
+  // Helper: two specials fixed at 3rd + 4th positions
+  // (idxThird at 3rd place, idxFourth at 4th place)
+  function placeThirdAndFourth(idxThird, idxFourth) {
+    // assume 4 options
+    const remaining = indices.filter(i => i !== idxThird && i !== idxFourth);
+    shuffleArray(remaining);       // fill 1st and 2nd randomly
+    return [remaining[0], remaining[1], idxThird, idxFourth];
+  }
+
+  // ====== RULE 4: Both + Neither → Both at 3rd, Neither at 4th ======
+  if (bothIdx.length === 1 && neitherIdx.length === 1) {
+    return placeThirdAndFourth(bothIdx[0], neitherIdx[0]);
+  }
+
+  // ====== RULE 5: Either + Neither → Either at 3rd, Neither at 4th ======
+  if (eitherIdx.length === 1 && neitherIdx.length === 1) {
+    return placeThirdAndFourth(eitherIdx[0], neitherIdx[0]);
+  }
+
+  // ====== RULE 7: Both + None → Both at 3rd, None at 4th ======
+  if (bothIdx.length === 1 && noneIdx.length === 1) {
+    return placeThirdAndFourth(bothIdx[0], noneIdx[0]);
+  }
+
+  // ====== RULE 6: Only ONE "Both" and other 3 are normal → keep as is (no shuffle) ======
+  if (
+    bothIdx.length === 1 &&
+    allIdx.length === 0 &&
+    noneIdx.length === 0 &&
+    anyIdx.length === 0 &&
+    eitherIdx.length === 0 &&
+    neitherIdx.length === 0
+  ) {
+    return indices; // original order
+  }
+
+  // ====== RULE 1: Only ONE option starting with "All" → always 4th ======
+  if (
+    allIdx.length === 1 &&
+    noneIdx.length === 0 &&
+    anyIdx.length === 0 &&
+    bothIdx.length === 0 &&
+    eitherIdx.length === 0 &&
+    neitherIdx.length === 0
+  ) {
+    return placeSingleAtEnd(allIdx[0]);
+  }
+
+  // ====== RULE 2: Only ONE option starting with "None" → always 4th ======
+  if (
+    noneIdx.length === 1 &&
+    allIdx.length === 0 &&
+    anyIdx.length === 0 &&
+    bothIdx.length === 0 &&
+    eitherIdx.length === 0 &&
+    neitherIdx.length === 0
+  ) {
+    return placeSingleAtEnd(noneIdx[0]);
+  }
+
+  // ====== RULE 3: Only ONE option starting with "Any" → always 4th ======
+  if (
+    anyIdx.length === 1 &&
+    allIdx.length === 0 &&
+    noneIdx.length === 0 &&
+    bothIdx.length === 0 &&
+    eitherIdx.length === 0 &&
+    neitherIdx.length === 0
+  ) {
+    return placeSingleAtEnd(anyIdx[0]);
+  }
+
+  // ====== Extra: Only ONE "Neither" and others normal → always 4th ======
+  if (
+    neitherIdx.length === 1 &&
+    allIdx.length === 0 &&
+    noneIdx.length === 0 &&
+    anyIdx.length === 0 &&
+    bothIdx.length === 0 &&
+    eitherIdx.length === 0
+  ) {
+    return placeSingleAtEnd(neitherIdx[0]);
+  }
+
+  // ====== Default: normal shuffle for everything else ======
+  const shuffled = [...indices];
+  shuffleArray(shuffled);
+  return shuffled;
+}
 
 function formatSecondsMode(sec) {
     // normal style: "45s"
@@ -1098,58 +1366,72 @@ if (!q._optionOrder) {
   }
 
   /* ========== ANSWER CLICK ========== */
-  function handleOptionClick(selectedIdx) {
-    if (quizFinished || !currentQuestions.length) return;
-    const q = currentQuestions[currentIndex];
-    if (!q || answers[currentIndex] != null) return;
+/* ========== ANSWER CLICK (with XP +3) ========== */
+function handleOptionClick(selectedIdx) {
+  if (quizFinished || !currentQuestions.length) return;
+  const q = currentQuestions[currentIndex];
+  if (!q || answers[currentIndex] != null) return;
 
-    clearTimer();
-    clearAutoNext();
+  clearTimer();
+  clearAutoNext();
 
-    const isCorrect = selectedIdx === q.correctIndex;
-    if (isCorrect && q._baseIndex != null) mastered[q._baseIndex] = true;
+  const isCorrect = selectedIdx === q.correctIndex;
 
-    setLiveQuestionBorder(isCorrect ? "#4caf50" : "#e53935");
-    answers[currentIndex] = selectedIdx;
+  // --- XP: +3 only first correct time for this question ---
+  // --- XP: +3 only first correct time for this question (RTP/MTP) ---
+// --- XP: +3 only first correct time for this question ---
+  
 
-    const buttons = mcqOptionsContainer.querySelectorAll(".mcq-option-btn");
-    buttons.forEach(btn => {
-      const idx = parseInt(btn.dataset.idx, 10);
-      const isCorrectOpt = idx === q.correctIndex;
-      const isSelected   = idx === selectedIdx;
+// XP: +3 EVERY time user answers correctly (RTP/MTP)
+if (isCorrect) {
+  grantXP(3);
+}
 
-      if (isCorrectOpt) btn.classList.add("correct");
-      if (isSelected && !isCorrectOpt) btn.classList.add("wrong");
-      if (!isSelected && !isCorrectOpt) btn.classList.add("dimmed");
-      btn.disabled = true;
-    });
-
-    if (roundNumber === 1 && q._baseIndex != null && firstRoundAns[q._baseIndex] == null) {
-      firstRoundAns[q._baseIndex] = selectedIdx;
-      attemptedFirst++;
-      if (isCorrect) marksCorrectFirst++; else marksWrongFirst++;
-    }
-
-    if (isCorrect) {
-      currentStreak++;
-      if (currentStreak > bestStreak) bestStreak = currentStreak;
-    } else {
-      currentStreak = 0;
-    }
-
-    if (nextBtn && !quizFinished) nextBtn.disabled = false;
-    updateStats();
-    updateProgress();
-
-    cfg_autoSkip = getBoolSetting("set_autoSkip", true);
-    if (cfg_autoSkip) {
-      const delay = isCorrect ? 600 : 3000;
-      autoNextTimeout = setTimeout(() => {
-        autoNextTimeout = null;
-        if (!quizFinished) goToNextQuestion(false);
-      }, delay);
-    }
+  if (isCorrect && q._baseIndex != null) {
+    mastered[q._baseIndex] = true;
   }
+
+  setLiveQuestionBorder(isCorrect ? "#4caf50" : "#e53935");
+  answers[currentIndex] = selectedIdx;
+
+  const buttons = mcqOptionsContainer.querySelectorAll(".mcq-option-btn");
+  buttons.forEach(btn => {
+    const idx = parseInt(btn.dataset.idx, 10);
+    const isCorrectOpt = idx === q.correctIndex;
+    const isSelected   = idx === selectedIdx;
+
+    if (isCorrectOpt) btn.classList.add("correct");
+    if (isSelected && !isCorrectOpt) btn.classList.add("wrong");
+    if (!isSelected && !isCorrectOpt) btn.classList.add("dimmed");
+    btn.disabled = true;
+  });
+
+  if (roundNumber === 1 && q._baseIndex != null && firstRoundAns[q._baseIndex] == null) {
+    firstRoundAns[q._baseIndex] = selectedIdx;
+    attemptedFirst++;
+    if (isCorrect) marksCorrectFirst++; else marksWrongFirst++;
+  }
+
+  if (isCorrect) {
+    currentStreak++;
+    if (currentStreak > bestStreak) bestStreak = currentStreak;
+  } else {
+    currentStreak = 0;
+  }
+
+  if (nextBtn && !quizFinished) nextBtn.disabled = false;
+  updateStats();
+  updateProgress();
+
+  cfg_autoSkip = getBoolSetting("set_autoSkip", true);
+  if (cfg_autoSkip) {
+    const delay = isCorrect ? 600 : 3000;
+    autoNextTimeout = setTimeout(() => {
+      autoNextTimeout = null;
+      if (!quizFinished) goToNextQuestion(false);
+    }, delay);
+  }
+}
 
   /* ========== NAVIGATION / ROUNDS ========== */
   function goToNextQuestion(fromTimer) {
@@ -1395,7 +1677,13 @@ if (minimalSwitch) {
   const currentPage = "rtp";   // is page par ho
 </script>
 <script src="shared.js"></script>
-
+<!-- Tiny toast for settings -->
+<div id="settingToast" class="setting-toast">
+  <div class="setting-toast-bar" id="settingToastBar"></div>
+  <span id="settingToastText"></span>
+</div>
+<!-- XP transferred toast -->
+<div id="xpToast" class="xp-toast">Transferred!</div>
  <footer class="simple-footer">
   <div>Made with ♥️</div>
   <div>Kunal Sharma • CA Foundation</div>
